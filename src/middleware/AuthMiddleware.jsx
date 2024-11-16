@@ -1,6 +1,6 @@
-import { useAuthStore } from '../../store/authStore';
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useAuthStore } from '../store/authStore';
 
 const AuthMiddleware = ({ children }) => {
 	const { auth } = useAuthStore();
