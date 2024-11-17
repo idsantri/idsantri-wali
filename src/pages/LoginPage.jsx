@@ -51,7 +51,7 @@ const Login = () => {
 					token: data.token,
 					user: { name: 'User' },
 				});
-				navigate('/dashboard');
+				navigate('/');
 			}, 1000);
 		} catch (error) {
 			setObjNotify((prevState) => ({
@@ -66,7 +66,7 @@ const Login = () => {
 	};
 
 	if (auth.isAuthenticated) {
-		return <Navigate to="/dashboard" />;
+		return <Navigate to="/" />;
 	}
 	return (
 		<>

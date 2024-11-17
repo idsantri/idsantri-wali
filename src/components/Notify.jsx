@@ -12,9 +12,14 @@ function Notify({
 }) {
 	return (
 		<ToastContainer
-			className={`m-4 ${isError ? 'bg-danger' : 'bg-success'}`}
-			position="bottom-center"
-			style={{ zIndex: 1, position: 'fixed' }}
+			className={`${isError ? 'bg-danger' : 'bg-success'}`}
+			style={{
+				zIndex: 1,
+				position: 'fixed',
+				left: '50%',
+				transform: 'translate(-50%, -50%)',
+				bottom: '10px',
+			}}
 		>
 			<Toast show={show} onClose={onClose} delay={delay} autohide>
 				<Toast.Header>

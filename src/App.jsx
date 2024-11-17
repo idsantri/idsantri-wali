@@ -7,8 +7,8 @@ import {
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
 import AuthMiddleware from './middleware/AuthMiddleware';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
+import SantriPage from './pages/SantriPage';
+import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
 import './App.css';
 
@@ -18,12 +18,9 @@ const App = () => {
 			future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
 		>
 			<Routes>
-				<Route
-					path="/"
-					element={<Navigate to="/dashboard" replace />}
-				/>
+				<Route path="/" element={<Navigate to="/santri" replace />} />
 				<Route element={<AuthLayout />}>
-					<Route path="/login" element={<Login />} />
+					<Route path="/login" element={<LoginPage />} />
 				</Route>
 				<Route
 					element={
@@ -32,7 +29,7 @@ const App = () => {
 						</AuthMiddleware>
 					}
 				>
-					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/santri" element={<SantriPage />} />
 				</Route>
 				<Route path="*" element={<ErrorPage />} />
 			</Routes>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useAuthStore } from '../store/authStore';
 
 const AuthMiddleware = ({ children }) => {
-	const { auth } = useAuthStore();
-	return auth.isAuthenticated ? children : <Navigate to="/login" />;
+	const { isAuthenticated } = useAuthStore.getState().auth;
+	return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
 // Validasi prop children
