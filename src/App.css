@@ -1,14 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+:root {
+	--color0: #fffcf5;
+	--color1: #fff6e3;
+	--color2: #eddbb0;
+	--color3: #c9af7f;
+	--color4: #af8557;
+	--color5: #94704a;
+	--color6: #7a5c3d;
+	--color7: #69482c;
+	--color8: #4a321d;
+	--color9: #292010;
+}
 
 *,
 html,
 body {
-    font-family: 'Ubuntu', serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    color: #0d47a1;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
+
 body {
-    background: rgb(244, 251, 255);
+	font-family: 'Ubuntu', serif;
+	font-weight: 400;
+	color: var(--color9);
+	background-color: var(--color0);
+}
+
+.text-color0 {
+	color: var(--color0);
+}
+.text-color1 {
+	color: var(--color1);
+}
+.text-color2 {
+	color: var(--color2);
+}
+.text-color3 {
+	color: var(--color3);
+}
+.text-color4 {
+	color: var(--color4);
+}
+.text-color5 {
+	color: var(--color5);
+}
+.text-color6 {
+	color: var(--color6);
+}
+.text-color7 {
+	color: var(--color7);
+}
+.text-color8 {
+	color: var(--color8);
+}
+.text-color9 {
+	color: var(--color9);
+}
+
+.bg-color0 {
+	background-color: var(--color0);
+}
+.bg-color1 {
+	background-color: var(--color1);
+}
+.bg-color2 {
+	background-color: var(--color2);
+}
+.bg-color3 {
+	background-color: var(--color3);
+}
+.bg-color4 {
+	background-color: var(--color4);
+}
+.bg-color5 {
+	background-color: var(--color5);
+}
+.bg-color6 {
+	background-color: var(--color6);
+}
+.bg-color7 {
+	background-color: var(--color7);
+}
+.bg-color8 {
+	background-color: var(--color8);
+}
+.bg-color9 {
+	background-color: var(--color9);
 }

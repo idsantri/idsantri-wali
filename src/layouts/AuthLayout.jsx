@@ -11,9 +11,9 @@ const AuthLayout = () => (
 				padding: '20px',
 				textAlign: 'center',
 			}}
-			className="bg-light"
+			className="bg-color2 text-color7"
 		>
-			<header style={{ marginBottom: '20px' }}>
+			<header>
 				<h1 style={{ fontSize: '1.8em' }}>Aplikasi Wali Santri</h1>
 				<p style={{ fontSize: '1.2em' }}>
 					Pondok Pesantren

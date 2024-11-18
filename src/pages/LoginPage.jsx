@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { apiPost } from '../api';
 import { Button, FloatingLabel, Form, Spinner } from 'react-bootstrap';
 import Notify from '../components/Notify';
+import { Icon } from '@iconify/react/dist/iconify.js';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -120,11 +121,16 @@ const Login = () => {
 			<p className="m-0 mt-3">
 				<a
 					target="_blank"
-					className="btn btn-outline-success"
-					style={{ width: '100%' }}
+					className="btn btn-outline-secondary d-flex justify-content-center text-color7"
 					href="https://wa.me/6285259787553"
 				>
 					Tidak Bisa Login? Hubungi Pengurus…!
+					<Icon
+						className="ms-2"
+						icon="logos:whatsapp-icon"
+						width="1.5em"
+						height="1.5em"
+					/>
 				</a>
 			</p>
 		</>

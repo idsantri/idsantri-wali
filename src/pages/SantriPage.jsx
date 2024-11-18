@@ -35,21 +35,24 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<div className="card p-2">
+		<>
 			<Notify {...objNotify} />
-			<h2
-				style={{
-					fontSize: '1.4em',
-					textAlign: 'center',
-					fontWeight: 300,
-				}}
-			>
-				Data Santri
-			</h2>
+			<div className="bg-color3">
+				<h2
+					style={{
+						fontSize: '1.4em',
+						textAlign: 'center',
+						fontWeight: 300,
+					}}
+					className="m-0 p-2"
+				>
+					Data Santri
+				</h2>
+			</div>
 			{santri ? (
 				<>
 					<Image
-						lazy
+						lazy="true"
 						src={santri.image_url}
 						thumbnail
 						roundedCircle
@@ -58,40 +61,46 @@ const Dashboard = () => {
 							height: '150px',
 							objectFit: 'cover',
 						}}
-						className="d-flex mx-auto"
+						className="d-flex m-2 mx-auto "
 					/>
-					<table className="table mt-4">
+					<table className="table m-0">
 						<tbody>
 							<tr>
-								<td className="fst-italic">ID Santri</td>
+								<td className="fst-italic fw-light">
+									ID Santri
+								</td>
 								<td className="fw-bold">{santri?.id}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic">Nama</td>
+								<td className="fst-italic fw-light">Nama</td>
 								<td style={{ fontVariant: 'small-caps' }}>
 									{santri?.nama}
 								</td>
 							</tr>
 							<tr>
-								<td className="fst-italic">Data Akhir</td>
+								<td className="fst-italic fw-light">
+									Data Akhir
+								</td>
 								<td>{santri.data_akhir}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic">Alamat Lengkap</td>
+								<td className="fst-italic fw-light">
+									Alamat Lengkap
+								</td>
 								<td>{`${santri.alamat_lengkap}`}</td>
 								{/* <td>{`${santri.jl} ${santri?.desa} ${santri?.kecamatan} ${santri?.kabupaten} ${santri?.provinsi}`}</td> */}
 							</tr>
 							<tr>
-								<td className="fst-italic">Ayah</td>
+								<td className="fst-italic fw-light">Ayah</td>
 								<td>{santri.ayah}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic">Ibu</td>
+								<td className="fst-italic fw-light">Ibu</td>
 								<td>{santri.ibu}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic">Wali</td>
-								<td>{`${santri.wali_nama} (${santri.wali_status}; ${santri.wali_sex}) `}</td>
+								<td className="fst-italic fw-light">Wali</td>
+								<td>{`${santri.wali_nama} (${santri.wali_sex}; ${santri.wali_status}) `}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -100,7 +109,7 @@ const Dashboard = () => {
 			) : (
 				<Loading />
 			)}
-		</div>
+		</>
 	);
 };
 

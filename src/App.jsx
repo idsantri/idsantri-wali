@@ -10,7 +10,8 @@ import AuthMiddleware from './middleware/AuthMiddleware';
 import SantriPage from './pages/SantriPage';
 import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
-import './App.css';
+import KelasPage from './pages/KelasPage';
+// import './App.css';
 
 const App = () => {
 	return (
@@ -30,6 +31,7 @@ const App = () => {
 					}
 				>
 					<Route path="/santri" element={<SantriPage />} />
+					<Route path="/kelas" element={<KelasPage />} />
 				</Route>
 				<Route path="*" element={<ErrorPage />} />
 			</Routes>
