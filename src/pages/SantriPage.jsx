@@ -3,15 +3,15 @@ import { apiGet } from '../api';
 import Notify from '../components/Notify';
 import Loading from '../components/Loading';
 import { Image } from 'react-bootstrap';
-const Dashboard = () => {
+
+const SantriPage = () => {
 	const [objNotify, setObjNotify] = useState({
 		message: '',
 		title: 'Error',
 		code: '',
 		isError: true,
 		show: false,
-		onClose: () =>
-			setObjNotify((prevNotify) => ({ ...prevNotify, show: false })),
+		onClose: () => setObjNotify((prevNotify) => ({ ...prevNotify, show: false })),
 	});
 
 	const [santri, setSantri] = useState(null);
@@ -25,8 +25,7 @@ const Dashboard = () => {
 			.catch((error) => {
 				setObjNotify((prevState) => ({
 					...prevState,
-					message:
-						error.response?.data?.message || 'Terjadi kesalahan',
+					message: error.response?.data?.message || 'Terjadi kesalahan',
 					show: true,
 					code: error.status,
 				}));
@@ -37,14 +36,14 @@ const Dashboard = () => {
 	return (
 		<>
 			<Notify {...objNotify} />
-			<div className="bg-color3">
+			<div className='bg-color3'>
 				<h2
 					style={{
 						fontSize: '1.4em',
 						textAlign: 'center',
 						fontWeight: 300,
 					}}
-					className="m-0 p-2"
+					className='m-0 p-2'
 				>
 					Data Santri
 				</h2>
@@ -52,8 +51,8 @@ const Dashboard = () => {
 			{santri ? (
 				<>
 					<Image
-						lazy="true"
-						src={santri.image_url}
+						lazy='true'
+						src={santri.image_url || 'user-default.png'}
 						thumbnail
 						roundedCircle
 						style={{
@@ -61,46 +60,42 @@ const Dashboard = () => {
 							height: '150px',
 							objectFit: 'cover',
 						}}
-						className="d-flex m-2 mx-auto "
+						className='d-flex m-2 mx-auto '
 					/>
-					<table className="table m-0">
-						<tbody>
-							<tr>
-								<td className="fst-italic fw-light">
-									ID Santri
-								</td>
-								<td className="fw-bold">{santri?.id}</td>
+					<table className='table m-0'>
+						<tbody className=''>
+							<tr className=''>
+								<td className='fst-italic fw-light'>ID Santri</td>
+								<td className='fw-bold'>{santri?.id}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic fw-light">Nama</td>
-								<td style={{ fontVariant: 'small-caps' }}>
-									{santri?.nama}
-								</td>
+								<td className='fst-italic fw-light'>Nama</td>
+								<td style={{ fontVariant: 'small-caps' }}>{santri?.nama}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic fw-light">
-									Data Akhir
-								</td>
+								<td className='fst-italic fw-light'>Data Akhir</td>
 								<td>{santri.data_akhir}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic fw-light">
-									Alamat Lengkap
-								</td>
+								<td className='fst-italic fw-light'>Alamat Lengkap</td>
 								<td>{`${santri.alamat_lengkap}`}</td>
 								{/* <td>{`${santri.jl} ${santri?.desa} ${santri?.kecamatan} ${santri?.kabupaten} ${santri?.provinsi}`}</td> */}
 							</tr>
 							<tr>
-								<td className="fst-italic fw-light">Ayah</td>
+								<td className='fst-italic fw-light'>Ayah</td>
 								<td>{santri.ayah}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic fw-light">Ibu</td>
+								<td className='fst-italic fw-light'>Ibu</td>
 								<td>{santri.ibu}</td>
 							</tr>
 							<tr>
-								<td className="fst-italic fw-light">Wali</td>
+								<td className='fst-italic fw-light'>Wali</td>
 								<td>{`${santri.wali_nama} (${santri.wali_sex}; ${santri.wali_status}) `}</td>
+							</tr>
+							<tr>
+								<td className='fst-italic fw-light'>No Telepon</td>
+								<td>{`${santri.wali_telepon || '-'}`}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -113,4 +108,4 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default SantriPage;

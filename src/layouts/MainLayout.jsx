@@ -1,24 +1,14 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { Dropdown } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
+import BottomNavigation from '../components/BottomNavigation';
 
 const MainLayout = () => {
 	const { logout } = useAuthStore();
 	return (
 		<div style={{ height: '100vh' }} className="">
 			<header className="d-flex align-items-center justify-content-between p-2 bg-color2">
-				<button
-					className=""
-					onClick={() => window.location.replace('/')}
-					style={{
-						cursor: 'pointer',
-						outline: 'none',
-						border: 'none',
-						background: 'none',
-						textAlign: 'left',
-					}}
-				>
+				<a className="text-decoration-none" href="/">
 					<h1
 						className="p-0 m-0 text-color7"
 						style={{ fontSize: '1.6em', fontWeight: 400 }}
@@ -41,7 +31,7 @@ const MainLayout = () => {
 					>
 						Syaichona Moh Cholil Bangkalan
 					</p>
-				</button>
+				</a>
 				<button onClick={logout} className="btn btn-danger">
 					<Icon
 						icon="icomoon-free:exit"
@@ -55,23 +45,7 @@ const MainLayout = () => {
 				<div className="card p-2 bg-color1">
 					<Outlet />
 				</div>
-				<div
-					style={{ position: 'fixed', bottom: '10px', left: '10px' }}
-				>
-					<Dropdown drop="up">
-						<Dropdown.Toggle
-							variant="outline-success"
-							id="dropdown-basic"
-						>
-							Menu
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={Link} to="/kelas">
-								Kelas
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-				</div>
+				<BottomNavigation />
 			</main>
 		</div>
 	);
