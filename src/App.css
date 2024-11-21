@@ -19,12 +19,15 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
 body {
 	font-family: 'Ubuntu', serif;
 	font-weight: 400;
 	color: var(--color9);
 	background-color: var(--color0);
+}
+td {
+	color: var(--color9) !important;
+	background-color: var(--color0) !important;
 }
 
 .text-color0 {

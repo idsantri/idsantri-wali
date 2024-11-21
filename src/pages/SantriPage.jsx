@@ -94,7 +94,7 @@ const SantriPage = () => {
 								<td>{`${santri.wali_nama} (${santri.wali_sex}; ${santri.wali_status}) `}</td>
 							</tr>
 							<tr>
-								<td className='fst-italic fw-light'>No Telepon</td>
+								<td className='fst-italic fw-light'>Telepon</td>
 								<td>{`${santri.wali_telepon || '-'}`}</td>
 							</tr>
 						</tbody>

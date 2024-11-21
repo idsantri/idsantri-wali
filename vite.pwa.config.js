@@ -2,13 +2,14 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// https://vite.dev/config/
 export default defineConfig({
 	plugins: [
 		react(),
 		VitePWA({
-			registerType: 'autoUpdate', // Untuk otomatis memperbarui service worker
-			includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'], // Tambahkan aset tambahan
+			devOptions: {
+				enabled: true, // Aktifkan PWA untuk development
+			},
+			registerType: 'autoUpdate', // Service worker akan otomatis diperbarui
 			manifest: {
 				name: 'IDSantri Wali',
 				short_name: 'Santri',
@@ -37,7 +38,4 @@ export default defineConfig({
 			},
 		}),
 	],
-	// server: {
-	// 	port: 3000,
-	// },
 });
