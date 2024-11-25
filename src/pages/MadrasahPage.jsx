@@ -26,25 +26,23 @@ function KelasPage() {
 	}, [setObjNotify]);
 
 	return (
-		<div>
-			<div className='bg-color3'>
-				<h2
-					style={{
-						fontSize: '1.4em',
-						textAlign: 'center',
-						fontWeight: 300,
-					}}
-					className='m-0 p-2'
-				>
-					Riwayat Kelas
-				</h2>
-			</div>
+		<>
+			<h2
+				style={{
+					fontSize: '1.4em',
+					textAlign: 'center',
+					fontWeight: 300,
+				}}
+				className='m-0 p-2 bg-color3'
+			>
+				Riwayat Kelas
+			</h2>
 
 			<Card className='my-2 bg-color2 text-center'>
 				<Card.Body className='p-2 fw-bold'>{santri.nama}</Card.Body>
 			</Card>
 			<Notify {...objNotify} />
-			<Accordion className='mt-2'>
+			<Accordion className=''>
 				{!kelas ? (
 					<Loading />
 				) : kelas.length == 0 ? (
@@ -53,7 +51,7 @@ function KelasPage() {
 					</Alert>
 				) : (
 					kelas.map((k) => (
-						<Accordion.Item eventKey={k.id} key={k.id}>
+						<Accordion.Item eventKey={k.id} key={k.id} className='bg-color0'>
 							<Accordion.Header className=''>
 								<div className='fw-light'>
 									{k.th_ajaran_h} | {k.tingkat_id} | {k.kelas}
@@ -73,7 +71,7 @@ function KelasPage() {
 			</Accordion>
 
 			{/* <pre className='mt-3'>{JSON.stringify(kelas, null, 2)}</pre> */}
-		</div>
+		</>
 	);
 }
 export default KelasPage;

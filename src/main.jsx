@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root'), { identifierPrefix: 'id-santri-' }).render(
 	<StrictMode>
 		<App />
 	</StrictMode>,
