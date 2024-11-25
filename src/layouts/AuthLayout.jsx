@@ -1,11 +1,11 @@
-import { Card } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Pwa from '../components/PWA';
+import { Card, Grid2 } from '@mui/material';
 
 const AuthLayout = () => {
 	return (
-		<div style={{ margin: '20px' }}>
-			<div className='mx-auto' style={{ maxWidth: '500px' }}>
+		<Grid2 container>
+			<Grid2 display='flex' justifyContent='center' alignItems='center' size='grow'>
 				<Pwa />
 				<Card
 					style={{
@@ -13,7 +13,8 @@ const AuthLayout = () => {
 						padding: '20px',
 						textAlign: 'center',
 					}}
-					className='bg-color2 text-color7'
+					// className='bg-color2 text-color7'
+					classes={{ root: 'bg-color2 text-color7' }}
 				>
 					<header>
 						<h1 style={{ fontSize: '1.8em', fontWeight: 300 }}>Aplikasi Wali Santri</h1>
@@ -27,8 +28,8 @@ const AuthLayout = () => {
 						<Outlet />
 					</main>
 				</Card>
-			</div>
-		</div>
+			</Grid2>
+		</Grid2>
 	);
 };
 
