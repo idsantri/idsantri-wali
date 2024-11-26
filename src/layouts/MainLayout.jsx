@@ -11,8 +11,8 @@ const MainLayout = () => {
 		logout();
 	}
 	return (
-		<div style={{ height: '100vh' }} className=''>
-			<header className='d-flex align-items-center justify-content-between p-2 bg-color2'>
+		<div className='h-screen'>
+			<header className='flex items-center justify-between p-2 bg-color2'>
 				<a className='text-decoration-none' href='/'>
 					<h1 className='p-0 m-0 text-color7' style={{ fontSize: '1.6em', fontWeight: 400 }}>
 						App Wali Santri
@@ -40,7 +40,9 @@ const MainLayout = () => {
 						boxShadow: 'rgba(0, 0, 0, 0.1) 0 2px 4px',
 						color: '#FFFFFF',
 						cursor: 'pointer',
-						display: 'inline-block',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
 						width: '50px',
 						height: '50px',
 						lineHeight: '50px',
@@ -56,11 +58,11 @@ const MainLayout = () => {
 						transition: 'box-shadow .2s',
 					}}
 				>
-					<Icon icon='icomoon-free:exit' width='1.2em' height='1.2em' className='text-color1 ms-1 mb-1' />
+					<Icon icon='icomoon-free:exit' width='1.25em' height='1.25em' className='text-color1' />
 				</button>
 			</header>
-			<main className='m-2'>
-				<div className='card p-2 bg-color1'>
+			<main className=''>
+				<div className='m-2 p-2 bg-color1'>
 					<Outlet />
 				</div>
 				<BottomNavigation />

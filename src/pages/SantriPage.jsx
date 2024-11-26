@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { apiGet } from '../api';
-import Notify from '../components/Notify';
+import Notify from '../components/__Notify--';
 import Loading from '../components/Loading';
-import { Image } from 'react-bootstrap';
 import useNotify from '../hooks/use-notify';
+import CardHeader from '../components/CardHeader';
 
 const SantriPage = () => {
 	const { objNotify, setObjNotify } = useNotify();
@@ -29,65 +29,48 @@ const SantriPage = () => {
 	return (
 		<>
 			<Notify {...objNotify} />
-			<div className='bg-color3'>
-				<h2
-					style={{
-						fontSize: '1.4em',
-						textAlign: 'center',
-						fontWeight: 300,
-					}}
-					className='m-0 p-2'
-				>
-					Data Santri
-				</h2>
-			</div>
+			<CardHeader>Data Santri</CardHeader>
 			{santri ? (
 				<>
-					<Image
-						lazy='true'
-						src={santri.image_url || 'user-default.png'}
-						thumbnail
-						roundedCircle
-						style={{
-							width: '150px',
-							height: '150px',
-							objectFit: 'cover',
-						}}
-						className='d-flex m-2 mx-auto '
-					/>
-					<table className='table m-0'>
+					<div className='avatar m-4 flex items-center justify-center'>
+						<div className='ring-orange-200 ring-offset-base-100 w-40 rounded-full ring ring-offset-1'>
+							<img src={santri.image_url || 'user-default.png'} />
+						</div>
+					</div>
+					<table className='table-sm table-auto table-pin-rows m-0 bg-color0 flex justify-center'>
+						<thead></thead>
 						<tbody className=''>
-							<tr className=''>
-								<td className='fst-italic fw-light'>ID Santri</td>
-								<td className='fw-bold'>{santri?.id}</td>
+							<tr className='border-b border-emerald-300'>
+								<td className='italic font-light'>ID Santri</td>
+								<td className='font-bold'>{santri?.id}</td>
 							</tr>
-							<tr>
-								<td className='fst-italic fw-light'>Nama</td>
+							<tr className='border-b border-emerald-300'>
+								<td className='italic font-light'>Nama</td>
 								<td style={{ fontVariant: 'small-caps' }}>{santri?.nama}</td>
 							</tr>
-							<tr>
-								<td className='fst-italic fw-light'>Data Akhir</td>
+							<tr className='border-b border-emerald-300'>
+								<td className='italic font-light'>Data Akhir</td>
 								<td>{santri.data_akhir}</td>
 							</tr>
-							<tr>
-								<td className='fst-italic fw-light'>Alamat Lengkap</td>
+							<tr className='border-b border-emerald-300'>
+								<td className='italic font-light'>Alamat Lengkap</td>
 								<td>{`${santri.alamat_lengkap}`}</td>
 								{/* <td>{`${santri.jl} ${santri?.desa} ${santri?.kecamatan} ${santri?.kabupaten} ${santri?.provinsi}`}</td> */}
 							</tr>
-							<tr>
-								<td className='fst-italic fw-light'>Ayah</td>
+							<tr className='border-b border-emerald-300'>
+								<td className='italic font-light'>Ayah</td>
 								<td>{santri.ayah}</td>
 							</tr>
-							<tr>
-								<td className='fst-italic fw-light'>Ibu</td>
+							<tr className='border-b border-emerald-300'>
+								<td className='italic font-light'>Ibu</td>
 								<td>{santri.ibu}</td>
 							</tr>
-							<tr>
-								<td className='fst-italic fw-light'>Wali</td>
+							<tr className='border-b border-emerald-300'>
+								<td className='italic font-light'>Wali</td>
 								<td>{`${santri.wali_nama} (${santri.wali_sex}; ${santri.wali_status}) `}</td>
 							</tr>
 							<tr>
-								<td className='fst-italic fw-light'>Telepon</td>
+								<td className='italic font-light'>Telepon</td>
 								<td>{`${santri.wali_telepon || '-'}`}</td>
 							</tr>
 						</tbody>
@@ -95,7 +78,7 @@ const SantriPage = () => {
 					{/* <pre>{JSON.stringify(santri, null, 2)}</pre> */}
 				</>
 			) : (
-				<Loading />
+				<Loading style={{ scale: 4 }} />
 			)}
 		</>
 	);

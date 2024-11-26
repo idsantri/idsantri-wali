@@ -1,18 +1,16 @@
-import { Spinner } from 'react-bootstrap';
-
 const Loading = () => {
 	return (
 		<div
 			style={{
-				width: '100px',
-				height: '100px',
+				width: '150px',
+				height: '150px',
 				margin: 'auto',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
 			}}
 		>
-			<Spinner animation="grow" size="xl" style={{ scale: '1.25' }} />
+			<div className='loading loading-ring loading-lg' style={{ width: '100px' }}></div>
 		</div>
 	);
 };

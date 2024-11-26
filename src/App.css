@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
 	--color0: #fffcf5;
 	--color1: #fff6e3;
@@ -24,10 +29,6 @@ body {
 	font-weight: 400;
 	color: var(--color9);
 	background-color: var(--color0);
-}
-td {
-	color: var(--color9) !important;
-	background-color: var(--color0) !important;
 }
 
 .text-color0 {

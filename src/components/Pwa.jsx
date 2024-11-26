@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Alert, Button } from 'react-bootstrap';
 
 function Pwa() {
 	const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -43,13 +42,16 @@ function Pwa() {
 	return (
 		<>
 			{showInstallBanner && (
-				<Alert variant='success' className='m-0'>
-					<Alert.Heading>Install</Alert.Heading>
-					<p>Install aplikasi untuk pengalaman lebih baik!</p>
-					<Button variant='success' className='d-flex ms-auto' onClick={handleInstallClick}>
-						Install
-					</Button>
-				</Alert>
+				<>
+					<div className=''>
+						<div role='alert' className='alert alert-info rounded-md'>
+							<span>Install aplikasi untuk pengalaman lebih baik!</span>
+							<button className='btn btn-ghost btn-outline' onClick={handleInstallClick}>
+								Install
+							</button>
+						</div>
+					</div>
+				</>
 			)}
 		</>
 	);

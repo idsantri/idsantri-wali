@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { apiGet } from '../api';
 import useNotify from '../hooks/use-notify';
-import Notify from '../components/Notify';
+import Notify from '../components/__Notify--';
 import Loading from '../components/Loading';
-import { Accordion, Alert, Button, Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import CardHeader from '../components/CardHeader';
 
 function KelasPage() {
 	const { objNotify, setObjNotify } = useNotify();
@@ -27,48 +27,43 @@ function KelasPage() {
 
 	return (
 		<>
-			<h2
-				style={{
-					fontSize: '1.4em',
-					textAlign: 'center',
-					fontWeight: 300,
-				}}
-				className='m-0 p-2 bg-color3'
-			>
-				Riwayat Kelas
-			</h2>
-
-			<Card className='my-2 bg-color2 text-center'>
-				<Card.Body className='p-2 fw-bold'>{santri.nama}</Card.Body>
-			</Card>
+			<CardHeader>Riwayat Kelas</CardHeader>
+			<div className='my-2 bg-color2 text-center rounded-sm'>
+				<div className='p-2 fw-bold'>
+					<div>{santri.nama}</div>
+					<div className='text-sm font-light'>{santri.data_akhir}</div>
+				</div>
+			</div>
 			<Notify {...objNotify} />
-			<Accordion className=''>
-				{!kelas ? (
-					<Loading />
-				) : kelas.length == 0 ? (
-					<Alert variant='danger' className='text-center m-0'>
-						Yang bersangkutan belum memiliki riwayat kelas!
-					</Alert>
-				) : (
-					kelas.map((k) => (
-						<Accordion.Item eventKey={k.id} key={k.id} className='bg-color0'>
-							<Accordion.Header className=''>
-								<div className='fw-light'>
-									{k.th_ajaran_h} | {k.tingkat_id} | {k.kelas}
+
+			{!kelas ? (
+				<Loading />
+			) : kelas.length == 0 ? (
+				<div role='alert' className='alert alert-warning rounded-sm text-center text-color8'>
+					<span> Yang bersangkutan belum memiliki riwayat kelas!</span>
+				</div>
+			) : (
+				<div className='join join-vertical w-full rounded-sm'>
+					{kelas.map((k) => (
+						<div className='collapse collapse-arrow join-item border-base-300 border bg-color0' key={k.id}>
+							<input name='radio' type='radio' />
+							<div className='collapse-title font-light'>
+								{k.th_ajaran_h} | {k.tingkat_id} | {k.kelas}
+							</div>
+							<div className='collapse-content'>
+								<div className='flex gap-2'>
+									<Link className='btn btn-ghost btn-outline btn-sm font-light' to={`/kelas/${k.id}/nilai`}>
+										Nilai
+									</Link>
+									<Link className='btn btn-ghost btn-outline btn-sm font-light' to={`/kelas/${k.id}/absensi`}>
+										Absensi
+									</Link>
 								</div>
-							</Accordion.Header>
-							<Accordion.Body className='d-flex gap-2 justify-content-start p-2'>
-								<Button className='' as={Link} to='/kelas/id/nilai' variant='outline-primary'>
-									Nilai
-								</Button>
-								<Button className='' as={Link} to='/kelas/id/absensi' variant='outline-success'>
-									Absensi
-								</Button>
-							</Accordion.Body>
-						</Accordion.Item>
-					))
-				)}
-			</Accordion>
+							</div>
+						</div>
+					))}
+				</div>
+			)}
 
 			{/* <pre className='mt-3'>{JSON.stringify(kelas, null, 2)}</pre> */}
 		</>

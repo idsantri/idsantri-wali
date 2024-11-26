@@ -1,32 +1,34 @@
-import { Card } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Pwa from '../components/PWA';
 
 const AuthLayout = () => {
 	return (
-		<div style={{ margin: '20px' }}>
-			<div className='mx-auto' style={{ maxWidth: '500px' }}>
+		<div className='h-screen bg-color0 grid place-content-center'>
+			<div style={{ maxWidth: '400px' }} className='mx-auto'>
 				<Pwa />
-				<Card
-					style={{
-						marginTop: '20vh',
-						padding: '20px',
-						textAlign: 'center',
-					}}
-					className='bg-color2 text-color7'
-				>
-					<header>
-						<h1 style={{ fontSize: '1.8em', fontWeight: 300 }}>Aplikasi Wali Santri</h1>
-						<p>
-							<span style={{ fontSize: '1.2em', fontWeight: 500 }}>Pondok Pesantren</span>
-							<br />
-							<span style={{ fontVariant: 'small-caps', fontSize: '1.5em' }}>Syaichona Moh Cholil</span>
-						</p>
-					</header>
-					<main>
-						<Outlet />
-					</main>
-				</Card>
+			</div>
+			<div
+				style={{
+					textAlign: 'center',
+					maxWidth: '400px',
+				}}
+				className='bg-color2 text-color7 m-3 p-4 rounded-md shadow-md'
+			>
+				<header className=''>
+					<h1 style={{ fontSize: '1.6em' }} className='font-medium'>
+						Aplikasi Wali Santri
+					</h1>
+					<p>
+						<span style={{ fontSize: '1.2em' }} className='font-medium'>
+							Pondok Pesantren
+						</span>
+						<br />
+						<span style={{ fontVariant: 'small-caps', fontSize: '1.5em' }}>Syaichona Moh Cholil</span>
+					</p>
+				</header>
+				<main>
+					<Outlet />
+				</main>
 			</div>
 		</div>
 	);

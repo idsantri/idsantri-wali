@@ -1,57 +1,49 @@
-import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
 
-export default function NavBar() {
+export default function BottomNavigation() {
 	return (
-		<>
-			<style>{`.custom-dropdown::after {display: none !important;}`}</style>
-			<Navbar fixed='bottom' className='border-top bg-color2'>
-				<Nav className='nav-justified w-100'>
-					<Nav.Item>
-						<Link to='/kelas' className='text-decoration-none text-color7'>
-							<Icon icon='healthicons:i-training-class-24px' width='1.2em' height='1.2em' />
-							<span className='small d-block'>Madrasah</span>
-						</Link>
-					</Nav.Item>
-					<Nav.Item>
-						<Link to='/' className='text-decoration-none text-color7' style={{ pointerEvents: 'none', color: 'grey' }}>
-							<Icon icon='ic:round-meeting-room' width='1.2em' height='1.2em' />
-							<span className='small d-block'>Pesantren</span>
-						</Link>
-					</Nav.Item>
-					<Nav.Item>
-						<Link to='/' className='text-decoration-none text-color7'>
-							<Icon icon='entypo:home' width='1.2em' height='1.2em' />
-							<span className='small d-block'>Beranda</span>
-						</Link>
-					</Nav.Item>
-					<Nav.Item>
-						<Link to='/' className='text-decoration-none text-color7' style={{ pointerEvents: 'none', color: 'grey' }}>
-							<Icon icon='majesticons:creditcard-hand' width='1.2em' height='1.2em' />
-							<span className='small d-block'>Iuran</span>
-						</Link>
-					</Nav.Item>
-					<Dropdown as={Nav.Item} drop='up'>
-						<Dropdown.Toggle
-							className='d-flex flex-column align-items-center custom-dropdown text-color7'
-							style={{ pointerEvents: 'none', color: 'grey', background: 'none', border: 'none' }}
-						>
-							{/* <Icon icon='material-symbols:other-admission-outline-rounded' /> */}
-							<Icon icon='basil:other-1-solid' width='1.2em' height='1.2em' />
-							<span className='small'>Lainnya</span>
-						</Dropdown.Toggle>
-						<Dropdown.Menu align='end'>
-							<Dropdown.Item as={Link} to='/'>
-								Santri
-							</Dropdown.Item>
-							<Dropdown.Item as={Link} to='/kelas'>
-								Kelas
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-				</Nav>
-			</Navbar>
-		</>
+		<nav className='bg-color2 border-t border-base-300 fixed bottom-0 w-screen'>
+			<ul className='grid grid-flow-col auto-cols-fr'>
+				<li className='p-2'>
+					<Link to='/kelas' className='text-lg text-base-content hover:text-base-content'>
+						<Icon className='w-full' icon='healthicons:i-training-class-24px' width='1.2em' height='1.2em' />
+						<span className='text-center text-sm block'>Madrasah</span>
+					</Link>
+				</li>
+				<li className='p-2 bg-orange-100'>
+					<Link to='/' className='text-lg text-base-content hover:text-base-content btn-disabled'>
+						<Icon className='w-full' icon='ic:round-meeting-room' width='1.2em' height='1.2em' />
+						<span className='text-center text-sm block'>Pesantren</span>
+					</Link>
+				</li>
+				<li className='p-2'>
+					<Link to='/' className='text-lg text-base-content hover:text-base-content'>
+						<Icon className='w-full' icon='entypo:home' width='1.2em' height='1.2em' />
+						<span className='text-center text-sm block'>Beranda</span>
+					</Link>
+				</li>
+				<li className='p-2 bg-orange-100'>
+					<Link to='/' className='text-lg text-base-content hover:text-base-content btn-disabled'>
+						<Icon className='w-full' icon='majesticons:creditcard-hand' width='1.2em' height='1.2em' />
+						<span className='text-center text-sm block'>Iuran</span>
+					</Link>
+				</li>
+				<li className='p-2 bg-orange-100 text-lg text-base-content hover:text-base-content dropdown dropdown-top dropdown-end'>
+					<div tabIndex={0} role='button' className='btn-disabled'>
+						<Icon className='w-full' icon='basil:other-1-solid' width='1.2em' height='1.2em' />
+						<span className='text-center text-sm block'>Lainnya</span>
+					</div>
+					<ul tabIndex={0} className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
+						<li>
+							<Link to='/'>Item 1</Link>
+						</li>
+						<li>
+							<Link to={'/'}>Item 2</Link>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
 	);
 }

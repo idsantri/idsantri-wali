@@ -1,44 +1,40 @@
-import PropTypes from 'prop-types';
-import { Toast, ToastContainer } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
-function Notify({
-	message,
-	title,
-	code,
-	show,
-	onClose,
-	delay = 2500,
-	isError,
-}) {
-	return (
-		<ToastContainer
-			className={`${isError ? 'bg-danger' : 'bg-success'}`}
-			style={{
-				zIndex: 1,
-				position: 'fixed',
-				left: '50%',
-				transform: 'translate(-50%, -50%)',
-				bottom: '10px',
-			}}
-		>
-			<Toast show={show} onClose={onClose} delay={delay} autohide>
-				<Toast.Header>
-					<strong className="me-auto">{title}</strong>
-					{code && <small>{code}</small>}
-				</Toast.Header>
-				<Toast.Body>{message}</Toast.Body>
-			</Toast>
-		</ToastContainer>
+const notifySuccess = (message, title = 'Sukses') => {
+	toast.success(
+		<div>
+			<strong className='text-success font-light'>{title}</strong>
+			<br />
+			{message}
+		</div>,
+		{
+			position: 'bottom-center',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		},
 	);
-}
-Notify.propTypes = {
-	message: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	code: PropTypes.string,
-	show: PropTypes.bool.isRequired,
-	onClose: PropTypes.func.isRequired,
-	delay: PropTypes.number,
-	isError: PropTypes.bool,
+};
+const notifyError = (message, title = 'Sukses') => {
+	toast.error(
+		<div>
+			<strong className='text-red-600 font-light'>{title}</strong>
+			<br />
+			{message}
+		</div>,
+		{
+			position: 'bottom-center',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		},
+	);
 };
 
-export default Notify;
+export { notifySuccess, notifyError };
