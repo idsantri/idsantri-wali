@@ -4,7 +4,7 @@ import { useAuthStore } from '../store/authStore';
 
 const AuthMiddleware = ({ children }) => {
 	const { isAuthenticated } = useAuthStore.getState().auth;
-	return isAuthenticated ? children : <Navigate to="/login" />;
+	return isAuthenticated ? children : <Navigate to='/login' />;
 };
 
 // Validasi prop children

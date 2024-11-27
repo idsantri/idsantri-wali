@@ -2,32 +2,38 @@ import { Outlet } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { Icon } from '@iconify/react';
 import BottomNavigation from '../components/BottomNavigation';
+import useConfirmDialog from '../hooks/use-confirm-dialog';
 
 const MainLayout = () => {
 	const { logout } = useAuthStore();
-	function handleLogout() {
-		const confirm = window.confirm('Keluar dari aplikasi?');
-		if (!confirm) return;
+	const dialog = useConfirmDialog();
+	async function handleLogout() {
+		const isConfirmed = await dialog({
+			title: 'Logout?',
+			message: 'Keluar dari Aplikasi?',
+		});
+		if (!isConfirmed) return;
 		logout();
 	}
 	return (
 		<div className='h-screen'>
 			<header className='flex items-center justify-between p-2 bg-color2'>
 				<a className='text-decoration-none' href='/'>
-					<h1 className='p-0 m-0 text-color7' style={{ fontSize: '1.6em', fontWeight: 400 }}>
+					<h1 className='p-0 m-0 text-jingga-600' style={{ fontSize: '1.5em', fontWeight: 400, lineHeight: '25px' }}>
 						App Wali Santri
 					</h1>
 					<p
-						className='p-0 m-0 text-color8'
+						className='p-0 m-0  text-jingga-800'
 						style={{
 							fontVariant: 'small-caps',
-							fontSize: '1.5em',
+							fontSize: '1.3em',
 							fontWeight: 300,
+							lineHeight: '22px',
 						}}
 					>
 						Pondok Pesantren
 					</p>
-					<p className='p-0 m-0 text-color8' style={{ fontWeight: 400 }}>
+					<p className='p-0 m-0 text-jingga-800' style={{ fontWeight: 400, lineHeight: '20px' }}>
 						Syaichona Moh Cholil Bangkalan
 					</p>
 				</a>

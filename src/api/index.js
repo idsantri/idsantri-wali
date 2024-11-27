@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
+import config from '../config';
 
 const api = axios.create({
-	baseURL: 'http://localhost:8000/wali',
+	baseURL: config.BASE_API + config.END_API,
 });
 
 api.defaults.withCredentials = true;

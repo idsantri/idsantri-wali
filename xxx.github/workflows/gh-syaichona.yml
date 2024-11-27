@@ -1,0 +1,25 @@
+on:
+    push:
+        branches:
+            - syaichona
+
+name: 🚀 Deploy website on push (Syaichona)
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build PWA
+              run: npm run build
+
+            - name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: dist
+                  clean: true
+                  branch: gh-syaichona

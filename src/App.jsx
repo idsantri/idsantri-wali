@@ -7,7 +7,8 @@ import LoginPage from './pages/LoginPage';
 import ErrorPage from './pages/ErrorPage';
 import MadrasahPage from './pages/MadrasahPage';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import IuranPage from './pages/IuranPage';
+import PesantrenPage from './pages/PesantrenPage';
 
 const App = () => {
 	return (
@@ -27,6 +28,8 @@ const App = () => {
 				>
 					<Route path='/santri' element={<SantriPage />} />
 					<Route path='/kelas' element={<MadrasahPage />} />
+					<Route path='/iuran' element={<IuranPage />} />
+					<Route path='/pesantren' element={<PesantrenPage />} />
 				</Route>
 				<Route path='*' element={<ErrorPage />} />
 			</Routes>

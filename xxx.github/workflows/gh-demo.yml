@@ -1,0 +1,28 @@
+on:
+    push:
+        branches:
+            - demo
+
+name: 🚀 Deploy website on push (Demo)
+jobs:
+    build:
+        env:
+            APP_NAME: TEST APP NAME
+            APP_URL: https://idsantri-wali.vercel.app
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build PWA
+              run: npm run build
+
+            - name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: dist
+                  clean: true
+                  branch: gh-demo

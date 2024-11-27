@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react';
 import { apiGet } from '../api';
-import Notify from '../components/__Notify--';
 import Loading from '../components/Loading';
-import useNotify from '../hooks/use-notify';
 import CardHeader from '../components/CardHeader';
 
 const SantriPage = () => {
-	const { objNotify, setObjNotify } = useNotify();
-
 	const [santri, setSantri] = useState(null);
 
 	useEffect(() => {
@@ -17,18 +13,12 @@ const SantriPage = () => {
 				localStorage.setItem('santri', JSON.stringify(res.data.santri));
 			})
 			.catch((error) => {
-				setObjNotify((prevNotify) => ({
-					...prevNotify,
-					message: error.response?.data?.message || 'Terjadi kesalahan',
-					show: true,
-					code: error.status,
-				}));
+				console.log(error);
 			});
-	}, [setObjNotify]);
+	}, []);
 
 	return (
 		<>
-			<Notify {...objNotify} />
 			<CardHeader>Data Santri</CardHeader>
 			{santri ? (
 				<>

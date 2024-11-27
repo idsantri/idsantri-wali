@@ -1,29 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { apiGet } from '../api';
-import useNotify from '../hooks/use-notify';
-import Notify from '../components/__Notify--';
 import Loading from '../components/Loading';
 import CardHeader from '../components/CardHeader';
 
 function KelasPage() {
-	const { objNotify, setObjNotify } = useNotify();
 	const santri = JSON.parse(localStorage.getItem('santri'));
 	const [kelas, setKelas] = useState(null);
+
 	useEffect(() => {
 		apiGet('/kelas')
 			.then((res) => {
 				setKelas(res.data.kelas);
 			})
 			.catch((error) => {
-				setObjNotify((prevNotify) => ({
-					...prevNotify,
-					message: error.response?.data?.message || 'Terjadi kesalahan',
-					show: true,
-					code: error.status,
-				}));
+				console.log(error);
 			});
-	}, [setObjNotify]);
+	}, []);
 
 	return (
 		<>
@@ -34,7 +27,6 @@ function KelasPage() {
 					<div className='text-sm font-light'>{santri.data_akhir}</div>
 				</div>
 			</div>
-			<Notify {...objNotify} />
 
 			{!kelas ? (
 				<Loading />

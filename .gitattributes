@@ -1,0 +1,7 @@
+#  git config --global merge.ours.driver true
+/public/icons merge=ours
+/public/favicon.ico merge=ours
+/src/config merge=ours
+
+
+

@@ -1,7 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ConfirmDialogProvider } from './context/ConfirmDialogContext';
 import App from './App.jsx';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Pendaftaran service worker
 if ('serviceWorker' in navigator) {
@@ -14,6 +16,8 @@ if ('serviceWorker' in navigator) {
 
 createRoot(document.getElementById('root'), { identifierPrefix: 'id-santri-' }).render(
 	<StrictMode>
-		<App />
+		<ConfirmDialogProvider>
+			<App />
+		</ConfirmDialogProvider>
 	</StrictMode>,
 );
