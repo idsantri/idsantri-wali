@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import Pwa from '../components/PWA';
+import InstallPwa from '../components/InstallPwa';
 
 const AuthLayout = () => {
 	return (
 		<div className='h-screen bg-color0 grid place-content-center'>
 			<div style={{ maxWidth: '400px' }} className='mx-auto'>
-				<Pwa />
+				<InstallPwa />
 			</div>
 			<div
 				style={{
