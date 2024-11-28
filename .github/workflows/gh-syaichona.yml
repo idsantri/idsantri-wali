@@ -1,12 +1,16 @@
+name: 🚀 Build to branch gh-syaichona
 on:
     push:
         branches:
             - syaichona
 
-name: 🚀 Deploy website on push (Syaichona)
+permissions:
+    contents: write
+
 jobs:
     build:
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4

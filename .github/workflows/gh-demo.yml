@@ -25,36 +25,9 @@ jobs:
             - name: Build PWA
               run: npm run build
 
-            # - name: Create branch
-            #   uses: JamesIves/github-pages-deploy-action@v4
-            #   with:
-            #       folder: dist
-            #       clean: true
-            #       branch: gh-demo
-
-            ########################################
-            # test upload artifact to github page #
-            ########################################
-            - name: Upload artifacts
-              uses: actions/upload-pages-artifact@v3
+            - name: Create branch
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
-                  name: 'github-pages'
-                  path: dist
-
-            # - name: Deploy to GitHub Pages
-            #   uses: actions/deploy-pages@v4
-            #   with:
-            #       token: ${{ secrets.GITHUB_TOKEN }}
-            #       artifact_name: 'github-pages'
-    deploy:
-        needs: build
-        permissions:
-            pages: write
-            id-token: write
-        environment:
-            name: github-pages
-        runs-on: ubuntu-latest
-        steps:
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4
+                  folder: dist
+                  clean: true
+                  branch: gh-demo
