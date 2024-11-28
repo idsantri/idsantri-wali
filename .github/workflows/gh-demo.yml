@@ -1,17 +1,23 @@
+name: 🚀 Build to branch gh-demo
 on:
     push:
         branches:
             - demo
+
 permissions:
     contents: write
+    #     contents: read
+    pages: write
+    id-token: write
 
-name: 🚀 Deploy website on push (Demo)
 jobs:
     build:
         env:
             APP_NAME: TEST APP NAME
             APP_URL: https://idsantri-wali.vercel.app
+
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
@@ -22,9 +28,24 @@ jobs:
             - name: Build PWA
               run: npm run build
 
-            - name: Deploy to GitHub Pages
+            - name: Create branch
               uses: JamesIves/github-pages-deploy-action@v4
               with:
                   folder: dist
                   clean: true
                   branch: gh-demo
+
+            ########################################
+            # test upload artifact to github page #
+            ########################################
+            - name: Upload artifacts
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  name: 'github-pages'
+                  path: dist
+
+            - name: Deploy to GitHub Pages
+              uses: actions/deploy-pages@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  artifact_name: 'github-pages'
