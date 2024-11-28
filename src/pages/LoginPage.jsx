@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { apiPost } from '../api';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { notifyError, notifySuccess } from '../components/Notify';
+import config from '../config';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -38,6 +39,7 @@ const Login = () => {
 		return <Navigate to='/' />;
 	}
 
+	const wa = 'https://wa.me/' + config.PHONE;
 	return (
 		<>
 			<h2 style={{ fontSize: '1.5em' }} className='font-normal my-7'>
@@ -58,7 +60,7 @@ const Login = () => {
 				</button>
 			</form>
 			<p className='mt-3'>
-				<a target='_blank' className='btn w-full max-w-xs border-0 bg-color4 text-color1 d-flex justify-content-center' href='https://wa.me/6285259787553'>
+				<a target='_blank' className='btn w-full max-w-xs border-0 bg-color4 text-color1 d-flex justify-content-center' href={wa}>
 					<span className='font-light'>Tidak Bisa Login? Hubungi Pengurus…!</span>
 					<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
 				</a>
