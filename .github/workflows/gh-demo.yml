@@ -1,4 +1,4 @@
-name: 🚀 Build to branch gh-demo
+name: 🚀 Build to branch demo-build
 on:
     push:
         branches:
@@ -11,7 +11,7 @@ jobs:
     build:
         env:
             APP_NAME: TEST APP NAME
-            APP_URL: https://idsantri-wali.vercel.app
+            APP_URL: https://idsantri.github.io/idsantri-wali
 
         runs-on: ubuntu-latest
 
@@ -30,4 +30,4 @@ jobs:
               with:
                   folder: dist
                   clean: true
-                  branch: gh-demo
+                  branch: demo-build

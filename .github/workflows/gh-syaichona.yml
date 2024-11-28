@@ -1,4 +1,4 @@
-name: 🚀 Build to branch gh-syaichona
+name: 🚀 Build to branch syaichona-build
 on:
     push:
         branches:
@@ -26,4 +26,4 @@ jobs:
               with:
                   folder: dist
                   clean: true
-                  branch: gh-syaichona
+                  branch: syaichona-build
