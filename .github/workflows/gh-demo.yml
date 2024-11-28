@@ -44,8 +44,20 @@ jobs:
                   name: 'github-pages'
                   path: dist
 
+            # - name: Deploy to GitHub Pages
+            #   uses: actions/deploy-pages@v4
+            #   with:
+            #       token: ${{ secrets.GITHUB_TOKEN }}
+            #       artifact_name: 'github-pages'
+    deploy:
+        needs: build
+        permissions:
+            pages: write
+            id-token: write
+        environment:
+            name: github-pages
+        runs-on: ubuntu-latest
+        steps:
             - name: Deploy to GitHub Pages
+              id: deployment
               uses: actions/deploy-pages@v4
-              with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  artifact_name: 'github-pages'
