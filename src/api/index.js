@@ -22,7 +22,7 @@ api.interceptors.response.use(
 	(res) => res,
 	(err) => {
 		if (!err.response) {
-			console.log('ERROR: Tidak dapat terhubung ke server');
+			console.log('ERROR: Tidak dapat terhubung ke server!');
 		} else {
 			return Promise.reject(err);
 		}
