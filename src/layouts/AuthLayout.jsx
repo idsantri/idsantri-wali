@@ -15,6 +15,11 @@ const AuthLayout = () => {
 				className='bg-color2 text-color7 m-3 p-4 rounded-md shadow-md'
 			>
 				<header className=''>
+					<div className='avatar'>
+						<div className='w-32 rounded-full  border-jingga-700 border-4'>
+							<img src='icons/icon-128x128.png' />
+						</div>
+					</div>
 					<h1 style={{ fontSize: '1.6em' }} className='font-medium'>
 						Aplikasi Wali Santri
 					</h1>
