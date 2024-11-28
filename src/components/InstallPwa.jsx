@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function Pwa() {
+function InstallPwa() {
 	const [deferredPrompt, setDeferredPrompt] = useState(null);
 	const [showInstallBanner, setShowInstallBanner] = useState(false);
 
@@ -57,4 +57,4 @@ function Pwa() {
 	);
 }
 
-export default Pwa;
+export default InstallPwa;
