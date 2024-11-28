@@ -1,9 +1,9 @@
 export default {
 	name: 'IDSantri Wali',
-	short_name: 'Santri',
-	description: 'Aplikasi untuk wali santri',
-	theme_color: '#ffffff',
-	background_color: '#ffffff',
+	short_name: 'Wali Santri',
+	description: 'Aplikasi Wali Santri',
+	theme_color: '#4a321d',
+	background_color: '#fffcf5',
 	display: 'standalone',
 	icons: [
 		{
