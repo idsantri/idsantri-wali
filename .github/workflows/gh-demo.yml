@@ -6,9 +6,6 @@ on:
 
 permissions:
     contents: write
-    #     contents: read
-    pages: write
-    id-token: write
 
 jobs:
     build:
@@ -28,12 +25,12 @@ jobs:
             - name: Build PWA
               run: npm run build
 
-            - name: Create branch
-              uses: JamesIves/github-pages-deploy-action@v4
-              with:
-                  folder: dist
-                  clean: true
-                  branch: gh-demo
+            # - name: Create branch
+            #   uses: JamesIves/github-pages-deploy-action@v4
+            #   with:
+            #       folder: dist
+            #       clean: true
+            #       branch: gh-demo
 
             ########################################
             # test upload artifact to github page #
