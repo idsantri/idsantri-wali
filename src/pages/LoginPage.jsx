@@ -16,12 +16,12 @@ const Login = () => {
 		const formData = new FormData(e.target);
 		const formObject = Object.fromEntries(formData.entries());
 		if (!formObject.santri_id || !formObject.nik) {
-			return notifyError('Lengkapi data login', 'Error');
+			return notifyError({ message: 'Lengkapi data login' });
 		}
 		try {
 			setLoading(true);
 			const { data } = await apiPost('login', formObject);
-			notifySuccess(data?.message, 'Berhasil Login');
+			notifySuccess({ message: data?.message, title: 'Berhasil Login', position: 'top-center' });
 			login({
 				isAuthenticated: true,
 				token: data.token,
@@ -29,7 +29,7 @@ const Login = () => {
 			});
 			navigate('/');
 		} catch (error) {
-			notifyError(error.response?.data?.message || 'Terjadi kesalahan', 'Error ' + error.status);
+			notifyError({ message: error.response?.data?.message || 'Terjadi kesalahan', title: 'Error ' + error.status });
 		} finally {
 			setLoading(false);
 		}
@@ -48,7 +48,7 @@ const Login = () => {
 			<form action='' onSubmit={handleLogin}>
 				<input type='text' name='santri_id' placeholder='Masukkan ID Santri' className='input input-bordered w-full max-w-xs' />
 				<input type='text' name='nik' placeholder='Masukkan NIK Santri' className='input input-bordered w-full max-w-xs mt-3' />
-				<button type='submit' className='btn w-full max-w-xs mt-3 bg-color1 text-color6 font-medium' disabled={loading}>
+				<button type='submit' className='btn w-full max-w-xs mt-3 font-medium bg-jingga-300 text-jingga-800' disabled={loading}>
 					{loading ? (
 						<>
 							<div className='loading loading-ring loading-md' />

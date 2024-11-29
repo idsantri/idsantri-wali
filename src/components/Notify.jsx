@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-const notifySuccess = (message, title = 'Sukses') => {
+const notifySuccess = ({ message, title = 'Sukses', position = 'bottom-center' }) => {
 	toast.success(
 		<div>
 			<strong className='text-success font-light'>{title}</strong>
@@ -8,7 +8,7 @@ const notifySuccess = (message, title = 'Sukses') => {
 			{message}
 		</div>,
 		{
-			position: 'bottom-center',
+			position: position,
 			autoClose: 3000,
 			hideProgressBar: false,
 			closeOnClick: true,
@@ -18,7 +18,7 @@ const notifySuccess = (message, title = 'Sukses') => {
 		},
 	);
 };
-const notifyError = (message, title = 'Sukses') => {
+const notifyError = ({ message, title = 'Error', position = 'bottom-center' }) => {
 	toast.error(
 		<div>
 			<strong className='text-red-600 font-light'>{title}</strong>
@@ -26,7 +26,7 @@ const notifyError = (message, title = 'Sukses') => {
 			{message}
 		</div>,
 		{
-			position: 'bottom-center',
+			position: position,
 			autoClose: 3000,
 			hideProgressBar: false,
 			closeOnClick: true,

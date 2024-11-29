@@ -1,39 +1,42 @@
 import { Outlet } from 'react-router-dom';
 import InstallPwa from '../components/InstallPwa';
+import config from '../config';
 
 const AuthLayout = () => {
 	return (
-		<div className='h-screen bg-color0 grid place-content-center'>
-			<div style={{ maxWidth: '400px' }} className='mx-auto'>
-				<InstallPwa />
-			</div>
+		<div className='min-h-screen bg-color0 grid place-content-center'>
 			<div
 				style={{
 					textAlign: 'center',
 					maxWidth: '400px',
 				}}
-				className='bg-color2 text-color7 m-3 p-4 rounded-md shadow-md'
+				className='mx-4 text-jingga-700'
 			>
-				<header className=''>
-					<div className='avatar'>
-						<div className='w-32 rounded-full  border-jingga-700 border-4'>
-							<img src='icons/icon-128x128.png' />
+				<div className='mb-4'>
+					<InstallPwa />
+				</div>
+				<div className='rounded-md bg-jingga-200 p-4 shadow-md shadow-jingga-500'>
+					<header className=''>
+						<div className='avatar my-4'>
+							<div className='w-28 rounded-full  border-jingga-700 border-2'>
+								<img src='icons/icon-128x128.png' />
+							</div>
 						</div>
-					</div>
-					<h1 style={{ fontSize: '1.6em' }} className='font-medium'>
-						Aplikasi Wali Santri
-					</h1>
-					<p>
-						<span style={{ fontSize: '1.2em' }} className='font-medium'>
-							Pondok Pesantren
-						</span>
-						<br />
-						<span style={{ fontVariant: 'small-caps', fontSize: '1.5em' }}>Syaichona Moh Cholil</span>
-					</p>
-				</header>
-				<main>
-					<Outlet />
-				</main>
+						<h1 style={{ fontSize: '1.6em' }} className='font-medium'>
+							{config.APP_NAME}
+						</h1>
+						<p>
+							<span style={{ fontSize: '1.2em' }} className='font-medium'>
+								{config.INS_DESC}
+							</span>
+							<br />
+							<span style={{ fontVariant: 'small-caps', fontSize: '1.5em' }}>{config.INS_NAME}</span>
+						</p>
+					</header>
+					<main>
+						<Outlet />
+					</main>
+				</div>
 			</div>
 		</div>
 	);
