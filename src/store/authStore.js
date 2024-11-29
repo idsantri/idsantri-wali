@@ -1,18 +1,23 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-export const useAuthStore = create((set) => ({
-	auth: JSON.parse(sessionStorage.getItem('auth')) || {
-		isAuthenticated: false,
-		token: null,
-		user: null,
-	},
-	login: (authData) => {
-		sessionStorage.setItem('auth', JSON.stringify(authData));
-		set({ auth: authData });
-	},
-	logout: () => {
-		sessionStorage.removeItem('auth');
-		set({ auth: { isAuthenticated: false, token: null, user: null } });
-		window.location.href = '/login';
-	},
-}));
+const initAuth = {
+	isAuthenticated: false,
+	token: null,
+	user: null,
+};
+export const useAuthStore = create(
+	persist(
+		(set) => ({
+			auth: initAuth,
+			login: (authData) => {
+				set({ auth: authData });
+			},
+			logout: () => {
+				set({ auth: initAuth });
+				window.location.href = '/login';
+			},
+		}),
+		{ name: 'auth', storage: createJSONStorage(() => sessionStorage) },
+	),
+);

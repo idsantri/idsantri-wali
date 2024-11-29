@@ -3,6 +3,7 @@ import { useAuthStore } from '../store/authStore';
 import { Icon } from '@iconify/react';
 import BottomNavigation from '../components/BottomNavigation';
 import useConfirmDialog from '../hooks/use-confirm-dialog';
+import config from '../config';
 
 const MainLayout = () => {
 	const { logout } = useAuthStore();
@@ -20,7 +21,7 @@ const MainLayout = () => {
 			<header className='flex items-center justify-between p-2 bg-color2'>
 				<a className='text-decoration-none' href='/'>
 					<h1 className='p-0 m-0 text-jingga-600' style={{ fontSize: '1.5em', fontWeight: 400, lineHeight: '25px' }}>
-						App Wali Santri
+						{config.APP_NAME}
 					</h1>
 					<p
 						className='p-0 m-0  text-jingga-800'
@@ -31,10 +32,10 @@ const MainLayout = () => {
 							lineHeight: '22px',
 						}}
 					>
-						Pondok Pesantren
+						{config.INS_DESC}
 					</p>
 					<p className='p-0 m-0 text-jingga-800' style={{ fontWeight: 400, lineHeight: '20px' }}>
-						Syaichona Moh Cholil Bangkalan
+						{config.INS_NAME}
 					</p>
 				</a>
 				<button

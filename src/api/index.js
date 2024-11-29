@@ -10,9 +10,9 @@ api.defaults.withCredentials = true;
 
 // request
 api.interceptors.request.use((config) => {
-	const { auth } = useAuthStore.getState();
-	if (auth.token) {
-		config.headers.Authorization = `Bearer ${auth.token}`;
+	const { token } = useAuthStore.getState().auth;
+	if (token) {
+		config.headers.Authorization = `Bearer ${token}`;
 	}
 	return config;
 });

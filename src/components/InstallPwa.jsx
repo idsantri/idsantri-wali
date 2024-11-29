@@ -43,13 +43,11 @@ function InstallPwa() {
 		<>
 			{showInstallBanner && (
 				<>
-					<div className=''>
-						<div role='alert' className='alert alert-info rounded-md'>
-							<span>Install aplikasi untuk pengalaman lebih baik!</span>
-							<button className='btn btn-ghost btn-outline' onClick={handleInstallClick}>
-								Install
-							</button>
-						</div>
+					<div role='alert' className='alert rounded-md bg-jingga-500 text-jingga-100 shadow-md shadow-jingga-500'>
+						<span>Install aplikasi untuk pengalaman lebih baik!</span>
+						<button className='btn btn-ghost btn-outline btn-md font-medium bg-jingga-700 text-jingga-200 shadow-jingga-50 shadow-sm' onClick={handleInstallClick}>
+							Install
+						</button>
 					</div>
 				</>
 			)}
