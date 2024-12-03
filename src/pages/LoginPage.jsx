@@ -29,7 +29,7 @@ const Login = () => {
 			});
 			navigate('/');
 		} catch (error) {
-			notifyError({ message: error.response?.data?.message || 'Terjadi kesalahan', title: 'Error ' + error.status });
+			notifyError({ message: error.response?.data?.message || 'Terjadi kesalahan', title: 'Error ' + error?.status || '' });
 		} finally {
 			setLoading(false);
 		}
@@ -42,17 +42,17 @@ const Login = () => {
 	const wa = 'https://wa.me/' + config.PHONE;
 	return (
 		<>
-			<h2 style={{ fontSize: '1.5em' }} className='font-normal my-7'>
+			<h2 style={{ fontSize: '1.5em' }} className='font-normal my-7 text-jingga-900'>
 				Login
 			</h2>
 			<form action='' onSubmit={handleLogin}>
 				<input type='text' name='santri_id' placeholder='Masukkan ID Santri' className='input input-bordered w-full max-w-xs' />
 				<input type='text' name='nik' placeholder='Masukkan NIK Santri' className='input input-bordered w-full max-w-xs mt-3' />
-				<button type='submit' className='btn w-full max-w-xs mt-3 font-medium bg-jingga-300 text-jingga-800' disabled={loading}>
+				<button type='submit' className='btn w-full max-w-xs mt-3 bg-jingga-700 text-jingga-100' disabled={loading}>
 					{loading ? (
 						<>
-							<div className='loading loading-ring loading-md' />
-							<span className='font-light'>Tunggu sebentar …</span>
+							<div className='loading loading-ring loading-md text-jingga-900' />
+							<span className='font-light text-jingga-700'>Tunggu sebentar …</span>
 						</>
 					) : (
 						<span className='font-medium'>Login</span>
@@ -60,7 +60,7 @@ const Login = () => {
 				</button>
 			</form>
 			<p className='mt-3'>
-				<a target='_blank' className='btn w-full max-w-xs border-0 bg-color4 text-color1 d-flex justify-content-center' href={wa}>
+				<a target='_blank' className='btn w-full max-w-xs border-0 d-flex justify-content-center bg-jingga-100 text-jingga-800' href={wa}>
 					<span className='font-light'>Tidak Bisa Login? Hubungi Pengurus…!</span>
 					<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
 				</a>

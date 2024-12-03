@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function BottomNavigation() {
 	return (
-		<nav className='bg-jingga-500 border-t border-base-300 fixed bottom-0 w-screen'>
+		<nav className='bg-jingga-800 border-t border-base-300 fixed bottom-0 w-screen'>
 			<ul className='grid grid-flow-col auto-cols-fr p-2'>
 				<li className='p-2'>
 					<Link to='/kelas' className=' text-lg text-base-content hover:text-base-content'>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 import config from '../config';
+import { notifyError } from '../components/Notify';
 
 const api = axios.create({
 	baseURL: config.BASE_API + config.END_API,
@@ -22,7 +23,8 @@ api.interceptors.response.use(
 	(res) => res,
 	(err) => {
 		if (!err.response) {
-			console.log('ERROR: Tidak dapat terhubung ke server!');
+			// console.log('Tidak dapat terhubung ke server!');
+			notifyError({ message: 'Tidak dapat terhubung ke server!', title: 'Server error' });
 		} else {
 			return Promise.reject(err);
 		}

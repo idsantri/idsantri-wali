@@ -4,7 +4,6 @@ import Loading from '../components/Loading';
 import CardHeader from '../components/CardHeader';
 
 function IuranPage() {
-	const santri = JSON.parse(localStorage.getItem('santri'));
 	const [iuran, setIuran] = useState(null);
 	const [alert, setAlert] = useState(null);
 	useEffect(() => {
@@ -45,13 +44,7 @@ function IuranPage() {
 
 	return (
 		<>
-			<CardHeader>Riwayat Iuran</CardHeader>
-			<div className='my-2 bg-color2 text-center rounded-sm'>
-				<div className='p-2 fw-bold'>
-					<div>{santri.nama}</div>
-					<div className='text-sm font-light'>{santri.data_akhir}</div>
-				</div>
-			</div>
+			<CardHeader title='Riwayat Iuran' />
 			{!iuran ? (
 				<Loading />
 			) : iuran.length == 0 ? (
@@ -95,7 +88,7 @@ function IuranPage() {
 						{/* <pre className='mt-3'>{JSON.stringify(iuran, null, 2)}</pre> */}
 					</div>
 					{alert && (
-						<div className='rounded-sm text-jingga-100 bg-jingga-400 mt-2 px-2 py-4 border border-base-300 text-center italic font-light'>
+						<div className='rounded-sm text-jingga-800 bg-jingga-300 mt-2 px-2 py-4 border border-base-300 text-center italic font-light'>
 							<span>{alert}</span>
 						</div>
 					)}
