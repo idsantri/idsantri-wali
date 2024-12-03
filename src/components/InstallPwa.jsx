@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Icon } from '@iconify/react/dist/iconify.js';
 
 function InstallPwa() {
 	const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -43,11 +44,17 @@ function InstallPwa() {
 		<>
 			{showInstallBanner && (
 				<>
-					<div role='alert' className='alert rounded-md bg-jingga-500 text-jingga-100 shadow-md shadow-jingga-500'>
-						<span>Install aplikasi untuk pengalaman lebih baik!</span>
-						<button className='btn btn-ghost btn-outline btn-md font-medium bg-jingga-700 text-jingga-200 shadow-jingga-50 shadow-sm' onClick={handleInstallClick}>
-							Install
-						</button>
+					<div role='alert' className='alert rounded-md bg-jingga-600 text-jingga-100 shadow-md shadow-jingga-500'>
+						<div className='flex items-center space-x-2'>
+							<div>
+								<Icon icon='typcn:info' height='32' />
+							</div>
+							<div className='text-left italic'>Instal aplikasi untuk pengalaman lebih baik!</div>
+							<button className='btn btn-ghost px-2 font-medium border-none bg-jingga-200 text-jingga-900 shadow-jingga-950 shadow-sm' onClick={handleInstallClick}>
+								<Icon icon='material-symbols-light:install-mobile' height='32' />
+								Instal
+							</button>
+						</div>
 					</div>
 				</>
 			)}

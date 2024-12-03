@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { apiGet } from '../api';
 import Loading from '../components/Loading';
 import CardHeader from '../components/CardHeader';
+import { notifyError } from '../components/Notify';
 
 const SantriPage = () => {
 	const [santri, setSantri] = useState(null);
-
+	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		apiGet('/santri')
 			.then((res) => {
@@ -13,13 +14,19 @@ const SantriPage = () => {
 				localStorage.setItem('santri', JSON.stringify(res.data.santri));
 			})
 			.catch((error) => {
-				console.log(error);
+				notifyError({ message: error.response?.data?.message || 'Terjadi kesalahan', title: 'Error ' + error?.status || '' });
+				// console.log(error);
+			})
+			.finally(() => {
+				setIsLoading(false);
 			});
 	}, []);
 
 	return (
 		<>
-			<CardHeader>Data Santri</CardHeader>
+			<CardHeader title='Data Santri' />
+			{isLoading && <Loading style={{ scale: 4 }} />}
+
 			{santri ? (
 				<>
 					<div className='avatar m-4 flex items-center justify-center'>
@@ -27,7 +34,7 @@ const SantriPage = () => {
 							<img src={santri.image_url || 'user-default.png'} />
 						</div>
 					</div>
-					<table className='table-sm table-auto table-pin-rows m-0 bg-color0 flex justify-center'>
+					<table className='table-sm table-auto table-pin-rows m-0 flex justify-center'>
 						<thead></thead>
 						<tbody className=''>
 							<tr className='border-b border-emerald-300'>
@@ -67,9 +74,7 @@ const SantriPage = () => {
 					</table>
 					{/* <pre>{JSON.stringify(santri, null, 2)}</pre> */}
 				</>
-			) : (
-				<Loading style={{ scale: 4 }} />
-			)}
+			) : null}
 		</>
 	);
 };
