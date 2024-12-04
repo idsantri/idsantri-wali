@@ -27,7 +27,7 @@ const App = () => {
 					}
 				>
 					<Route path='/santri' element={<SantriPage />} />
-					<Route path='/kelas' element={<MadrasahPage />} />
+					<Route path='/madrasah' element={<MadrasahPage />} />
 					<Route path='/iuran' element={<IuranPage />} />
 					<Route path='/pesantren' element={<PesantrenPage />} />
 				</Route>

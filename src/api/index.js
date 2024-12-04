@@ -5,9 +5,8 @@ import { notifyError } from '../components/Notify';
 
 const api = axios.create({
 	baseURL: config.BASE_API + config.END_API,
+	withCredentials: true,
 });
-
-api.defaults.withCredentials = true;
 
 // request
 api.interceptors.request.use((config) => {
