@@ -6,16 +6,14 @@ const AuthLayout = () => {
 	return (
 		<>
 			{/* <ColorPallet /> */}
-			<div className='min-h-screen bg-jingga-50 grid place-content-center'>
+			<div className='min-h-screen bg-jingga-50 grid place-content-center p-4'>
 				<div
 					style={{
 						textAlign: 'center',
 						maxWidth: '400px',
 					}}
 				>
-					<div className='mb-4'>
-						<InstallPwa />
-					</div>
+					<InstallPwa className='mb-4' />
 					<div className='rounded-md bg-jingga-200 p-4 shadow-md shadow-jingga-500'>
 						<header className=''>
 							<div className='avatar my-4'>

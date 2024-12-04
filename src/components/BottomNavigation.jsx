@@ -6,7 +6,7 @@ export default function BottomNavigation() {
 		<nav className='bg-jingga-800 border-t border-base-300 fixed bottom-0 w-screen'>
 			<ul className='grid grid-flow-col auto-cols-fr p-2'>
 				<li className='p-2'>
-					<Link to='/kelas' className=' text-lg text-base-content hover:text-base-content'>
+					<Link to='/madrasah' className=' text-lg text-base-content hover:text-base-content'>
 						<Icon className='w-full text-jingga-50' icon='healthicons:i-training-class-24px' width='1.2em' height='1.2em' />
 						<span className='text-jingga-200 text-center text-sm block'>Madrasah</span>
 					</Link>

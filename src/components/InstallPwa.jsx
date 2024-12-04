@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js';
 
-function InstallPwa() {
+function InstallPwa({ className }) {
 	const [deferredPrompt, setDeferredPrompt] = useState(null);
 	const [showInstallBanner, setShowInstallBanner] = useState(false);
 
@@ -44,7 +44,7 @@ function InstallPwa() {
 		<>
 			{showInstallBanner && (
 				<>
-					<div role='alert' className='alert rounded-md bg-jingga-600 text-jingga-100 shadow-md shadow-jingga-500'>
+					<div role='alert' className={`alert rounded-md bg-jingga-600 text-jingga-100 shadow-md shadow-jingga-500 ${className}`}>
 						<div className='flex items-center space-x-2'>
 							<div>
 								<Icon icon='typcn:info' height='32' />

@@ -1,38 +1,35 @@
 import { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { apiPost } from '../api';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { notifyError, notifySuccess } from '../components/Notify';
+import { notifyError } from '../components/Notify';
 import config from '../config';
+import apiPost from '../api/api-post';
 
 const Login = () => {
 	const navigate = useNavigate();
 	const { login, auth } = useAuthStore();
 	const [loading, setLoading] = useState(false);
 
-	const handleLogin = async (e) => {
+	const handleLogin = (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const formObject = Object.fromEntries(formData.entries());
 		if (!formObject.santri_id || !formObject.nik) {
 			return notifyError({ message: 'Lengkapi data login' });
 		}
-		try {
-			setLoading(true);
-			const { data } = await apiPost('login', formObject);
-			notifySuccess({ message: data?.message, title: 'Berhasil Login', position: 'top-center' });
-			login({
-				isAuthenticated: true,
-				token: data.token,
-				user: { name: 'User' },
-			});
-			navigate('/');
-		} catch (error) {
-			notifyError({ message: error.response?.data?.message || 'Terjadi kesalahan', title: 'Error ' + error?.status || '' });
-		} finally {
+		setLoading(true);
+		apiPost({ endPoint: 'login', data: formObject, notify: true }).then((res) => {
 			setLoading(false);
-		}
+			if (res) {
+				login({
+					isAuthenticated: true,
+					token: res.token,
+					user: { name: 'User' },
+				});
+				navigate('/');
+			}
+		});
 	};
 
 	if (auth.isAuthenticated) {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 function CardHeader({ title }) {
-	const santri = JSON.parse(localStorage.getItem('santri'));
+	const santri = JSON.parse(localStorage.getItem('santri') || 'null');
 
 	return (
 		<>
