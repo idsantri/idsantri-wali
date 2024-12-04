@@ -43,8 +43,8 @@ const Login = () => {
 				Login
 			</h2>
 			<form action='' onSubmit={handleLogin}>
-				<input type='text' name='santri_id' placeholder='Masukkan ID Santri' className='input input-bordered w-full max-w-xs' />
-				<input type='text' name='nik' placeholder='Masukkan NIK Santri' className='input input-bordered w-full max-w-xs mt-3' />
+				<input type='text' name='santri_id' placeholder='Masukkan ID Santri' className='input input-bordered w-full max-w-xs bg-jingga-50 text-jingga-950' />
+				<input type='text' name='nik' placeholder='Masukkan NIK Santri' className='input input-bordered w-full max-w-xs mt-3 bg-jingga-50 text-jingga-950' />
 				<button type='submit' className='btn w-full max-w-xs mt-3 bg-jingga-700 text-jingga-100' disabled={loading}>
 					{loading ? (
 						<>
