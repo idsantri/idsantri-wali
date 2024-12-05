@@ -6,7 +6,8 @@ const initAuth = {
 	token: null,
 	user: null,
 };
-export const useAuthStore = create(
+
+const useAuthStore = create(
 	persist(
 		(set) => ({
 			auth: initAuth,
@@ -21,3 +22,5 @@ export const useAuthStore = create(
 		{ name: 'auth', storage: createJSONStorage(() => sessionStorage) },
 	),
 );
+
+export default useAuthStore;

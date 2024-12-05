@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '../store/authStore';
+import useAuthStore from '../store/authStore';
 import config from '../config';
 import { notifyError } from '../components/Notify';
 

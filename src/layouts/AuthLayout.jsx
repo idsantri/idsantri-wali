@@ -6,7 +6,7 @@ const AuthLayout = () => {
 	return (
 		<>
 			{/* <ColorPallet /> */}
-			<div className='min-h-screen bg-jingga-50 grid place-content-center p-4'>
+			<div className='min-h-screen bg-white grid place-content-center p-4'>
 				<div
 					style={{
 						textAlign: 'center',

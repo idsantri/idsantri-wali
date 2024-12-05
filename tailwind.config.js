@@ -6,6 +6,8 @@ export default {
 	theme: {
 		extend: {
 			colors: {
+				black: '#302305',
+				white: '#fffcf5',
 				jingga: {
 					50: '#fffcf5',
 					100: '#FFF2D4',
