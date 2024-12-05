@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
+import useAuthStore from '../store/authStore';
 import { Icon } from '@iconify/react';
 import BottomNavigation from '../components/BottomNavigation';
 import useConfirmDialog from '../hooks/use-confirm-dialog';
