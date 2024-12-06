@@ -80,7 +80,7 @@ function InstallPwa({ className }) {
 									className='btn btn-ghost rounded-full btn-circle btn-sm font-medium border-none bg-jingga-200 text-jingga-900 shadow-jingga-950 shadow-sm'
 									onClick={() => setShowIosComp(!showIosComp)}
 								>
-									{showIosComp ? <Icon icon='mingcute:down-fill' width='24' height='24' /> : <Icon icon='mingcute:up-fill' width='24' height='24' />}
+									{showIosComp ? <Icon icon='mingcute:up-fill' width='24' height='24' /> : <Icon icon='mingcute:down-fill' width='24' height='24' />}
 								</button>
 							)}
 						</div>
