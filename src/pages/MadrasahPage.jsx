@@ -18,19 +18,19 @@ function KelasPage() {
 
 	function RenderKelas() {
 		return (
-			<div className='join join-vertical w-full rounded-sm '>
+			<div className='w-full rounded-sm join join-vertical '>
 				{kelas.map((k) => (
-					<div className='collapse collapse-arrow join-item border-base-300 border bg-jingga-100' key={k.id}>
+					<div className='border collapse collapse-arrow join-item border-base-300 bg-jingga-100' key={k.id}>
 						<input name='radio' type='radio' className='' />
-						<div className='collapse-title font-light'>
+						<div className='font-light collapse-title'>
 							{k.th_ajaran_h} | {k.tingkat_id} | {k.kelas}
 						</div>
 						<div className='collapse-content'>
 							<div className='flex gap-2 mt-3'>
-								<Link className='btn btn-ghost btn-outline btn-sm font-light' to={`/kelas/${k.id}/nilai`}>
+								<Link className='font-light btn btn-ghost btn-outline btn-sm' to={`/kelas/${k.id}/nilai`}>
 									Nilai
 								</Link>
-								<Link className='btn btn-ghost btn-outline btn-sm font-light' to={`/kelas/${k.id}/absensi`}>
+								<Link className='font-light btn btn-ghost btn-outline btn-sm' to={`/kelas/${k.id}/absensi`}>
 									Absensi
 								</Link>
 							</div>

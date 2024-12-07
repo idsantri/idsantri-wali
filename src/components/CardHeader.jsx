@@ -4,26 +4,17 @@ function CardHeader({ title }) {
 	const santri = JSON.parse(localStorage.getItem('santri') || 'null');
 
 	return (
-		<>
-			<h2
-				style={{
-					fontSize: '1.4em',
-					textAlign: 'center',
-					fontWeight: 300,
-				}}
-				className='m-0 p-2 bg-jingga-100'
-			>
-				{title}
-			</h2>
+		<div className='mb-2 overflow-hidden rounded-md'>
+			<h2 className='p-2 m-0 text-xl font-light text-center bg-jingga-100 text-jingga-800'>{title}</h2>
 			{santri && (
-				<div className='bg-jingga-200 text-center rounded-sm mb-2'>
-					<div className='p-2 fw-bold'>
+				<div className='text-center bg-jingga-200'>
+					<div className='p-2'>
 						<div>{santri.nama}</div>
-						<div className='text-sm font-light'>{santri.data_akhir}</div>
+						<div className='text-xs font-light'>{santri.data_akhir}</div>
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 }
 CardHeader.propTypes = {

@@ -43,9 +43,9 @@ const Login = () => {
 				Login
 			</h2>
 			<form action='' onSubmit={handleLogin}>
-				<input type='text' name='santri_id' placeholder='Masukkan ID Santri' className='input input-bordered w-full max-w-xs bg-jingga-50 text-jingga-950' />
-				<input type='text' name='nik' placeholder='Masukkan NIK Santri' className='input input-bordered w-full max-w-xs mt-3 bg-jingga-50 text-jingga-950' />
-				<button type='submit' className='btn w-full max-w-xs mt-3 bg-jingga-700 text-jingga-100' disabled={loading}>
+				<input type='text' name='santri_id' placeholder='Masukkan ID Santri' className='w-full max-w-xs input input-bordered bg-jingga-50 text-jingga-950' />
+				<input type='text' name='nik' placeholder='Masukkan NIK Santri' className='w-full max-w-xs mt-3 input input-bordered bg-jingga-50 text-jingga-950' />
+				<button type='submit' className='w-full max-w-xs mt-3 btn bg-jingga-700 text-jingga-100' disabled={loading}>
 					{loading ? (
 						<>
 							<div className='loading loading-ring loading-md text-jingga-900' />
@@ -57,7 +57,7 @@ const Login = () => {
 				</button>
 			</form>
 			<p className='mt-3'>
-				<a target='_blank' className='btn w-full max-w-xs border-0 d-flex justify-content-center bg-jingga-100 text-jingga-800' href={wa}>
+				<a target='_blank' className='w-full max-w-xs border-0 btn d-flex justify-content-center bg-jingga-100 text-jingga-800' href={wa}>
 					<span className='font-light'>Tidak Bisa Login? Hubungi Pengurus…!</span>
 					<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
 				</a>

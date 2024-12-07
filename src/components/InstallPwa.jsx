@@ -68,16 +68,16 @@ function InstallPwa({ className }) {
 							<div>
 								<Icon icon='typcn:info' height='32' className='text-yellow-200' />
 							</div>
-							<div className='text-left italic'>Instal aplikasi untuk pengalaman lebih baik!</div>
+							<div className='text-sm italic text-left'>Instal aplikasi untuk mendapatkan pengalaman lebih baik!</div>
 							{isAndroid() && (
-								<button className='btn btn-ghost px-2 font-medium border-none bg-jingga-200 text-jingga-900 shadow-jingga-950 shadow-sm' onClick={installPwa}>
+								<button className='px-2 font-medium border-none shadow-sm btn btn-ghost bg-jingga-200 text-jingga-900 shadow-jingga-950' onClick={installPwa}>
 									<Icon icon='material-symbols-light:install-mobile' height='32' />
 									Instal
 								</button>
 							)}
 							{isIos() && (
 								<button
-									className='btn btn-ghost rounded-full btn-circle btn-sm font-medium border-none bg-jingga-200 text-jingga-900 shadow-jingga-950 shadow-sm'
+									className='font-medium border-none rounded-full shadow-sm btn btn-ghost btn-circle btn-sm bg-jingga-200 text-jingga-900 shadow-jingga-950'
 									onClick={() => setShowIosComp(!showIosComp)}
 								>
 									{showIosComp ? <Icon icon='mingcute:up-fill' width='24' height='24' /> : <Icon icon='mingcute:down-fill' width='24' height='24' />}
@@ -85,14 +85,14 @@ function InstallPwa({ className }) {
 							)}
 						</div>
 						{showIosComp && (
-							<div className='w-full text-left border rounded-md py-2 px-4 bg-jingga-700'>
+							<div className='w-full px-4 py-2 text-left border rounded-md bg-jingga-700'>
 								<p>Bagi Pengguna iOS!</p>
-								<ul className='list-decimal list-outside font-light ml-4 text-sm'>
+								<ul className='ml-4 text-sm font-light list-decimal list-outside'>
 									<li className=''>
 										Pastikan Anda menggunakan browser <span className='font-semibold'>Safari</span>;
 									</li>
-									<li className=''>Ketuk ikon bagikan (sebuah kotak dengan panah ke atas) di bagian bawah layar;</li>
-									<li>Gulir ke bawah dalam menu bagikan dan pilih opsi &lsquo;Tambahkan ke Layar Utama&rdquo;;</li>
+									<li className=''>Ketuk ikon bagikan (sebuah kotak dengan panah ke atas di bagian bawah layar);</li>
+									<li>Gulir ke bawah dalam menu bagikan dan pilih opsi &ldquo;Tambahkan ke Layar Utama&rdquo;;</li>
 									<li>Anda mungkin akan diminta untuk memberikan nama dan mengonfigurasi ikon;</li>
 									<li>Ketuk &ldquo;Tambahkan&rdquo; di pojok kanan atas layar untuk menyelesaikan proses;</li>
 								</ul>

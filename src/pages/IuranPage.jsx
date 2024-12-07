@@ -4,6 +4,8 @@ import CardHeader from '../components/CardHeader';
 import apiGet from '../api/api-get';
 import AlertNotFound from '../components/AlertNotFound';
 import { addHours, format } from 'date-fns';
+import { Icon } from '@iconify/react/dist/iconify.js';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function IuranPage() {
 	const [iuran, setIuran] = useState(null);
@@ -43,55 +45,91 @@ function IuranPage() {
 		);
 	}
 
-	function RenderIuran() {
+	function RenderDetail({ item, index, ...props }) {
 		return (
-			<div>
-				<div className='join join-vertical w-full rounded-sm'>
-					{iuran.map((tahun) => (
-						<div className='collapse collapse-arrow join-item border-base-300 border bg-color0' key={tahun.th_ajaran_h}>
-							<input name='radio' type='radio' />
-							<div className='collapse-title font-light flex items-center justify-between'>
-								<div>Tahun Ajaran: {tahun.th_ajaran_h}</div>
-								<div className='font-normal'>
-									{tahun.total.toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-								</div>
-							</div>
-							<div className='collapse-content'>
-								{tahun.data.map((item) => (
-									<div key={item.id} className='border-separated border border-base-300 bg-jingga-100 py-1 px-3 flex items-center justify-between'>
-										<div>
-											<div className='font-light'>{item.iuran}</div>
-											{/* <div className='text-xs'>{item.cr_at}</div> */}
-											<div className='text-xs'> {format(addHours(item.cr_at, 7), 'yyyy-MM-dd HH:mm:ss')}</div>
-										</div>
-										<div className='font-light'>
-											{(item.nominal * item.qty).toLocaleString('id-ID', {
-												style: 'currency',
-												currency: 'IDR',
-												minimumFractionDigits: 0,
-												maximumFractionDigits: 0,
-											})}
-										</div>
-										{/* <pre className='mt-3'>{JSON.stringify(i, null, 2)}</pre> */}
-									</div>
-								))}
-							</div>
-						</div>
-					))}
+			<div {...props} className={`flex items-center justify-between p-1 ${index == 0 ? '' : 'border-t border-jingga-300'}`}>
+				<div>
+					<div>{item.iuran}</div>
+					<div className='text-xs italic'>{format(addHours(item.cr_at, 7), 'yyyy-MM-dd')}</div>
 				</div>
-				{info && (
-					<div className='rounded-sm text-jingga-800 bg-jingga-300 mt-2 px-2 py-4 border border-base-300 text-center italic font-light'>
-						<span>{info}</span>
-					</div>
-				)}
+				<div className=''>
+					{(item.nominal * item.qty).toLocaleString('id-ID', {
+						style: 'currency',
+						currency: 'IDR',
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 0,
+					})}
+				</div>
 			</div>
 		);
 	}
 
+	function RenderItem({ iuran, ...props }) {
+		const [showDetail, setShowDetail] = useState(false);
+		const data = iuran.data;
+		// console.log('🚀 ~ CardIuran ~ iuran:', iuran);
+		return (
+			<div {...props} className='px-2 py-2 border bg-jingga-200/50 border-jingga-200/75'>
+				<div className='flex items-center justify-between py-2 cursor-pointer ' onClick={() => setShowDetail(!showDetail)}>
+					<div className=''>
+						<span className='text-sm font-normal'>Th Ajaran: </span>
+						<span className='font-normal text-jingga-800'>{iuran.th_ajaran_h}</span>
+					</div>
+					<div className='flex items-center gap-2 text-jingga-800'>
+						<div className='font-semibold '>
+							{iuran.total.toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+						</div>
+						<Icon icon={showDetail ? 'entypo:chevron-up' : 'entypo:chevron-down'} width='1em' />
+					</div>
+				</div>
+				<AnimatePresence>
+					{showDetail && (
+						<motion.div
+							initial={{ opacity: 0, height: 0 }}
+							animate={{ opacity: 1, height: 'auto' }}
+							exit={{ opacity: 0, height: 0 }}
+							transition={{ duration: 0.3 }}
+							className='px-2 bg-jingga-300/25'
+						>
+							{data.map((item, index) => (
+								<motion.div
+									key={item.id}
+									initial={{ opacity: 0, y: -10 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: -10 }}
+									transition={{
+										duration: 0.2,
+										delay: 0.1,
+									}}
+								>
+									<RenderDetail item={item} index={index} />
+								</motion.div>
+							))}
+						</motion.div>
+					)}
+				</AnimatePresence>
+			</div>
+		);
+	}
 	return (
 		<>
 			<CardHeader title='Riwayat Iuran' />
-			{isLoading ? <Loading /> : !iuran || iuran.length == 0 ? <AlertNotFound /> : <RenderIuran />}
+			{isLoading ? (
+				<Loading />
+			) : !iuran || iuran.length == 0 ? (
+				<AlertNotFound />
+			) : (
+				<>
+					{iuran.map((item) => (
+						<RenderItem key={item.th_ajaran_h} iuran={item} title='Klik untuk melihat selengkapnya' />
+					))}
+					{info && (
+						<div className='px-2 py-4 mt-2 italic font-light text-center border rounded-sm text-jingga-800 bg-jingga-300 border-base-300'>
+							<span>{info}</span>
+						</div>
+					)}
+				</>
+			)}
 		</>
 	);
 }
