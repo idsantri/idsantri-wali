@@ -5,7 +5,7 @@ function PesantrenPage() {
 		<>
 			<CardHeader title='Data Pesantren' />
 
-			<div className='text-xl-center flex items-center justify-center h-96'>Halaman Pesantren</div>
+			<div className='flex items-center justify-center text-xl-center h-96'>Halaman Pesantren</div>
 		</>
 	);
 }

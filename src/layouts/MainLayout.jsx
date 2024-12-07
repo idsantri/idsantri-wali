@@ -24,7 +24,7 @@ const MainLayout = () => {
 						{config.APP_NAME}
 					</h1>
 					<p
-						className='p-0 m-0  text-jingga-100'
+						className='p-0 m-0 text-jingga-100'
 						style={{
 							fontVariant: 'small-caps',
 							fontSize: '1.25em',

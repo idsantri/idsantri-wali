@@ -6,7 +6,7 @@ const AuthLayout = () => {
 	return (
 		<>
 			{/* <ColorPallet /> */}
-			<div className='min-h-screen bg-white grid place-content-center p-4'>
+			<div className='grid min-h-screen p-4 bg-white place-content-center'>
 				<div
 					style={{
 						textAlign: 'center',
@@ -14,14 +14,14 @@ const AuthLayout = () => {
 					}}
 				>
 					<InstallPwa className='mb-4' />
-					<div className='rounded-md bg-jingga-200 p-4 shadow-md shadow-jingga-500'>
+					<div className='px-4 py-10 rounded-md shadow-md bg-jingga-200 shadow-jingga-500'>
 						<header className=''>
-							<div className='avatar my-4'>
-								<div className='w-28 rounded-full  border-jingga-700 border-2'>
+							<div className='avatar'>
+								<div className='border-2 rounded-full w-28 border-jingga-700'>
 									<img src='icons/icon-128x128.png' />
 								</div>
 							</div>
-							<h1 style={{ fontSize: '1.6em' }} className='font-medium text-jingga-700'>
+							<h1 style={{ fontSize: '1.6em' }} className='mt-4 font-medium text-jingga-700'>
 								{config.APP_NAME}
 							</h1>
 							<p>

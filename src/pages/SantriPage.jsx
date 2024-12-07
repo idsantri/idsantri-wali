@@ -21,12 +21,12 @@ const SantriPage = () => {
 	function RenderSantri() {
 		return (
 			<>
-				<div className='avatar m-4 flex items-center justify-center'>
-					<div className='ring-orange-200 ring-offset-base-100 w-40 rounded-full ring ring-offset-1'>
+				<div className='flex items-center justify-center m-4 avatar'>
+					<div className='w-40 rounded-full ring-orange-200 ring-offset-base-100 ring ring-offset-1'>
 						<img src={santri.image_url || 'user-default.png'} />
 					</div>
 				</div>
-				<table className='table-sm table-auto table-pin-rows m-0 flex justify-center'>
+				<table className='flex justify-center m-0 table-auto table-sm table-pin-rows'>
 					<thead></thead>
 					<tbody className=''>
 						<tr className='border-b border-emerald-300'>
