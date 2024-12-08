@@ -64,12 +64,12 @@ function IuranPage() {
 		);
 	}
 
-	function RenderItem({ iuran, ...props }) {
+	function RenderItem({ iuran, className, ...props }) {
 		const [showDetail, setShowDetail] = useState(false);
 		const data = iuran.data;
 		// console.log('🚀 ~ CardIuran ~ iuran:', iuran);
 		return (
-			<div {...props} className='px-2 py-2 border bg-jingga-200/50 border-jingga-200/75'>
+			<div {...props} className={`px-2 py-2 bg-jingga-200/50 ${className}`}>
 				<div className='flex items-center justify-between py-2 cursor-pointer ' onClick={() => setShowDetail(!showDetail)}>
 					<div className=''>
 						<span className='text-sm font-normal'>Th Ajaran: </span>
@@ -120,9 +120,11 @@ function IuranPage() {
 				<AlertNotFound />
 			) : (
 				<>
-					{iuran.map((item) => (
-						<RenderItem key={item.th_ajaran_h} iuran={item} title='Klik untuk melihat selengkapnya' />
-					))}
+					<div className='overflow-hidden border rounded-md border-jingga-300/75'>
+						{iuran.map((item, index) => (
+							<RenderItem key={item.th_ajaran_h} iuran={item} className={index == 0 ? '' : 'border-t border-jingga-300/75'} title='Klik untuk melihat selengkapnya' />
+						))}
+					</div>
 					{info && (
 						<div className='px-2 py-4 mt-2 italic font-light text-center border rounded-sm text-jingga-800 bg-jingga-300 border-base-300'>
 							<span>{info}</span>
