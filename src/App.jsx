@@ -9,13 +9,15 @@ import MadrasahPage from './pages/MadrasahPage';
 import { ToastContainer } from 'react-toastify';
 import IuranPage from './pages/IuranPage';
 import PesantrenPage from './pages/PesantrenPage';
+import DashboardPage from './pages/DashboardPage';
+import TatibPage from './pages/TatibPage';
 
 const App = () => {
 	return (
 		<Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
 			<ToastContainer />
 			<Routes>
-				<Route path='/' element={<Navigate to='/santri' replace />} />
+				<Route path='/' element={<Navigate to='/dashboard' replace />} />
 				<Route element={<AuthLayout />}>
 					<Route path='/login' element={<LoginPage />} />
 				</Route>
@@ -26,10 +28,12 @@ const App = () => {
 						</AuthMiddleware>
 					}
 				>
+					<Route path='/dashboard' element={<DashboardPage />} />
 					<Route path='/santri' element={<SantriPage />} />
 					<Route path='/madrasah' element={<MadrasahPage />} />
 					<Route path='/iuran' element={<IuranPage />} />
 					<Route path='/pesantren' element={<PesantrenPage />} />
+					<Route path='/tatib' element={<TatibPage />} />
 				</Route>
 				<Route path='*' element={<ErrorPage />} />
 			</Routes>
