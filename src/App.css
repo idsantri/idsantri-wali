@@ -20,13 +20,6 @@
 *,
 html,
 body {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-body {
 	font-family: 'Ubuntu', serif;
 	font-weight: 400;
-	color: #302305;
-	background-color: #fffcf5;
 }

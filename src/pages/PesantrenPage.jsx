@@ -52,7 +52,7 @@ function PesantrenPage() {
 	return (
 		<>
 			<CardHeader title='Riwayat Domisili' />
-			<div className='mb-20'>
+			<div className=''>
 				{isLoading ? (
 					<Loading />
 				) : !domisili || domisili.length === 0 ? (

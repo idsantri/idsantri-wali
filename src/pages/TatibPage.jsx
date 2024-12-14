@@ -42,7 +42,7 @@ function TatibPage() {
 	};
 
 	const RenderTable = ({ tatib }) => (
-		<div className='mb-20 overflow-hidden border rounded-sm shadow-sm shadow-jingga-500 border-jingga-300'>
+		<div className='overflow-hidden border rounded-sm shadow-sm shadow-jingga-500 border-jingga-300'>
 			<table className='table table-auto table-sm'>
 				<tr className='w-auto bg-jingga-300'>
 					<th>Pasal</th>

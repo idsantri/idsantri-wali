@@ -16,7 +16,7 @@ function BottomNavigation() {
 	}
 
 	return (
-		<nav className='fixed bottom-0 w-screen border-t bg-jingga-800 border-base-300'>
+		<nav className='border-t border-base-300 bg-gradient-to-t from-jingga-800 to-jingga-700'>
 			<ul className='grid grid-flow-col auto-cols-fr'>
 				<ButtonNavigation iconName='healthicons:i-training-class-24px' to='/madrasah' label='Madrasah' />
 				<ButtonNavigation iconName='ic:round-meeting-room' to='/pesantren' label='Asrama' />
