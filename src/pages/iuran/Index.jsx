@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Loading from '../components/Loading';
-import CardHeader from '../components/CardHeader';
-import apiGet from '../api/api-get';
-import AlertNotFound from '../components/AlertNotFound';
+import Loading from '@/components/Loading';
+import CardHeader from '@/components/CardHeader';
+import apiGet from '@/api/api-get';
+import AlertNotFound from '@/components/AlertNotFound';
 import { addHours, format } from 'date-fns';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { motion, AnimatePresence } from 'framer-motion';

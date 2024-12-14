@@ -1,7 +1,7 @@
 import axios from 'axios';
-import useAuthStore from '../store/authStore';
-import config from '../config';
-import { notifyError } from '../components/Notify';
+import useAuthStore from '@/store/authStore';
+import config from '@/config';
+import { notifyError } from '@/components/Notify';
 
 const api = axios.create({
 	baseURL: config.BASE_API + config.END_API,

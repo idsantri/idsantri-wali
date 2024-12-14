@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import useAuthStore from '../store/authStore';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { notifyError } from '../components/Notify';
-import config from '../config';
-import apiPost from '../api/api-post';
+import useAuthStore from '@/store/authStore';
+import { notifyError } from '@/components/Notify';
+import config from '@/config';
+import apiPost from '@/api/api-post';
 
 const Login = () => {
 	const navigate = useNavigate();

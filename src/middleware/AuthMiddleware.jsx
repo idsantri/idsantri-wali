@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useAuthStore from '../store/authStore';
+import useAuthStore from '@/store/authStore';
 
 const AuthMiddleware = ({ children }) => {
 	const { isAuthenticated } = useAuthStore.getState().auth;

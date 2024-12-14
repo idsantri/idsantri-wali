@@ -1,6 +1,6 @@
-import CardHeader from '../components/CardHeader';
+import CardHeader from '../../components/CardHeader';
 
-function DashboardPage() {
+export default function Dashboard() {
 	return (
 		<>
 			<CardHeader title='Data Pesantren' />
@@ -9,5 +9,3 @@ function DashboardPage() {
 		</>
 	);
 }
-
-export default DashboardPage;

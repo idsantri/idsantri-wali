@@ -1,6 +1,6 @@
 import api from '.';
 import apiError from './api-error';
-import { notifySuccess } from '../components/Notify';
+import { notifySuccess } from '@/components/Notify';
 
 async function apiPost({ endPoint, data, params, notify = true }) {
 	try {

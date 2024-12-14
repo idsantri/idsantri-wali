@@ -1,5 +1,5 @@
-import config from '../config';
-import LogoAvatar from './LogoAvatar';
+import config from '@/config';
+import LogoAvatar from '@/layouts/_components/LogoAvatar';
 
 function MainTop() {
 	return (

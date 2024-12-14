@@ -1,7 +1,7 @@
-import ButtonNavigation from './ButtonNavigation';
-import ButtonMore from './ButtonMore';
-import useAuthStore from '../store/authStore';
-import useConfirmDialog from '../hooks/use-confirm-dialog';
+import ButtonNavigation from '@/layouts/_components/ButtonNavigation';
+import ButtonMore from '@/layouts/_components/ButtonMore';
+import useAuthStore from '@/store/authStore';
+import useConfirmDialog from '@/hooks/use-confirm-dialog';
 
 function BottomNavigation() {
 	const { logout } = useAuthStore();
