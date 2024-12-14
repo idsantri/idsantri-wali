@@ -3,7 +3,7 @@ import LogoAvatar from '@/layouts/_components/LogoAvatar';
 
 function MainTop() {
 	return (
-		<div className='flex items-center gap-2 p-2 bg-gradient-to-b from-jingga-800 to-jingga-700'>
+		<div className='flex items-center gap-2 p-2 border-none shadow-md bg-gradient-to-b from-jingga-800 to-jingga-700 shadow-jingga-400'>
 			<a href='/' className='text-decoration-none'>
 				<LogoAvatar className='w-16' />
 			</a>
