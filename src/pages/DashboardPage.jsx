@@ -5,7 +5,7 @@ function DashboardPage() {
 		<>
 			<CardHeader title='Data Pesantren' />
 
-			<div className='flex items-center justify-center text-xl-center h-96'>Halaman Beranda</div>
+			<div className='grid h-96 place-content-center text-xl-center'>Halaman Beranda</div>
 		</>
 	);
 }

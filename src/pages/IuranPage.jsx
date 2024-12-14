@@ -131,7 +131,7 @@ function IuranPage() {
 			) : !iuran || iuran.length == 0 ? (
 				<AlertNotFound />
 			) : (
-				<div className='mb-20'>
+				<div className=''>
 					<div className='overflow-hidden border rounded-md border-jingga-300/75'>
 						{iuran.map((item, index) => (
 							<RenderItem
