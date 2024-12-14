@@ -4,7 +4,7 @@ export default {
 	name: config.PWA_NAME,
 	short_name: config.PWA_SHORT_NAME,
 	description: 'Aplikasi Wali Santri',
-	theme_color: '#5E4B1F',
+	theme_color: '#4a321d',
 	background_color: '#ffffff',
 	display: 'standalone',
 	icons: [
