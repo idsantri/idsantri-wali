@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import CardHeader from '../components/CardHeader';
-import apiGet from '../api/api-get';
-import Loading from '../components/Loading';
-import AlertNotFound from '../components/AlertNotFound';
 import { addHours, format } from 'date-fns';
+import CardHeader from '@/components/CardHeader';
+import apiGet from '@/api/api-get';
+import Loading from '@/components/Loading';
+import AlertNotFound from '@/components/AlertNotFound';
 
 function PesantrenPage() {
 	const [domisili, setDomisili] = useState(null);

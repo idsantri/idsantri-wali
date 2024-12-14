@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import apiGet from '../api/api-get';
-import Loading from '../components/Loading';
-import AlertNotFound from '../components/AlertNotFound';
+import apiGet from '@/api/api-get';
+import Loading from '@/components/Loading';
+import AlertNotFound from '@/components/AlertNotFound';
 
 function TatibPage() {
 	const [tatib, setTatib] = useState(null);

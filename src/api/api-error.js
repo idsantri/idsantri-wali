@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { buildTextError } from '../utils/array-object';
-import { notifyError } from '../components/Notify';
+import { buildTextError } from '@/utils/array-object';
+import { notifyError } from '@/components/Notify';
 
 function apiError(error) {
 	// Check for axios.AxiosError type

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Loading from '../components/Loading';
-import CardHeader from '../components/CardHeader';
-import apiGet from '../api/api-get';
-import AlertNotFound from '../components/AlertNotFound';
-import { Icon } from '@iconify/react/dist/iconify.js';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Icon } from '@iconify/react/dist/iconify.js';
+import Loading from '@/components/Loading';
+import CardHeader from '@/components/CardHeader';
+import apiGet from '@/api/api-get';
+import AlertNotFound from '@/components/AlertNotFound';
 
 function KelasPage() {
 	const [kelas, setKelas] = useState(null);

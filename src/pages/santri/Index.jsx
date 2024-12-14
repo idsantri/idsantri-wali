@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Loading from '../components/Loading';
-import CardHeader from '../components/CardHeader';
-import apiGet from '../api/api-get';
-import AlertNotFound from '../components/AlertNotFound';
+import AlertNotFound from '@/components/AlertNotFound';
+import CardHeader from '@/components/CardHeader';
+import Loading from '@/components/Loading';
+import apiGet from '@/api/api-get';
 
-const SantriPage = () => {
+export default function Santri() {
 	const [santri, setSantri] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -74,6 +74,4 @@ const SantriPage = () => {
 			{isLoading ? <Loading /> : santri ? <RenderSantri /> : <AlertNotFound />}
 		</>
 	);
-};
-
-export default SantriPage;
+}

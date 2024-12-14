@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import MainLayout from './layouts/MainLayout';
-import AuthLayout from './layouts/AuthLayout';
-import AuthMiddleware from './middleware/AuthMiddleware';
-import SantriPage from './pages/SantriPage';
-import LoginPage from './pages/LoginPage';
-import ErrorPage from './pages/ErrorPage';
-import MadrasahPage from './pages/MadrasahPage';
 import { ToastContainer } from 'react-toastify';
-import IuranPage from './pages/IuranPage';
-import PesantrenPage from './pages/PesantrenPage';
-import DashboardPage from './pages/DashboardPage';
-import TatibPage from './pages/TatibPage';
+import MainLayout from '@/layouts/MainLayout';
+import AuthLayout from '@/layouts/AuthLayout';
+import AuthMiddleware from '@/middleware/AuthMiddleware';
+import SantriPage from '@/pages/santri/Index';
+import IuranPage from '@/pages/iuran/Index';
+import Dashboard from '@/pages/dashboard/Index';
+import MadrasahPage from '@/pages/madrasah/Index';
+import TatibPage from '@/pages/tatib/Index';
+import LoginPage from '@/pages/auth/LoginPage';
+import PesantrenPage from '@/pages/pesantren/Index';
+import ErrorPage from '@/pages/ErrorPage';
 
 const App = () => {
 	return (
@@ -28,7 +28,7 @@ const App = () => {
 						</AuthMiddleware>
 					}
 				>
-					<Route path='/dashboard' element={<DashboardPage />} />
+					<Route path='/dashboard' element={<Dashboard />} />
 					<Route path='/santri' element={<SantriPage />} />
 					<Route path='/madrasah' element={<MadrasahPage />} />
 					<Route path='/iuran' element={<IuranPage />} />

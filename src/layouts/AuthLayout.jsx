@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import InstallPwa from '../components/InstallPwa';
-import config from '../config';
-import LogoAvatar from '../components/LogoAvatar';
+import config from '@/config';
+import InstallPwa from '@/layouts/_components/InstallPwa';
+import LogoAvatar from '@/layouts/_components/LogoAvatar';
 
 const AuthLayout = () => {
 	return (
