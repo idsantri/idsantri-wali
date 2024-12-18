@@ -11,6 +11,8 @@ import TatibPage from '@/pages/tatib/Index';
 import LoginPage from '@/pages/auth/LoginPage';
 import PesantrenPage from '@/pages/pesantren/Index';
 import ErrorPage from '@/pages/ErrorPage';
+import NilaiMapelPage from '@/pages/nilai-mapel/Index';
+import NilaiAhwalPage from '@/pages/nilai-ahwal/Index';
 
 const App = () => {
 	return (
@@ -31,6 +33,8 @@ const App = () => {
 					<Route path='/dashboard' element={<Dashboard />} />
 					<Route path='/santri' element={<SantriPage />} />
 					<Route path='/madrasah' element={<MadrasahPage />} />
+					<Route path='/kelas/:kelas_id/nilai-mapel' element={<NilaiMapelPage />} />
+					<Route path='/kelas/:kelas_id/nilai-ahwal' element={<NilaiAhwalPage />} />
 					<Route path='/iuran' element={<IuranPage />} />
 					<Route path='/pesantren' element={<PesantrenPage />} />
 					<Route path='/tatib' element={<TatibPage />} />
