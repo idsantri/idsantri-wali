@@ -14,6 +14,7 @@ function KelasPage() {
 	useEffect(() => {
 		apiGet({ endPoint: 'kelas' }).then((data) => {
 			if (data) setKelas(data.kelas);
+			localStorage.setItem('kelas', JSON.stringify(data.kelas));
 			setIsLoading(false);
 		});
 	}, []);
@@ -45,15 +46,27 @@ function KelasPage() {
 										<span className='text-sm font-light'> Wali Kelas: </span>{' '}
 										<span className='text-sm'>{kelas.wali_kelas || '-'}</span>
 									</div>
-									<div className='flex gap-2'>
+									<div className='flex flex-wrap gap-2 text-nowrap'>
 										<Link
-											className='font-light btn btn-ghost btn-outline btn-sm'
-											to={`/kelas/${kelas.id}/nilai`}
+											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
+											to={`/kelas/${kelas.id}/nilai-mapel`}
 										>
-											Nilai
+											Nilai Mapel
 										</Link>
 										<Link
-											className='font-light btn btn-ghost btn-outline btn-sm'
+											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
+											to={`/kelas/${kelas.id}/nilai-ahwal`}
+										>
+											Nilai Ahwal
+										</Link>
+										<Link
+											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
+											to={`/kelas/${kelas.id}/izin`}
+										>
+											Izin Madrasah
+										</Link>
+										<Link
+											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
 											to={`/kelas/${kelas.id}/absensi`}
 										>
 											Absensi
