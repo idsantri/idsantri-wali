@@ -8,8 +8,10 @@ const MainLayout = () => {
 			<header className='fixed top-0 z-[1000] w-screen '>
 				<MainTop />
 			</header>
-			<main className='pt-[86px] pb-[74px] m-2'>
-				<Outlet />
+			<main className='pt-[86px] pb-[74px]'>
+				<div className='m-2'>
+					<Outlet />
+				</div>
 			</main>
 			<footer className='fixed bottom-0 z-[1000] w-screen'>
 				<MainBottom />

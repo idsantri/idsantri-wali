@@ -9,7 +9,7 @@ import Dashboard from '@/pages/dashboard/Index';
 import MadrasahPage from '@/pages/madrasah/Index';
 import TatibPage from '@/pages/tatib/Index';
 import LoginPage from '@/pages/auth/LoginPage';
-import PesantrenPage from '@/pages/pesantren/Index';
+import PesantrenPage from '@/pages/domisili/Index';
 import ErrorPage from '@/pages/ErrorPage';
 import NilaiMapelPage from '@/pages/nilai-mapel/Index';
 import NilaiAhwalPage from '@/pages/nilai-ahwal/Index';
@@ -36,7 +36,7 @@ const App = () => {
 					<Route path='/kelas/:kelas_id/nilai-mapel' element={<NilaiMapelPage />} />
 					<Route path='/kelas/:kelas_id/nilai-ahwal' element={<NilaiAhwalPage />} />
 					<Route path='/iuran' element={<IuranPage />} />
-					<Route path='/pesantren' element={<PesantrenPage />} />
+					<Route path='/domisili' element={<PesantrenPage />} />
 					<Route path='/tatib' element={<TatibPage />} />
 				</Route>
 				<Route path='*' element={<ErrorPage />} />
