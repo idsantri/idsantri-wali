@@ -13,7 +13,7 @@ import PesantrenPage from '@/pages/domisili/Index';
 import ErrorPage from '@/pages/ErrorPage';
 import NilaiMapelPage from '@/pages/nilai-mapel/Index';
 import NilaiAhwalPage from '@/pages/nilai-ahwal/Index';
-
+import AbsensiSekolahPage from '@/pages/absensi-sekolah/Index';
 const App = () => {
 	return (
 		<Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -35,6 +35,7 @@ const App = () => {
 					<Route path='/madrasah' element={<MadrasahPage />} />
 					<Route path='/kelas/:kelas_id/nilai-mapel' element={<NilaiMapelPage />} />
 					<Route path='/kelas/:kelas_id/nilai-ahwal' element={<NilaiAhwalPage />} />
+					<Route path='/kelas/:kelas_id/absensi-sekolah' element={<AbsensiSekolahPage />} />
 					<Route path='/iuran' element={<IuranPage />} />
 					<Route path='/domisili' element={<PesantrenPage />} />
 					<Route path='/tatib' element={<TatibPage />} />

@@ -5,6 +5,7 @@ import apiGet from '@/api/api-get';
 import CardHeader from '@/components/CardHeader';
 import Rating from 'react-rating';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import CardKelas from '../../components/CardKelas';
 
 function Index() {
 	const { kelas_id } = useParams();
@@ -23,16 +24,6 @@ function Index() {
 			setIsLoading(false);
 		});
 	}, [kelas_id]);
-
-	function RenderKelas({ className }) {
-		return (
-			<div className={`${className} w-full border rounded-md border-jingga-200 bg-jingga-100`}>
-				<div className='px-2 py-4 text-center text-jingga-800 bg-jingga-300'>
-					{kelasData.th_ajaran_h} | {kelasData.tingkat} | {kelasData.kelas}
-				</div>
-			</div>
-		);
-	}
 
 	function RenderNilai({ nilai, className }) {
 		return (
@@ -106,7 +97,7 @@ function Index() {
 	return (
 		<>
 			<CardHeader title='Nilai Mata Pelajaran' />
-			<RenderKelas />
+			<CardKelas data={kelasData} />
 			{isLoading ? <Loading /> : <RenderNilai nilai={nilaiAhwal} />}
 		</>
 	);
