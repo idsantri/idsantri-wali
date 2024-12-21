@@ -11,25 +11,22 @@ function ButtonMore({ clickLogout }) {
 				</div>
 				<ul
 					tabIndex={0}
-					className='dropdown-content menu bg-jingga-200 rounded-md z-[1] w-48 p-1 shadow-md shadow-jingga-400 mb-2 mr-2'
+					className='dropdown-content menu bg-jingga-200 rounded-md z-[1] w-48 p-1 shadow-md shadow-jingga-400 mb-2 mr-2 text-jingga-800'
 				>
 					<li className=''>
-						<Link to='/tatib' className='text-md text-base-content hover:text-base-content'>
+						<Link to='/tatib' className=''>
 							<Icon icon='codicon:symbol-ruler' width='24' height='24' />
 							Tata Tertib
 						</Link>
 					</li>
 					<li className=''>
-						<Link to='/domisili' className='text-md text-base-content hover:text-base-content'>
+						<Link to='/domisili' className=''>
 							<Icon icon='mdi:bed-outline' width='24' height='24' />
 							Riwayat Domisili
 						</Link>
 					</li>
 					<li className=''>
-						<button
-							onClick={clickLogout}
-							className='text-red-500 text-md hover:bg-red-500 hover:text-red-100'
-						>
+						<button onClick={clickLogout} className='text-red-500 hover:bg-red-500 hover:text-red-100'>
 							<Icon icon='bitcoin-icons:exit-filled' width='24' height='24' />
 							Keluar
 						</button>

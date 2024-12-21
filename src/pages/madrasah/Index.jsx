@@ -59,15 +59,15 @@ function KelasPage() {
 										>
 											Nilai Ahwal
 										</Link>
-										<Link
+										{/* <Link
 											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
 											to={`/kelas/${kelas.id}/izin`}
 										>
 											Izin Madrasah
-										</Link>
+										</Link> */}
 										<Link
 											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
-											to={`/kelas/${kelas.id}/absensi`}
+											to={`/kelas/${kelas.id}/absensi-sekolah`}
 										>
 											Absensi
 										</Link>

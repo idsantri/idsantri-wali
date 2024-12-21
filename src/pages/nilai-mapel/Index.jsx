@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Loading from '@/components/Loading';
 import apiGet from '@/api/api-get';
 import CardHeader from '@/components/CardHeader';
+import CardKelas from '../../components/CardKelas';
 // const temp = [
 // 	{
 // 		id: 'ts-qur',
@@ -163,16 +164,6 @@ function Index() {
 		});
 	}, [kelas_id]);
 
-	function RenderKelas({ className }) {
-		return (
-			<div className={`${className} w-full border rounded-md border-jingga-200 bg-jingga-100`}>
-				<div className='px-2 py-4 text-center text-jingga-800 bg-jingga-300'>
-					{kelasData.th_ajaran_h} | {kelasData.tingkat} | {kelasData.kelas}
-				</div>
-			</div>
-		);
-	}
-
 	function RenderNilai({ nilai, className }) {
 		return (
 			<div className={`${className} w-full my-2 border rounded-md border-jingga-200 bg-jingga-200`}>
@@ -232,7 +223,7 @@ function Index() {
 	return (
 		<>
 			<CardHeader title='Nilai Mata Pelajaran' />
-			<RenderKelas />
+			<CardKelas data={kelasData} />
 			{isLoading ? <Loading /> : <RenderNilai nilai={nilai} />}
 		</>
 	);
