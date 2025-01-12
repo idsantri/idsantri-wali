@@ -5,7 +5,6 @@ const config = {
 	BASE_API: 'http://localhost:8000',
 	END_API: '/wali',
 	DEV: true,
-	PHONE: '6285259787553',
 	PWA_NAME: 'Aplikasi Wali Santri (Lokal)',
 	PWA_SHORT_NAME: 'Wali Santri',
 };

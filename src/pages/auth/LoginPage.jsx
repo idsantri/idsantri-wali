@@ -1,15 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import useAuthStore from '@/store/authStore';
 import { notifyError } from '@/components/Notify';
-import config from '@/config';
 import apiPost from '@/api/api-post';
+import apiGet from '@/api/api-get';
 
 const Login = () => {
 	const navigate = useNavigate();
 	const { login, auth } = useAuthStore();
 	const [loading, setLoading] = useState(false);
+	const [appWali, setAppWali] = useState(null);
+	const [loadingAppWali, setLoadingAppWali] = useState(false);
+
+	useEffect(() => {
+		setLoadingAppWali(true);
+		apiGet({ endPoint: 'app-wali' }).then((data) => {
+			setLoadingAppWali(false);
+			if (data?.app_wali) {
+				setAppWali(data?.app_wali ?? null);
+				// localStorage.setItem('app_wali', JSON.stringify(data?.app_wali ?? {}));
+			}
+		});
+	}, []);
 
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -36,7 +49,6 @@ const Login = () => {
 		return <Navigate to='/santri' />;
 	}
 
-	const wa = 'https://wa.me/' + config.PHONE;
 	return (
 		<>
 			<h2 style={{ fontSize: '1.5em' }} className='font-normal my-7 text-jingga-900'>
@@ -74,10 +86,15 @@ const Login = () => {
 				<a
 					target='_blank'
 					className='w-full max-w-xs border-0 btn d-flex justify-content-center bg-jingga-100 text-jingga-800'
-					href={wa}
+					href={'https://wa.me/' + appWali?.cs}
+					disabled={appWali?.cs ? false : true}
 				>
 					<span className='font-light'>Tidak Bisa Login? Hubungi Pengurus…!</span>
-					<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
+					{loadingAppWali ? (
+						<div className='loading loading-ring loading-md text-jingga-900' />
+					) : (
+						<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
+					)}
 				</a>
 			</p>
 		</>
