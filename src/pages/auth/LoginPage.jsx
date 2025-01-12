@@ -93,7 +93,7 @@ const Login = () => {
 					{loadingAppWali ? (
 						<div className='loading loading-ring loading-md text-jingga-900' />
 					) : (
-						<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
+						appWali?.cs && <Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
 					)}
 				</a>
 			</p>
