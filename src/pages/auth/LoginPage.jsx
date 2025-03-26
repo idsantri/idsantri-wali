@@ -15,7 +15,7 @@ const Login = () => {
 
 	useEffect(() => {
 		setLoadingAppWali(true);
-		apiGet({ endPoint: 'app-wali' }).then((data) => {
+		apiGet({ endPoint: 'profile' }).then((data) => {
 			setLoadingAppWali(false);
 			if (data?.app_wali) {
 				setAppWali(data?.app_wali ?? null);
