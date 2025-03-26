@@ -162,6 +162,12 @@ function Index() {
 			}
 			setIsLoading(false);
 		});
+
+		// Clean-up function
+		// return () => {
+		// 	setIsLoading(true);
+		// 	setNilai(null);
+		// };
 	}, [kelas_id]);
 
 	function RenderNilai({ nilai, className }) {

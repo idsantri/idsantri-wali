@@ -6,7 +6,7 @@ async function apiGet({ endPoint, params, notify = false }) {
 	try {
 		const { data } = await api.get(endPoint, { params });
 		if (notify) notifySuccess({ message: data.message });
-		return data;
+		return data.data;
 	} catch (error) {
 		apiError(error);
 		return false;
