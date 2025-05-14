@@ -1,0 +1,1 @@
+import{j as a}from"./index-CFYFtVUv.js";function t(){return a.jsx("div",{role:"alert",className:"rounded-sm alert alert-danger ",children:a.jsx("span",{children:" Tidak ada data untuk ditampilkan!"})})}export{t as A};

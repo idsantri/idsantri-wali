@@ -1,4 +1,4 @@
-import{r as i,j as a,I as h}from"./index-DPA8SpJr.js";import{L as I}from"./Loading-B8xSKYtF.js";import{C as w}from"./CardHeader-26BRoou3.js";import{a as S}from"./api-get-fpseTqvE.js";import{A as L}from"./AlertNotFound-N1JlZgB_.js";import{A as D,m as x}from"./index-DD4FrAyv.js";function T(){const[o,g]=i.useState(null),[d,u]=i.useState(null),[j,p]=i.useState(!0),l=JSON.parse(localStorage.getItem("app_wali"))??null,r=JSON.parse(localStorage.getItem("santri"))??null,b=`Assalamu'alaikum, 
+import{r as i,j as a,I as h}from"./index-CFYFtVUv.js";import{L as I}from"./Loading-ClDj-7ei.js";import{C as w}from"./CardHeader-DmH4xWM1.js";import{a as S}from"./api-get-BGsSxVxd.js";import{A as L}from"./AlertNotFound-BbNzWOCm.js";import{A as D,m as x}from"./index-CG19cADa.js";function T(){const[o,g]=i.useState(null),[d,u]=i.useState(null),[j,p]=i.useState(!0),l=JSON.parse(localStorage.getItem("app_wali"))??null,r=JSON.parse(localStorage.getItem("santri"))??null,b=`Assalamu'alaikum, 
 Saya ingin melakukan pembayaran iuran santri untuk 
 - Nama: ${r==null?void 0:r.nama} 
 - ID Santri: ${r==null?void 0:r.id} 
