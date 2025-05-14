@@ -3,18 +3,22 @@ import { ToastContainer } from 'react-toastify';
 import MainLayout from '@/layouts/MainLayout';
 import AuthLayout from '@/layouts/AuthLayout';
 import AuthMiddleware from '@/middleware/AuthMiddleware';
-import SantriPage from '@/pages/santri/Index';
-import IuranPage from '@/pages/iuran/Index';
-import Dashboard from '@/pages/dashboard/Index';
-import MadrasahPage from '@/pages/madrasah/Index';
-import TatibPage from '@/pages/tatib/Index';
-import LoginPage from '@/pages/auth/LoginPage';
-import PesantrenPage from '@/pages/domisili/Index';
-import ErrorPage from '@/pages/ErrorPage';
-import NilaiMapelPage from '@/pages/nilai-mapel/Index';
-import NilaiAhwalPage from '@/pages/nilai-ahwal/Index';
-import AbsensiSekolahPage from '@/pages/absensi-sekolah/Index';
-import ProfilePage from '@/pages/Profile/Index';
+import { lazy } from 'react';
+
+// Lazy load components
+const Dashboard = lazy(() => import('@/pages/dashboard/Index'));
+const SantriPage = lazy(() => import('@/pages/santri/Index'));
+const MadrasahPage = lazy(() => import('@/pages/madrasah/Index'));
+const NilaiMapelPage = lazy(() => import('@/pages/nilai-mapel/Index'));
+const NilaiAhwalPage = lazy(() => import('@/pages/nilai-ahwal/Index'));
+const AbsensiSekolahPage = lazy(() => import('@/pages/absensi-sekolah/Index'));
+const IuranPage = lazy(() => import('@/pages/iuran/Index'));
+const PesantrenPage = lazy(() => import('@/pages/domisili/Index'));
+const TatibPage = lazy(() => import('@/pages/tatib/Index'));
+const ProfilePage = lazy(() => import('@/pages/profile/Index'));
+const LoginPage = lazy(() => import('@/pages/auth/LoginPage'));
+const ErrorPage = lazy(() => import('@/pages/ErrorPage'));
+
 // import { useEffect } from 'react';
 // import useThemeStore from './store/modeStore';
 const App = () => {
