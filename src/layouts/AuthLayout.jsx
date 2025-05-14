@@ -2,15 +2,18 @@ import { Outlet } from 'react-router-dom';
 import config from '@/config';
 import InstallPwa from '@/layouts/_components/InstallPwa';
 import LogoAvatar from '@/layouts/_components/LogoAvatar';
+import ToggleMode from '../components/ToggleMode';
 
 const AuthLayout = () => {
 	return (
 		<>
 			{/* <ColorPallet /> */}
 			<div className='grid min-h-screen p-4 bg-jingga-50 text-jingga-950 place-content-center'>
-				<div className='max-w-md text-center'>
+				<div className='max-w-sm text-center'>
 					<InstallPwa className='mb-4' />
-					<div className='px-4 py-10 rounded-md shadow-md bg-jingga-200 shadow-jingga-500'>
+					<div className='px-4 py-10 rounded-md shadow-md bg-jingga-200 shadow-jingga-500 relative'>
+						{/* button mode */}
+						<ToggleMode className='absolute top-2 right-2 hidden' />
 						<header className=''>
 							<LogoAvatar className='w-28' />
 							<div className=''>

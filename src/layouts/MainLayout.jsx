@@ -4,7 +4,7 @@ import MainTop from '@/layouts/_components/MainTop';
 
 const MainLayout = () => {
 	return (
-		<div className='min-h-screen bg-jingga-50 text-jingga-950'>
+		<div className='min-h-screen bg-jingga-50 text-jingga-950 dark:bg-jingga-950 dark:text-jingga-200'>
 			<header className='fixed top-0 z-[1000] w-screen '>
 				<MainTop />
 			</header>

@@ -14,7 +14,18 @@ import ErrorPage from '@/pages/ErrorPage';
 import NilaiMapelPage from '@/pages/nilai-mapel/Index';
 import NilaiAhwalPage from '@/pages/nilai-ahwal/Index';
 import AbsensiSekolahPage from '@/pages/absensi-sekolah/Index';
+// import { useEffect } from 'react';
+// import useThemeStore from './store/modeStore';
 const App = () => {
+	// const isDarkMode = useThemeStore((state) => state.isDarkMode());
+
+	// useEffect(() => {
+	// 	if (isDarkMode) {
+	// 		document.documentElement.classList.add('dark');
+	// 	} else {
+	// 		document.documentElement.classList.remove('dark');
+	// 	}
+	// }, [isDarkMode]);
 	return (
 		<Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
 			<ToastContainer />
