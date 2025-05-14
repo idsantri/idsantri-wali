@@ -14,6 +14,7 @@ import ErrorPage from '@/pages/ErrorPage';
 import NilaiMapelPage from '@/pages/nilai-mapel/Index';
 import NilaiAhwalPage from '@/pages/nilai-ahwal/Index';
 import AbsensiSekolahPage from '@/pages/absensi-sekolah/Index';
+import ProfilePage from '@/pages/Profile/Index';
 // import { useEffect } from 'react';
 // import useThemeStore from './store/modeStore';
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
 					<Route path='/iuran' element={<IuranPage />} />
 					<Route path='/domisili' element={<PesantrenPage />} />
 					<Route path='/tatib' element={<TatibPage />} />
+					<Route path='/profile' element={<ProfilePage />} />
 				</Route>
 				<Route path='*' element={<ErrorPage />} />
 			</Routes>
