@@ -19,7 +19,7 @@ const Login = () => {
 			setLoadingAppWali(false);
 			if (data?.app_wali) {
 				setAppWali(data?.app_wali ?? null);
-				// localStorage.setItem('app_wali', JSON.stringify(data?.app_wali ?? {}));
+				localStorage.setItem('app_wali', JSON.stringify(data?.app_wali ?? {}));
 			}
 		});
 	}, []);
@@ -28,7 +28,7 @@ const Login = () => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const formObject = Object.fromEntries(formData.entries());
-		if (!formObject.santri_id || !formObject.nik) {
+		if (!formObject.santri_id || !formObject.tgl_lahir) {
 			return notifyError({ message: 'Lengkapi data login' });
 		}
 		setLoading(true);
@@ -58,15 +58,30 @@ const Login = () => {
 				<input
 					type='text'
 					name='santri_id'
-					placeholder='Masukkan ID Santri'
+					placeholder='ID Santri'
 					className='w-full max-w-xs input input-bordered bg-jingga-50 text-jingga-950'
+					readOnly
+					onFocus={(e) => {
+						e.target.removeAttribute('readonly');
+					}}
+					onBlur={(e) => {
+						e.target.setAttribute('readonly', 'readonly');
+					}}
 				/>
 				<input
 					type='text'
-					name='nik'
-					placeholder='Masukkan NIK Santri'
+					name='tgl_lahir'
+					placeholder='Tanggal Lahir Santri (hhbbtttt)'
 					className='w-full max-w-xs mt-3 input input-bordered bg-jingga-50 text-jingga-950'
+					readOnly
+					onFocus={(e) => {
+						e.target.removeAttribute('readonly');
+					}}
+					onBlur={(e) => {
+						e.target.setAttribute('readonly', 'readonly');
+					}}
 				/>
+				<p className='text-xs text-jingga-800 pt-1'>01022000 = 1 Februari 2000</p>
 				<button
 					type='submit'
 					className='w-full max-w-xs mt-3 btn bg-jingga-700 text-jingga-100'
