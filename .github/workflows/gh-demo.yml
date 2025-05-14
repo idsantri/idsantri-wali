@@ -1,25 +1,33 @@
+name: 🚀 Build to branch demo-build
 on:
     push:
         branches:
-            - syaichona
+            - demo
 
-name: 🚀 Deploy website on push (Syaichona)
+permissions:
+    contents: write
+
 jobs:
     build:
+        env:
+            APP_NAME: TEST APP NAME
+            APP_URL: https://idsantri.github.io/idsantri-wali
+
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
 
             - name: Install dependencies
-              run: npm install
+              run: yarn install
 
             - name: Build PWA
-              run: npm run build
+              run: yarn build
 
-            - name: Deploy to GitHub Pages
+            - name: Create branch
               uses: JamesIves/github-pages-deploy-action@v4
               with:
                   folder: dist
                   clean: true
-                  branch: gh-syaichona
+                  branch: demo-build

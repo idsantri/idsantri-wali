@@ -1,36 +1,46 @@
 import { Outlet } from 'react-router-dom';
-import Pwa from '../components/PWA';
+import config from '@/config';
+import InstallPwa from '@/layouts/_components/InstallPwa';
+import LogoAvatar from '@/layouts/_components/LogoAvatar';
+import ToggleMode from '../components/ToggleMode';
 
 const AuthLayout = () => {
 	return (
-		<div className='h-screen bg-color0 grid place-content-center'>
-			<div style={{ maxWidth: '400px' }} className='mx-auto'>
-				<Pwa />
+		<>
+			{/* <ColorPallet /> */}
+			<div className='grid min-h-screen p-4 bg-jingga-50 text-jingga-950 place-content-center'>
+				<div className='max-w-sm text-center'>
+					<InstallPwa className='mb-4' />
+					<div className='px-4 py-10 rounded-md shadow-md bg-jingga-200 shadow-jingga-500 relative'>
+						{/* button mode */}
+						<ToggleMode className='absolute top-2 right-2 hidden' />
+						<header className=''>
+							<LogoAvatar className='w-28' />
+							<div className=''>
+								<h1 style={{ fontSize: '1.6em' }} className='mt-4 font-medium text-jingga-700'>
+									{config.APP_NAME}
+								</h1>
+								<p>
+									<span style={{ fontSize: '1.2em' }} className='font-medium text-jingga-800'>
+										{config.INS_DESC}
+									</span>
+									<br />
+									<span
+										style={{ fontVariant: 'small-caps', fontSize: '1.5em' }}
+										className='text-jingga-900'
+									>
+										{config.INS_NAME}
+									</span>
+								</p>
+							</div>
+						</header>
+						<main>
+							<Outlet />
+						</main>
+					</div>
+				</div>
 			</div>
-			<div
-				style={{
-					textAlign: 'center',
-					maxWidth: '400px',
-				}}
-				className='bg-color2 text-color7 m-3 p-4 rounded-md shadow-md'
-			>
-				<header className=''>
-					<h1 style={{ fontSize: '1.6em' }} className='font-medium'>
-						Aplikasi Wali Santri
-					</h1>
-					<p>
-						<span style={{ fontSize: '1.2em' }} className='font-medium'>
-							Pondok Pesantren
-						</span>
-						<br />
-						<span style={{ fontVariant: 'small-caps', fontSize: '1.5em' }}>Syaichona Moh Cholil</span>
-					</p>
-				</header>
-				<main>
-					<Outlet />
-				</main>
-			</div>
-		</div>
+		</>
 	);
 };
 

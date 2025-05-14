@@ -1,28 +1,29 @@
+name: 🚀 Build to branch syaichona-build
 on:
     push:
         branches:
-            - demo
+            - syaichona
 
-name: 🚀 Deploy website on push (Demo)
+permissions:
+    contents: write
+
 jobs:
     build:
-        env:
-            APP_NAME: TEST APP NAME
-            APP_URL: https://idsantri-wali.vercel.app
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
 
             - name: Install dependencies
-              run: npm install
+              run: yarn install
 
             - name: Build PWA
-              run: npm run build
+              run: yarn build
 
             - name: Deploy to GitHub Pages
               uses: JamesIves/github-pages-deploy-action@v4
               with:
                   folder: dist
                   clean: true
-                  branch: gh-demo
+                  branch: syaichona-build

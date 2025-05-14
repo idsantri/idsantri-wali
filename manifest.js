@@ -1,8 +1,10 @@
+import config from './src/config';
+
 export default {
-	name: 'IDSantri Wali',
-	short_name: 'Santri',
-	description: 'Aplikasi untuk wali santri',
-	theme_color: '#ffffff',
+	name: config.PWA_NAME,
+	short_name: config.PWA_SHORT_NAME,
+	description: 'Aplikasi Wali Santri',
+	theme_color: '#5e4b1f',
 	background_color: '#ffffff',
 	display: 'standalone',
 	icons: [

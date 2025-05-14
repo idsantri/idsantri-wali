@@ -1,10 +1,9 @@
 import { createContext, useState } from 'react';
-import ConfirmDialog from '../components/ConfirmDialog';
+import ConfirmDialog from '@/components/ConfirmDialog';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ConfirmDialogContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const ConfirmDialogProvider = ({ children }) => {
 	const [dialogState, setDialogState] = useState({
 		isOpen: false,
@@ -33,7 +32,12 @@ export const ConfirmDialogProvider = ({ children }) => {
 		<ConfirmDialogContext.Provider value={confirmDialog}>
 			{children}
 			{dialogState.isOpen && (
-				<ConfirmDialog title={dialogState.title} message={dialogState.message} onConfirm={() => handleConfirm(true)} onCancel={() => handleConfirm(false)} />
+				<ConfirmDialog
+					title={dialogState.title}
+					message={dialogState.message}
+					onConfirm={() => handleConfirm(true)}
+					onCancel={() => handleConfirm(false)}
+				/>
 			)}
 		</ConfirmDialogContext.Provider>
 	);
