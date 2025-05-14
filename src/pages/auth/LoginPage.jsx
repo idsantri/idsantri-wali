@@ -81,7 +81,7 @@ const Login = () => {
 						e.target.setAttribute('readonly', 'readonly');
 					}}
 				/>
-				<p className='text-xs text-jingga-800 pt-1'>01022000 = 1 Februari 2000</p>
+				<p className='text-xs text-jingga-800 pt-1'>01012000 = 1 Januari 2000</p>
 				<button
 					type='submit'
 					className='w-full max-w-xs mt-3 btn bg-jingga-700 text-jingga-100'
