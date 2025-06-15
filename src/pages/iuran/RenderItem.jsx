@@ -57,7 +57,7 @@ function RenderItem({ item, index }) {
 				<div>
 					{!item.lunas && item.bank_va ? (
 						<>
-							{item.bank_name}: {item.bank_va}
+							{item.bank_name}: {String(item.bank_va).replace(/(\d{4})(?=\d)/g, '$1.')}
 							<button
 								className='badge badge-outline text-jingga-700 text-xs ml-2'
 								onClick={() => copyText(item.bank_va)}
