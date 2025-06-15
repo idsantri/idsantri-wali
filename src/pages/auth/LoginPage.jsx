@@ -10,18 +10,37 @@ const Login = () => {
 	const navigate = useNavigate();
 	const { login, auth } = useAuthStore();
 	const [loading, setLoading] = useState(false);
-	const [appWali, setAppWali] = useState(null);
-	const [loadingAppWali, setLoadingAppWali] = useState(false);
+	const [loadingSubmit, setLoadingSubmit] = useState(false);
 
 	useEffect(() => {
-		setLoadingAppWali(true);
-		apiGet({ endPoint: 'profile' }).then((data) => {
-			setLoadingAppWali(false);
-			if (data?.app_wali) {
-				setAppWali(data?.app_wali ?? null);
-				localStorage.setItem('app_wali', JSON.stringify(data?.app_wali ?? {}));
+		const fetchAllData = async () => {
+			setLoading(true);
+			try {
+				const [appWaliData, profilesData, vaData] = await Promise.all([
+					apiGet({ endPoint: 'app-wali' }),
+					apiGet({ endPoint: 'profiles' }),
+					apiGet({ endPoint: 'va' }),
+				]);
+
+				if (appWaliData?.app_wali) {
+					localStorage.setItem('app_wali', JSON.stringify(appWaliData.app_wali));
+				}
+
+				if (profilesData?.profiles) {
+					localStorage.setItem('profiles', JSON.stringify(profilesData.profiles));
+				}
+
+				if (vaData?.va) {
+					localStorage.setItem('va', JSON.stringify(vaData.va));
+				}
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			} finally {
+				setLoading(false);
 			}
-		});
+		};
+
+		fetchAllData();
 	}, []);
 
 	const handleLogin = (e) => {
@@ -31,9 +50,9 @@ const Login = () => {
 		if (!formObject.santri_id || !formObject.tgl_lahir) {
 			return notifyError({ message: 'Lengkapi data login' });
 		}
-		setLoading(true);
+		setLoadingSubmit(true);
 		apiPost({ endPoint: 'login', data: formObject, notify: true }).then((res) => {
-			setLoading(false);
+			setLoadingSubmit(false);
 			if (res) {
 				login({
 					isAuthenticated: true,
@@ -48,6 +67,12 @@ const Login = () => {
 	if (auth.isAuthenticated) {
 		return <Navigate to='/santri' />;
 	}
+
+	// For WhatsApp link in render
+	const getAppWaliCS = () => {
+		const appWali = localStorage.getItem('app_wali');
+		return appWali ? JSON.parse(appWali)?.cs : null;
+	};
 
 	return (
 		<>
@@ -68,6 +93,7 @@ const Login = () => {
 						e.target.setAttribute('readonly', 'readonly');
 					}}
 				/>
+				{/* <p className='text-xs text-jingga-800 pt-1'>01012000 = 1 Januari 2000</p> */}
 				<input
 					type='text'
 					name='tgl_lahir'
@@ -85,9 +111,9 @@ const Login = () => {
 				<button
 					type='submit'
 					className='w-full max-w-xs mt-3 btn bg-jingga-700 text-jingga-100'
-					disabled={loading}
+					disabled={loadingSubmit}
 				>
-					{loading ? (
+					{loadingSubmit ? (
 						<>
 							<div className='loading loading-ring loading-md text-jingga-900' />
 							<span className='font-light text-jingga-700'>Tunggu sebentar …</span>
@@ -101,14 +127,16 @@ const Login = () => {
 				<a
 					target='_blank'
 					className='w-full max-w-xs border-0 btn d-flex justify-content-center bg-jingga-100 text-jingga-800'
-					href={'https://wa.me/' + appWali?.cs}
-					disabled={appWali?.cs ? false : true}
+					href={'https://wa.me/' + getAppWaliCS()}
+					disabled={!getAppWaliCS()}
 				>
 					<span className='font-light'>Tidak Bisa Login? Hubungi Pengurus…!</span>
-					{loadingAppWali ? (
+					{loading ? (
 						<div className='loading loading-ring loading-md text-jingga-900' />
 					) : (
-						appWali?.cs && <Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
+						getAppWaliCS() && (
+							<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />
+						)
 					)}
 				</a>
 			</p>
