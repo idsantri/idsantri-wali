@@ -1,1 +1,0 @@
-import{j as t}from"./index-DYK18Ylv.js";const e=()=>t.jsx("div",{style:{width:"150px",height:"150px",margin:"auto",display:"flex",justifyContent:"center",alignItems:"center"},children:t.jsx("div",{className:"loading loading-ring loading-lg",style:{width:"100px"}})});export{e as L};
