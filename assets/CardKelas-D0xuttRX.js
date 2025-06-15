@@ -1,1 +1,0 @@
-import{j as r}from"./index-CFYFtVUv.js";function s({data:e,className:n}){return r.jsx("div",{className:`${n||null} w-full border rounded-md border-jingga-200 bg-jingga-100`,children:r.jsxs("div",{className:"px-2 py-4 text-center text-jingga-800 bg-jingga-300",children:[e.th_ajaran_h," | ",e.tingkat," | ",e.kelas]})})}export{s as C};
