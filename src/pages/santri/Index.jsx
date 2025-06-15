@@ -58,8 +58,12 @@ export default function Santri() {
 							<td>{`${santri.wali_nama} (${santri.wali_sex}; ${santri.wali_status}) `}</td>
 						</tr>
 						<tr>
-							<td className='italic font-light'>Telepon</td>
+							<td className='italic font-light'>Telepon Wali</td>
 							<td>{`${santri.wali_telepon || '-'}`}</td>
+						</tr>
+						<tr>
+							<td className='italic font-light'>Email Wali</td>
+							<td>{`${santri.wali_email || '-'}`}</td>
 						</tr>
 					</tbody>
 				</table>
