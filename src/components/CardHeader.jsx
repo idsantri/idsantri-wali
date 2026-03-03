@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 function CardHeader({ title }) {
 	const santri = JSON.parse(localStorage.getItem('santri') || 'null');
@@ -17,7 +17,7 @@ function CardHeader({ title }) {
 		</div>
 	);
 }
-CardHeader.propTypes = {
-	title: PropTypes.string.isRequired,
-};
+// CardHeader.propTypes = {
+// 	title: PropTypes.string.isRequired,
+// };
 export default CardHeader;
