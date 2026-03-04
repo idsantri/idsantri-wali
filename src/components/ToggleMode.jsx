@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { useEffect } from 'react';
-import useThemeStore from '../store/modeStore';
+import { useThemeStore } from '../store/themeStore';
 
 function ToggleMode({ className }) {
 	const { toggleTheme, isDarkMode, initializeTheme } = useThemeStore();

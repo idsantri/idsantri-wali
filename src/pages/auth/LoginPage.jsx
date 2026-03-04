@@ -5,6 +5,7 @@ import useAuthStore from '@/store/authStore';
 import { notifyError } from '@/components/Notify';
 import apiPost from '@/api/api-post';
 import apiGet from '@/api/api-get';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -76,15 +77,16 @@ const Login = () => {
 
 	return (
 		<>
-			<h2 style={{ fontSize: '1.5em' }} className='font-normal my-7 text-jingga-900'>
+			<h2 style={{ fontSize: '1.5em' }} className='font-normal my-7'>
 				Login
 			</h2>
-			<form action='' onSubmit={handleLogin}>
+			<form action='' onSubmit={handleLogin} className='relative'>
+				{loading && <LoadingAbsolute />}
 				<input
 					type='text'
 					name='santri_id'
 					placeholder='ID Santri'
-					className='w-full max-w-xs input input-bordered bg-jingga-50 text-jingga-950'
+					className='w-full max-w-xs text-center input'
 					readOnly
 					onFocus={(e) => {
 						e.target.removeAttribute('readonly');
@@ -92,13 +94,13 @@ const Login = () => {
 					onBlur={(e) => {
 						e.target.setAttribute('readonly', 'readonly');
 					}}
+					disabled={loadingSubmit}
 				/>
-				{/* <p className='pt-1 text-xs text-jingga-800'>01012000 = 1 Januari 2000</p> */}
 				<input
 					type='text'
 					name='tgl_lahir'
 					placeholder='Tanggal Lahir Santri (hhbbtttt)'
-					className='w-full max-w-xs mt-3 input input-bordered bg-jingga-50 text-jingga-950'
+					className='w-full max-w-xs mt-3 text-center input'
 					readOnly
 					onFocus={(e) => {
 						e.target.removeAttribute('readonly');
@@ -106,17 +108,14 @@ const Login = () => {
 					onBlur={(e) => {
 						e.target.setAttribute('readonly', 'readonly');
 					}}
-				/>
-				<p className='pt-1 text-xs text-jingga-800'>01012000 = 1 Januari 2000</p>
-				<button
-					type='submit'
-					className='w-full max-w-xs mt-3 btn bg-jingga-700 text-jingga-100'
 					disabled={loadingSubmit}
-				>
+				/>
+				<p className='pt-1 text-xs'>01012000 = 1 Januari 2000</p>
+				<button type='submit' className='w-full max-w-xs mt-3 btn btn-primary' disabled={loadingSubmit}>
 					{loadingSubmit ? (
 						<>
-							<div className='loading loading-ring loading-md text-jingga-900' />
-							<span className='font-light text-jingga-700'>Tunggu sebentar …</span>
+							<div className='loading loading-ring loading-md' />
+							<span className='font-light'>Tunggu sebentar …</span>
 						</>
 					) : (
 						<span className='font-medium'>Login</span>
@@ -126,13 +125,13 @@ const Login = () => {
 			<div className='mt-3'>
 				<a
 					target='_blank'
-					className='w-full max-w-xs border-0 btn d-flex justify-content-center bg-jingga-100 text-jingga-800'
+					className='w-full max-w-xs border-0 btn d-flex justify-content-center btn-info'
 					href={'https://wa.me/' + getAppWaliCS()}
 					disabled={!getAppWaliCS()}
 				>
 					<span className='font-light'>Tidak Bisa Login? Hubungi Pengurus…!</span>
 					{loading ? (
-						<div className='loading loading-ring loading-md text-jingga-900' />
+						<div className='loading loading-ring loading-md' />
 					) : (
 						getAppWaliCS() && (
 							<Icon className='ms-2' icon='logos:whatsapp-icon' width='1.5em' height='1.5em' />

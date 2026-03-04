@@ -4,9 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ConfirmDialogProvider } from '@/context/ConfirmDialogContext';
 import App from '@/App';
 import './App.css';
-import useThemeStore from './store/modeStore';
+import { useThemeStore } from './store/themeStore';
 
-useThemeStore.getState().initializeTheme();
+const theme = useThemeStore.getState()
+theme.initializeTheme();
 
 createRoot(document.getElementById('root'), { identifierPrefix: 'id-santri-' }).render(
 	<StrictMode>

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-const useThemeStore = create(
+export const useThemeStore = create(
 	persist(
 		(set, get) => ({
 			theme: 'system', // 'light', 'dark', or 'system'
@@ -66,5 +66,3 @@ if (typeof window !== 'undefined') {
 		}
 	});
 }
-
-export default useThemeStore;
