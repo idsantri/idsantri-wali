@@ -9,7 +9,7 @@ export default defineConfig({
 		react(),
 		VitePWA({
 			devOptions: {
-				enabled: true, // Aktifkan PWA untuk development
+				enabled: false, // Aktifkan PWA untuk development
 			},
 			registerType: 'autoUpdate', // Service worker akan otomatis diperbarui
 			manifest: manifest,

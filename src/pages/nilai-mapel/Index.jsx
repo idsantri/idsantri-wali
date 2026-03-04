@@ -158,7 +158,7 @@ function Index() {
 	useEffect(() => {
 		apiGet({ endPoint: 'nilai-mapel', params: { kelas_id, category } }).then((data) => {
 			if (data) {
-				setNilai(data.nilai);
+				setNilai(data.nilai_mapel);
 			}
 			setIsLoading(false);
 		});

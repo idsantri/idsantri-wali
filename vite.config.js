@@ -3,11 +3,13 @@ import react from '@vitejs/plugin-react-swc';
 import { VitePWA } from 'vite-plugin-pwa';
 import manifest from './manifest';
 import { fileURLToPath, URL } from 'node:url';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
 	plugins: [
 		react(),
+		tailwindcss(),
 		VitePWA({
 			registerType: 'autoUpdate', // Untuk otomatis memperbarui service worker
 			includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'], // Tambahkan aset tambahan
