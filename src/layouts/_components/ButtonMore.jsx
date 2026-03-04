@@ -11,7 +11,7 @@ function ButtonMore({ clickLogout }) {
 				</div>
 				<ul
 					tabIndex={0}
-					className='dropdown-content menu bg-jingga-200 rounded-md z-[1] w-48 p-1 shadow-md shadow-jingga-400 mb-2 mr-2 text-jingga-800'
+					className='w-48 p-1 mb-2 mr-2 rounded-md shadow-md dropdown-content menu bg-jingga-200 z-1 shadow-jingga-400 text-jingga-800'
 				>
 					<li className=''>
 						<Link to='/tatib' className=''>

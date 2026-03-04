@@ -4,15 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ConfirmDialogProvider } from '@/context/ConfirmDialogContext';
 import App from '@/App';
 import './App.css';
+import useThemeStore from './store/modeStore';
 
-// Pendaftaran service worker
-if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => {
-		navigator.serviceWorker.register('/sw.js').catch((registrationError) => {
-			console.log('SW registration failed: ', registrationError);
-		});
-	});
-}
+useThemeStore.getState().initializeTheme();
 
 createRoot(document.getElementById('root'), { identifierPrefix: 'id-santri-' }).render(
 	<StrictMode>

@@ -14,11 +14,17 @@ export default defineConfig({
 			registerType: 'autoUpdate', // Untuk otomatis memperbarui service worker
 			includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'], // Tambahkan aset tambahan
 			manifest: manifest,
+			devOptions: {
+				enabled: true, // Aktifkan PWA untuk development
+			},
 		}),
 	],
-	// server: {
-	// 	port: 3000,
-	// },
+
+	server: {
+		host: '0.0.0.0', // Ensure the server listens on all network interfaces
+		port: 5173, // Ensure the port matches your script
+	},
+
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),

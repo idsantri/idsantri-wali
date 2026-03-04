@@ -11,9 +11,9 @@ const AuthLayout = () => {
 			<div className='grid min-h-screen p-4 bg-jingga-50 text-jingga-950 place-content-center'>
 				<div className='max-w-sm text-center'>
 					<InstallPwa className='mb-4' />
-					<div className='px-4 py-10 rounded-md shadow-md bg-jingga-200 shadow-jingga-500 relative'>
+					<div className='relative px-4 py-10 rounded-md shadow-md bg-jingga-200 shadow-jingga-500'>
 						{/* button mode */}
-						<ToggleMode className='absolute top-2 right-2 hidden' />
+						<ToggleMode className='absolute top-2 right-2' />
 						<header className=''>
 							<LogoAvatar className='w-28' />
 							<div className=''>

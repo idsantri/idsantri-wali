@@ -4,9 +4,9 @@ import ToggleMode from '../../components/ToggleMode';
 
 function MainTop() {
 	return (
-		<div className='flex items-center justify-between gap-2 p-2 border-b shadow-md bg-gradient-to-b from-jingga-800 to-jingga-600 shadow-jingga-400 border-jingga-400'>
+		<div className='flex items-center justify-between gap-2 p-2 border-b shadow-md bg-linear-to-b from-jingga-800 to-jingga-600 shadow-jingga-400 border-jingga-400'>
 			<div className='flex items-center gap-2'>
-				<a href='/' className='text-decoration-none block'>
+				<a href='/' className='block text-decoration-none'>
 					<LogoAvatar className='w-16' />
 				</a>
 				<div>
@@ -36,7 +36,7 @@ function MainTop() {
 				</div>
 			</div>
 			{/* Button Mode */}
-			<ToggleMode className='bg-jingga-100 hidden' />
+			<ToggleMode className='bg-jingga-100' />
 		</div>
 	);
 }

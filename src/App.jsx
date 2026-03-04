@@ -19,18 +19,7 @@ const ProfilePage = lazy(() => import('@/pages/profile/Index'));
 const LoginPage = lazy(() => import('@/pages/auth/LoginPage'));
 const ErrorPage = lazy(() => import('@/pages/ErrorPage'));
 
-// import { useEffect } from 'react';
-// import useThemeStore from './store/modeStore';
 const App = () => {
-	// const isDarkMode = useThemeStore((state) => state.isDarkMode());
-
-	// useEffect(() => {
-	// 	if (isDarkMode) {
-	// 		document.documentElement.classList.add('dark');
-	// 	} else {
-	// 		document.documentElement.classList.remove('dark');
-	// 	}
-	// }, [isDarkMode]);
 	return (
 		<Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
 			<ToastContainer />

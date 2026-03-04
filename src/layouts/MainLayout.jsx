@@ -5,15 +5,15 @@ import MainTop from '@/layouts/_components/MainTop';
 const MainLayout = () => {
 	return (
 		<div className='min-h-screen bg-jingga-50 text-jingga-950 dark:bg-jingga-950 dark:text-jingga-200'>
-			<header className='fixed top-0 z-[1000] w-screen '>
+			<header className='fixed top-0 w-screen z-1000 '>
 				<MainTop />
 			</header>
-			<main className='pt-[86px] pb-[74px]'>
+			<main className='pt-21.5 pb-18.5'>
 				<div className='m-2'>
 					<Outlet />
 				</div>
 			</main>
-			<footer className='fixed bottom-0 z-[1000] w-screen'>
+			<footer className='fixed bottom-0 w-screen z-1000'>
 				<MainBottom />
 			</footer>
 		</div>

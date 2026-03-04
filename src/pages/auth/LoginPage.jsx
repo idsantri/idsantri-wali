@@ -93,7 +93,7 @@ const Login = () => {
 						e.target.setAttribute('readonly', 'readonly');
 					}}
 				/>
-				{/* <p className='text-xs text-jingga-800 pt-1'>01012000 = 1 Januari 2000</p> */}
+				{/* <p className='pt-1 text-xs text-jingga-800'>01012000 = 1 Januari 2000</p> */}
 				<input
 					type='text'
 					name='tgl_lahir'
@@ -107,7 +107,7 @@ const Login = () => {
 						e.target.setAttribute('readonly', 'readonly');
 					}}
 				/>
-				<p className='text-xs text-jingga-800 pt-1'>01012000 = 1 Januari 2000</p>
+				<p className='pt-1 text-xs text-jingga-800'>01012000 = 1 Januari 2000</p>
 				<button
 					type='submit'
 					className='w-full max-w-xs mt-3 btn bg-jingga-700 text-jingga-100'
@@ -123,7 +123,7 @@ const Login = () => {
 					)}
 				</button>
 			</form>
-			<p className='mt-3'>
+			<div className='mt-3'>
 				<a
 					target='_blank'
 					className='w-full max-w-xs border-0 btn d-flex justify-content-center bg-jingga-100 text-jingga-800'
@@ -139,7 +139,7 @@ const Login = () => {
 						)
 					)}
 				</a>
-			</p>
+			</div>
 		</>
 	);
 };
