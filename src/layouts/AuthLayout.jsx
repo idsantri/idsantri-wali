@@ -7,12 +7,10 @@ import ToggleMode from '../components/ToggleMode';
 const AuthLayout = () => {
 	return (
 		<>
-			{/* <ColorPallet /> */}
 			<div className='grid min-h-screen p-4 bg-base-300 place-content-center'>
 				<div className='max-w-sm text-center'>
 					<InstallPwa className='mb-4' />
 					<div className='relative px-4 py-10 rounded-md shadow-sm bg-base-100 shadow-base-300'>
-						{/* button mode */}
 						<ToggleMode className='absolute top-2 right-2' />
 						<header className=''>
 							<LogoAvatar className='w-28' />
@@ -25,10 +23,7 @@ const AuthLayout = () => {
 										{config.INS_DESC}
 									</span>
 									<br />
-									<span
-										style={{ fontVariant: 'small-caps', fontSize: '1.5em' }}
-										className=''
-									>
+									<span style={{ fontVariant: 'small-caps', fontSize: '1.5em' }} className=''>
 										{config.INS_NAME}
 									</span>
 								</p>

@@ -15,7 +15,7 @@ export default defineConfig({
 			includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'], // Tambahkan aset tambahan
 			manifest: manifest,
 			devOptions: {
-				enabled: true, // Aktifkan PWA untuk development
+				enabled: false, // Aktifkan PWA untuk development
 			},
 		}),
 	],
