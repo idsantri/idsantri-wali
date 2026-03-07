@@ -3,9 +3,9 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import useAuthStore from '@/store/authStore';
 import { notifyError } from '@/components/Notify';
-import apiPost from '@/api/api-post';
-import apiGet from '@/api/api-get';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
+import { login as loginApi } from '../../models/auth';
+import { appWali, profiles, va } from '../../models/app';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -17,22 +17,18 @@ const Login = () => {
 		const fetchAllData = async () => {
 			setLoading(true);
 			try {
-				const [appWaliData, profilesData, vaData] = await Promise.all([
-					apiGet({ endPoint: 'app-wali' }),
-					apiGet({ endPoint: 'profiles' }),
-					apiGet({ endPoint: 'va' }),
-				]);
+				const [resWali, resProfiles, resVa] = await Promise.all([appWali(), profiles(), va()]);
 
-				if (appWaliData?.app_wali) {
-					localStorage.setItem('app_wali', JSON.stringify(appWaliData.app_wali));
+				if (resWali?.app_wali) {
+					localStorage.setItem('app_wali', JSON.stringify(resWali.app_wali));
 				}
 
-				if (profilesData?.profiles) {
-					localStorage.setItem('profiles', JSON.stringify(profilesData.profiles));
+				if (resProfiles?.profiles) {
+					localStorage.setItem('profiles', JSON.stringify(resProfiles.profiles));
 				}
 
-				if (vaData?.va) {
-					localStorage.setItem('va', JSON.stringify(vaData.va));
+				if (resVa?.va) {
+					localStorage.setItem('va', JSON.stringify(resVa.va));
 				}
 			} catch (error) {
 				console.error('Error fetching data:', error);
@@ -52,17 +48,17 @@ const Login = () => {
 			return notifyError({ message: 'Lengkapi data login' });
 		}
 		setLoadingSubmit(true);
-		apiPost({ endPoint: 'login', data: formObject, notify: true }).then((res) => {
-			setLoadingSubmit(false);
-			if (res) {
-				login({
-					isAuthenticated: true,
-					token: res.token,
-					user: { name: 'User' },
-				});
-				navigate('/santri');
-			}
-		});
+		loginApi(formObject.santri_id, formObject.tgl_lahir)
+			.then((res) => {
+				if (res) {
+					login({
+						isAuthenticated: true,
+						token: res.token,
+						user: { name: 'User' },
+					});
+				}
+			})
+			.finally(() => setLoadingSubmit(false));
 	};
 
 	if (auth.isAuthenticated) {
