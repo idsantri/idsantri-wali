@@ -1,6 +1,9 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+/**
+ * @deprecated
+ */
 export const useThemeStore = create(
 	persist(
 		(set, get) => ({
