@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { notifyError } from '@/components/Notify';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
@@ -8,7 +7,7 @@ import { useAuthStore } from '../../store/authStore';
 
 const Login = () => {
 	const auth = useAuthStore();
-	const { isLoggedIn, loading: loadingSubmit } = useAuthStore((state) => state);
+	const { loading: loadingSubmit } = useAuthStore((state) => state);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -47,10 +46,6 @@ const Login = () => {
 		}
 		await auth.login(formObject.santri_id, formObject.tgl_lahir);
 	};
-
-	if (isLoggedIn) {
-		return <Navigate to='/santri' />;
-	}
 
 	// For WhatsApp link in render
 	const getAppWaliCS = () => {

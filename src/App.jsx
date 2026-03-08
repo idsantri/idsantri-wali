@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import MainLayout from '@/layouts/MainLayout';
-import AuthLayout from '@/layouts/AuthLayout';
-import AuthMiddleware from '@/middleware/AuthMiddleware';
+import GuestLayout from '@/layouts/GuestLayout';
 import { lazy } from 'react';
 
 // Lazy load components
@@ -24,17 +23,11 @@ const App = () => {
 		<Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
 			<ToastContainer />
 			<Routes>
-				<Route path='/' element={<Navigate to='/dashboard' replace />} />
-				<Route element={<AuthLayout />}>
+				<Route path='/' element={<Navigate to='/santri' replace />} />
+				<Route element={<GuestLayout />}>
 					<Route path='/login' element={<LoginPage />} />
 				</Route>
-				<Route
-					element={
-						<AuthMiddleware>
-							<MainLayout />
-						</AuthMiddleware>
-					}
-				>
+				<Route element={<MainLayout />}>
 					<Route path='/dashboard' element={<Dashboard />} />
 					<Route path='/santri' element={<SantriPage />} />
 					<Route path='/madrasah' element={<MadrasahPage />} />
