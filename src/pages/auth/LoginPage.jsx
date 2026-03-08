@@ -3,15 +3,13 @@ import { Navigate } from 'react-router-dom';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { notifyError } from '@/components/Notify';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
-import { login as loginApi } from '../../models/auth';
 import { appWali, profiles, va } from '../../models/app';
 import { useAuthStore } from '../../store/authStore';
 
 const Login = () => {
 	const auth = useAuthStore();
-	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+	const { isLoggedIn, loading: loadingSubmit } = useAuthStore((state) => state);
 	const [loading, setLoading] = useState(false);
-	const [loadingSubmit, setLoadingSubmit] = useState(false);
 
 	useEffect(() => {
 		const fetchAllData = async () => {
@@ -40,21 +38,14 @@ const Login = () => {
 		fetchAllData();
 	}, []);
 
-	const handleLogin = (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const formObject = Object.fromEntries(formData.entries());
 		if (!formObject.santri_id || !formObject.tgl_lahir) {
 			return notifyError({ message: 'Lengkapi data login' });
 		}
-		setLoadingSubmit(true);
-		loginApi(formObject.santri_id, formObject.tgl_lahir)
-			.then((res) => {
-				if (res) {
-					auth.login(res.token);
-				}
-			})
-			.finally(() => setLoadingSubmit(false));
+		await auth.login(formObject.santri_id, formObject.tgl_lahir);
 	};
 
 	if (isLoggedIn) {
