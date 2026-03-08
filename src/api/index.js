@@ -1,5 +1,5 @@
 import axios from 'axios';
-import useAuthStore from '@/store/authStore';
+import { useAuthStore } from '@/store/authStore';
 import config from '@/config';
 import { notifyError } from '@/components/Notify';
 
@@ -10,7 +10,7 @@ const api = axios.create({
 
 // request
 api.interceptors.request.use((config) => {
-	const { token } = useAuthStore.getState().auth;
+	const { token } = useAuthStore.getState();
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
 	}

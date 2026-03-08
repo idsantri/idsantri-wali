@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { Link } from 'react-router-dom';
-import useAuthStore from '../../store/authStore';
+import { useAuthStore } from '../../store/authStore';
 import useConfirmDialog from '@/hooks/use-confirm-dialog';
 
 function DockMore() {

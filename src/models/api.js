@@ -1,10 +1,10 @@
-import useAuthStore from '../store/authStore';
+import { useAuthStore } from '../store/authStore';
 import config from '../config';
 import { notifyError } from '../components/Notify';
 import { buildTextError } from '../utils/array-object';
 
 function getAccessToken() {
-	const { token } = useAuthStore.getState().auth;
+	const { token } = useAuthStore.getState();
 	return token || null;
 }
 

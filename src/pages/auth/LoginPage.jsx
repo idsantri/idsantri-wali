@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import useAuthStore from '@/store/authStore';
 import { notifyError } from '@/components/Notify';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
 import { login as loginApi } from '../../models/auth';
 import { appWali, profiles, va } from '../../models/app';
+import { useAuthStore } from '../../store/authStore';
 
 const Login = () => {
-	const navigate = useNavigate();
-	const { login, auth } = useAuthStore();
+	const auth = useAuthStore();
+	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 	const [loading, setLoading] = useState(false);
 	const [loadingSubmit, setLoadingSubmit] = useState(false);
 
@@ -51,17 +51,13 @@ const Login = () => {
 		loginApi(formObject.santri_id, formObject.tgl_lahir)
 			.then((res) => {
 				if (res) {
-					login({
-						isAuthenticated: true,
-						token: res.token,
-						user: { name: 'User' },
-					});
+					auth.login(res.token);
 				}
 			})
 			.finally(() => setLoadingSubmit(false));
 	};
 
-	if (auth.isAuthenticated) {
+	if (isLoggedIn) {
 		return <Navigate to='/santri' />;
 	}
 
