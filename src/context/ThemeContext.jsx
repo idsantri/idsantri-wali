@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 
-const ThemeContext = createContext();
+export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
 	// Ambil initial value dari localStorage atau default ke 'system'
@@ -58,5 +58,3 @@ export const ThemeProvider = ({ children }) => {
 		<ThemeContext.Provider value={{ theme, setTheme, toggleTheme, isDarkMode }}>{children}</ThemeContext.Provider>
 	);
 };
-
-export default ThemeContext;
