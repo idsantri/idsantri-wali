@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import AlertNotFound from '@/components/AlertNotFound';
+import AlertNotFound from '../../components/AlertNotFound';
 import CardHeader from '../../components/CardHeader';
 import apiGet from '@/api/api-get';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
 
 export default function Santri() {
 	const [santri, setSantri] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		apiGet({ endPoint: 'santri' }).then((res) => {
