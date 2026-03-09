@@ -12,6 +12,7 @@ function KelasPage() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
 		apiGet({ endPoint: 'kelas' }).then((data) => {
 			if (data) setKelas(data.kelas);
 			localStorage.setItem('kelas', JSON.stringify(data.kelas));
@@ -40,7 +41,7 @@ function KelasPage() {
 							exit={{ opacity: 0, height: 0 }}
 							transition={{ duration: 0.3 }}
 						>
-							<div className='px-2 py-2 bg-accent/25 '>
+							<div className='px-2 py-2 bg-accent/15 '>
 								<div className='mb-2'>
 									<span className='text-sm font-light'> Wali Kelas: </span>{' '}
 									<span className='text-sm'>{kelas.wali_kelas || '-'}</span>

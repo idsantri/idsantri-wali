@@ -9,6 +9,7 @@ export default function Santri() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
 		apiGet({ endPoint: 'santri' }).then((res) => {
 			if (res && res.santri) {
 				setSantri(res.santri);

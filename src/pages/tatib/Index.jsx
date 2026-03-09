@@ -5,9 +5,10 @@ import AlertNotFound from '@/components/AlertNotFound';
 
 function TatibPage() {
 	const [tatib, setTatib] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
 		apiGet({ endPoint: 'tatib-santri' }).then((res) => {
 			if (res) {
 				setTatib(res.tatib_santri);

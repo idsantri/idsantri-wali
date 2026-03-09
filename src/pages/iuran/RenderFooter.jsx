@@ -9,9 +9,9 @@ function RenderFooter() {
 	const textWa = `Assalamu'alaikum, \nSaya ingin melakukan pembayaran iuran santri untuk \n- Nama: ${santri?.nama} \n- ID Santri: ${santri?.id} \n`;
 
 	return (
-		<div className='mt-2 border rounded-sm text-jingga-800 bg-jingga-200 border-jingga-400 '>
-			{va?.info && <div className='p-4 text-sm border-b border-jingga-400'>{parse(va.info)}</div>}
-			<div className='flex items-center justify-between p-4 '>
+		<div className='mt-2 overflow-hidden rounded-md text-info-content'>
+			{va?.info && <div className='p-4 text-sm bg-info/50'>{parse(va.info)}</div>}
+			<div className='flex items-center justify-between p-4 bg-info/25'>
 				<a
 					href={va?.link_info_pembayaran || '#'}
 					target='_blank'
