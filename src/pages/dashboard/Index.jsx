@@ -9,17 +9,17 @@ export default function Dashboard() {
 
 	return (
 		<>
-			<div className='mb-2 overflow-hidden border rounded-md border-jingga-300 relative'>
-				<h2 className='p-2 m-0 text-xl font-light text-center bg-jingga-100 text-jingga-800'>Info</h2>
-				<Link className='block absolute top-2 right-2 text-jingga-700' to='/profile'>
+			<div className='relative mb-2 overflow-hidden rounded-md bg-accent'>
+				<h2 className='p-2 m-0 text-xl font-light text-center'>Info</h2>
+				<Link className='absolute block top-2 right-2' to='/profile'>
 					<Icon icon='ic:round-school' width='28' height='28' />
 				</Link>
 			</div>
 
-			<div className='text-sm'>
+			<div className='flex flex-col gap-2'>
 				{banners?.length > 0 &&
 					banners.map((banner, i) => (
-						<div key={i} className='border border-jingga-300/50 rounded-lg p-4 mb-4 text-jingga-900'>
+						<div key={i} className='p-4 text-sm border rounded-md bg-accent/10 border-accent'>
 							{parse(banner?.content)}
 						</div>
 					))}
