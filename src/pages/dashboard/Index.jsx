@@ -11,7 +11,7 @@ export default function Dashboard() {
 		<>
 			<div className='relative mb-2 overflow-hidden rounded-md bg-accent'>
 				<h2 className='p-2 m-0 text-xl font-light text-center'>Info</h2>
-				<Link className='absolute block top-2 right-2' to='/profile'>
+				<Link className='absolute block top-2 right-2' to='/dashboard/profile'>
 					<Icon icon='ic:round-school' width='28' height='28' />
 				</Link>
 			</div>

@@ -15,7 +15,7 @@ function DockNavigation({ clickLogout, disabled }) {
 
 	const anyActive =
 		isActiveForPath('/santri') ||
-		isActiveForPath('/madrasah') ||
+		isActiveForPath('/kelas') ||
 		isActiveForPath('/dashboard') ||
 		isActiveForPath('/iuran');
 
@@ -30,9 +30,9 @@ function DockNavigation({ clickLogout, disabled }) {
 				/>
 				<DockButton
 					iconName='healthicons:i-training-class-24px'
-					to='/madrasah'
+					to='/kelas'
 					label='Madrasah'
-					className={isActiveForPath('/madrasah') ? 'dock-active' : ''}
+					className={isActiveForPath('/kelas') ? 'dock-active' : ''}
 				/>
 				<DockButton
 					iconName='entypo:home'

@@ -3,7 +3,7 @@ export default function CardHeader({ title }) {
 
 	return (
 		<div className='mb-2 overflow-hidden border rounded-md border-base-300'>
-			<h2 className='p-2 m-0 font-light text-center bg-secondary text-secondary-content'>{title}</h2>
+			<h2 className='p-2 m-0 font-light text-center bg-accent'>{title}</h2>
 			{santri && (
 				<div className='text-center bg-base-300'>
 					<div className='p-2'>

@@ -48,13 +48,13 @@ function KelasPage() {
 									</div>
 									<div className='flex flex-wrap gap-2 text-nowrap'>
 										<Link
-											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
+											className='w-24 font-light btn btn-ghost btn-outline btn-sm'
 											to={`/kelas/${kelas.id}/nilai-mapel`}
 										>
 											Nilai Mapel
 										</Link>
 										<Link
-											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
+											className='w-24 font-light btn btn-ghost btn-outline btn-sm'
 											to={`/kelas/${kelas.id}/nilai-ahwal`}
 										>
 											Nilai Ahwal
@@ -66,7 +66,7 @@ function KelasPage() {
 											Izin Madrasah
 										</Link> */}
 										<Link
-											className='font-light w-[96px] btn btn-ghost btn-outline btn-sm'
+											className='w-24 font-light btn btn-ghost btn-outline btn-sm'
 											to={`/kelas/${kelas.id}/absensi-sekolah`}
 										>
 											Absensi
