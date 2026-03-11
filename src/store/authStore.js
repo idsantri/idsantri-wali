@@ -1,18 +1,29 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { login as loginApi } from '../models/auth';
 
-export const useAuthStore = create((set) => ({
-	auth: JSON.parse(sessionStorage.getItem('auth')) || {
-		isAuthenticated: false,
-		token: null,
-		user: null,
-	},
-	login: (authData) => {
-		sessionStorage.setItem('auth', JSON.stringify(authData));
-		set({ auth: authData });
-	},
-	logout: () => {
-		sessionStorage.removeItem('auth');
-		set({ auth: { isAuthenticated: false, token: null, user: null } });
-		window.location.href = '/login';
-	},
-}));
+export const useAuthStore = create(
+	persist(
+		(set, get) => ({
+			token: null,
+			isLoggedIn: false,
+			loading: false,
+
+			login: (santri_id, tgl_lahir) => {
+				set({ loading: true });
+				loginApi(santri_id, tgl_lahir)
+					.then((res) => {
+						if (res) {
+							set({ token: res.token, isLoggedIn: true });
+						}
+					})
+					.finally(() => set({ loading: false }));
+			},
+
+			logout: () => {
+				set({ token: null, isLoggedIn: false });
+			},
+		}),
+		{ name: 'auth', storage: createJSONStorage(() => sessionStorage) },
+	),
+);

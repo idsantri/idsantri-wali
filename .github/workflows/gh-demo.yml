@@ -1,0 +1,46 @@
+name: 🚀 Build to branch demo-build
+on:
+    push:
+        branches:
+            - demo
+
+permissions:
+    contents: write
+
+jobs:
+    build:
+        env:
+            APP_NAME: TEST APP NAME
+            APP_URL: https://idsantri.github.io/idsantri-wali
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                 node-version: 22
+
+            - name: Install Corepack
+              run: npm i -g corepack
+
+            - name: Enable corepack & pnpm
+              run: |
+               corepack enable
+               corepack prepare pnpm@latest --activate
+
+            - name: Install Dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Build PWA
+              run: pnpm build
+
+            - name: Create branch
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: dist
+                  clean: true
+                  branch: demo-build

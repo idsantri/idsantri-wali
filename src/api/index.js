@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '@/store/authStore';
+import config from '@/config';
+import { notifyError } from '@/components/Notify';
 
 const api = axios.create({
-	baseURL: 'http://localhost:8000/wali',
+	baseURL: config.BASE_API + config.END_API,
+	withCredentials: true,
 });
-
-api.defaults.withCredentials = true;
 
 // request
 api.interceptors.request.use((config) => {
-	const { auth } = useAuthStore.getState();
-	if (auth.token) {
-		config.headers.Authorization = `Bearer ${auth.token}`;
+	const { token } = useAuthStore.getState();
+	if (token) {
+		config.headers.Authorization = `Bearer ${token}`;
 	}
 	return config;
 });
@@ -21,7 +22,8 @@ api.interceptors.response.use(
 	(res) => res,
 	(err) => {
 		if (!err.response) {
-			console.log('ERROR: Tidak dapat terhubung ke server');
+			// console.log('Tidak dapat terhubung ke server!');
+			notifyError({ message: 'Tidak dapat terhubung ke server!', title: 'Server error' });
 		} else {
 			return Promise.reject(err);
 		}

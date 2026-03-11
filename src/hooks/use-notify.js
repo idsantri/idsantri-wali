@@ -1,4 +1,3 @@
-// src/hooks/use-notify.js
 import { useState } from 'react';
 
 const useNotify = () => {

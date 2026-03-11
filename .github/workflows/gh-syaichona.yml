@@ -1,0 +1,29 @@
+name: 🚀 Build to branch syaichona-build
+on:
+    push:
+        branches:
+            - syaichona
+
+permissions:
+    contents: write
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Install dependencies
+              run: yarn install
+
+            - name: Build PWA
+              run: yarn build
+
+            - name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: dist
+                  clean: true
+                  branch: syaichona-build

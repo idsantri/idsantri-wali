@@ -8,7 +8,7 @@ import prettier from 'eslint-config-prettier';
 export default [
 	{ ignores: ['dist'] },
 	{
-		files: ['**/*.{js,jsx,ts,tsx}'],
+		files: ['src/**/*.{js,jsx,ts,tsx}'],
 		languageOptions: {
 			ecmaVersion: 2020,
 			globals: globals.browser,
@@ -18,7 +18,7 @@ export default [
 				sourceType: 'module',
 			},
 		},
-		settings: { react: { version: '18.3' } },
+		settings: { react: { version: 'detect' } },
 		plugins: {
 			react,
 			'react-hooks': reactHooks,
@@ -30,11 +30,9 @@ export default [
 			...react.configs['jsx-runtime'].rules,
 			...reactHooks.configs.recommended.rules,
 			'react/jsx-no-target-blank': 'off',
-			'react-refresh/only-export-components': [
-				'warn',
-				{ allowConstantExport: true },
-			],
+			'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 			'no-unused-vars': 'warn',
+			'react/prop-types': 'off',
 		},
 	},
 	prettier,
