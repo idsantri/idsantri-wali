@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CardHeader from '@/components/CardHeader';
-import CardKelas from '@/components/CardKelas';
-import Loading from '@/components/Loading';
+import CardHeader from '../../components/CardHeader';
+import CardKelas from '../../components/CardKelas';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
 import apiGet from '@/api/api-get';
 import { getBulanHijri } from '@/utils/hijri';
+import AlertNotFound from '../../components/AlertNotFound';
 
 function Index() {
 	const { kelas_id } = useParams();
@@ -25,20 +26,17 @@ function Index() {
 	}, [kelas_id]);
 
 	function RenderAbsensi({ absensi, className }) {
-		// console.log(absensi);
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-jingga-200 bg-jingga-200`}>
-				<div className='p-2 text-center bg-jingga-300 text-jingga-900'>Data Absensi Sekolah</div>
-				<div className='px-2 py-4 text-center text-jingga-800'>
+			<div className={`${className} w-full my-2 border rounded-md border-accent/75`}>
+				<div className='p-2 text-center bg-accent/25 text-accent-content'>Data Absensi Sekolah</div>
+				<div className='px-2 py-4 text-center'>
 					{!absensi || absensi.length === 0 ? (
-						<div className='p-4 italic font-light text-center text-red-900 bg-red-200 rounded-md'>
-							Tidak ada data untuk ditampilkan!
-						</div>
+						<AlertNotFound />
 					) : (
 						<div className='overflow-x-auto'>
 							<table className='table'>
 								<thead>
-									<tr className='text-jingga-800'>
+									<tr className='bg-secondary/50 text-secondary-content'>
 										<th className='font-medium'>Bulan</th>
 										<th className='font-medium text-center'>Sakit</th>
 										<th className='font-medium text-center'>Izin</th>
@@ -99,7 +97,8 @@ function Index() {
 		<>
 			<CardHeader title='Absensi Sekolah' />
 			<CardKelas data={kelasData} />
-			{isLoading ? <Loading /> : <RenderAbsensi absensi={absensi} />}
+			{isLoading && <LoadingAbsolute />}
+			<RenderAbsensi absensi={absensi} />
 		</>
 	);
 }
