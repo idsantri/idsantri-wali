@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Loading from '@/components/Loading';
 import apiGet from '@/api/api-get';
-import CardHeader from '@/components/CardHeader';
+import CardHeader from '../../components/CardHeader';
 import Rating from 'react-rating';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import CardKelas from '../../components/CardKelas';
+import AlertNotFound from '../../components/AlertNotFound';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
 
 function Index() {
 	const { kelas_id } = useParams();
@@ -27,18 +28,16 @@ function Index() {
 
 	function RenderNilai({ nilai, className }) {
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-jingga-200 bg-jingga-200`}>
-				<div className='p-2 text-center bg-jingga-300 text-jingga-900'>Data Nilai Ahwal (Kepribadian)</div>
-				<div className='px-2 py-4 text-center text-jingga-800'>
+			<div className={`${className} w-full my-2 border rounded-md border-accent/75`}>
+				<div className='p-2 text-center bg-accent/25 text-accent-content'>Data Nilai Ahwal (Kepribadian)</div>
+				<div className='px-2 py-4 text-center'>
 					{!nilai || nilai.length === 0 ? (
-						<div className='p-4 italic font-light text-center text-red-900 bg-red-200 rounded-md'>
-							Tidak ada data untuk ditampilkan!
-						</div>
+						<AlertNotFound />
 					) : (
 						<div className='overflow-x-auto'>
 							<table className='table'>
 								<thead>
-									<tr className='text-jingga-800'>
+									<tr className='text-center bg-secondary/50 text-secondary-content'>
 										<th className='font-medium'>Cawu/Semester</th>
 										<th className='font-medium'>Kesopanan</th>
 										<th className='font-medium'>Kedisiplinan</th>
@@ -98,7 +97,8 @@ function Index() {
 		<>
 			<CardHeader title='Nilai Mata Pelajaran' />
 			<CardKelas data={kelasData} />
-			{isLoading ? <Loading /> : <RenderNilai nilai={nilaiAhwal} />}
+			{isLoading && <LoadingAbsolute />}
+			<RenderNilai nilai={nilaiAhwal} />
 		</>
 	);
 }

@@ -1,23 +1,21 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import 'react-toastify/dist/ReactToastify.css';
-import { ConfirmDialogProvider } from '@/context/ConfirmDialogContext';
+import { ConfirmDialogProvider } from './context/ConfirmDialogContext';
+import { ThemeProvider } from './context/ThemeContext';
 import App from '@/App';
 import './App.css';
 
-// Pendaftaran service worker
-if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => {
-		navigator.serviceWorker.register('/sw.js').catch((registrationError) => {
-			console.log('SW registration failed: ', registrationError);
-		});
-	});
-}
+// import { useThemeStore } from './store/themeStore';
+// const theme = useThemeStore.getState()
+// theme.initializeTheme();
 
 createRoot(document.getElementById('root'), { identifierPrefix: 'id-santri-' }).render(
 	<StrictMode>
-		<ConfirmDialogProvider>
-			<App />
-		</ConfirmDialogProvider>
+		<ThemeProvider>
+			<ConfirmDialogProvider>
+				<App />
+			</ConfirmDialogProvider>
+		</ThemeProvider>
 	</StrictMode>,
 );
