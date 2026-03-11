@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { addHours, format } from 'date-fns';
-import CardHeader from '@/components/CardHeader';
+import CardHeader from '../../components/CardHeader';
 import apiGet from '@/api/api-get';
-import Loading from '@/components/Loading';
-import AlertNotFound from '@/components/AlertNotFound';
+import AlertNotFound from '../../components/AlertNotFound';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
 
 function PesantrenPage() {
 	const [domisili, setDomisili] = useState(null);
@@ -18,16 +18,14 @@ function PesantrenPage() {
 
 	function RenderItem({ dom, index: i }) {
 		return (
-			<div
-				className={`flex items-center justify-between px-3 py-1 ${i == 0 ? '' : 'border-t border-jingga-300'}`}
-			>
+			<div className={`flex items-center justify-between px-3 py-1 ${i == 0 ? '' : 'border-t border-accent/50'}`}>
 				<div>
 					<div>
-						<span className='inline-block w-[60px] text-sm italic font-light'>Kamar:</span>
+						<span className='inline-block text-sm italic font-light w-15'>Kamar:</span>
 						<span>{dom.domisili}</span>
 					</div>
 					<div>
-						<span className='inline-block w-[60px] text-sm italic font-light'>Ket.:</span>
+						<span className='inline-block text-sm italic font-light w-15'>Ket.:</span>
 						<span>{dom.keterangan || '-'}</span>
 					</div>
 				</div>
@@ -41,7 +39,7 @@ function PesantrenPage() {
 
 	function RenderDomisili({ domisili }) {
 		return (
-			<div className='overflow-hidden border rounded-md shadow-sm shadow-jingga-500 border-jingga-300'>
+			<div className='overflow-hidden border rounded-md border-accent/75'>
 				{domisili.map((dom, i) => (
 					<RenderItem key={i} dom={dom} index={i} />
 				))}
@@ -52,15 +50,8 @@ function PesantrenPage() {
 	return (
 		<>
 			<CardHeader title='Riwayat Domisili' />
-			<div className=''>
-				{isLoading ? (
-					<Loading />
-				) : !domisili || domisili.length === 0 ? (
-					<AlertNotFound />
-				) : (
-					<RenderDomisili domisili={domisili} />
-				)}
-			</div>
+			{isLoading && <LoadingAbsolute />}
+			{!domisili || domisili.length === 0 ? <AlertNotFound /> : <RenderDomisili domisili={domisili} />}
 		</>
 	);
 }
