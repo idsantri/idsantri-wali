@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { notifyError } from '@/components/Notify';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
-import { appWali, profiles, va } from '../../models/app';
+import { getAppWali, getProfiles, getVA } from '../../models/app';
 import { useAuthStore } from '../../store/authStore';
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
 		const fetchAllData = async () => {
 			setLoading(true);
 			try {
-				const [resWali, resProfiles, resVa] = await Promise.all([appWali(), profiles(), va()]);
+				const [resWali, resProfiles, resVa] = await Promise.all([getAppWali(), getProfiles(), getVA()]);
 
 				if (resWali?.app_wali) {
 					localStorage.setItem('app_wali', JSON.stringify(resWali.app_wali));

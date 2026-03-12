@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import apiGet from '@/api/api-get';
 import CardHeader from '../../components/CardHeader';
 import CardKelas from '../../components/CardKelas';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
 import AlertNotFound from '../../components/AlertNotFound';
+import { useReadLocalStorage } from 'usehooks-ts';
+import { getNilaiMapel } from '../../models/madrasah';
 // const temp = [
 // 	{
 // 		id: 'ts-qur',
@@ -134,10 +135,19 @@ function Index() {
 	const [nilai, setNilai] = useState(null);
 	const category = 'rapor';
 
-	const kelas = JSON.parse(localStorage.getItem('kelas')) || [];
+	const kelas = useReadLocalStorage('kelas');
 	const kelasData = kelas.find((item) => item.id == kelas_id);
-	// console.log('🚀 ~ Index ~ kelas:', kelas);
-	// console.log('🚀 ~ Index ~ kelasData:', kelasData);
+
+	useEffect(() => {
+		setIsLoading(true);
+		getNilaiMapel(kelas_id, category)
+			.then((data) => {
+				if (data && data.nilai_mapel) {
+					setNilai(data.nilai_mapel);
+				}
+			})
+			.finally(() => setIsLoading(false));
+	}, [kelas_id]);
 
 	function hitungRerata(data, key) {
 		if (!Array.isArray(data) || data.length === 0) return null;
@@ -155,22 +165,6 @@ function Index() {
 
 		return count > 0 ? total / count : null;
 	}
-
-	useEffect(() => {
-		setIsLoading(true);
-		apiGet({ endPoint: 'nilai-mapel', params: { kelas_id, category } }).then((data) => {
-			if (data) {
-				setNilai(data.nilai_mapel);
-			}
-			setIsLoading(false);
-		});
-
-		// Clean-up function
-		// return () => {
-		// 	setIsLoading(true);
-		// 	setNilai(null);
-		// };
-	}, [kelas_id]);
 
 	function RenderNilai({ nilai, className }) {
 		return (

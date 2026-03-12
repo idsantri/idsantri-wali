@@ -11,6 +11,7 @@ export async function login(santri_id, tgl_lahir) {
 		return response.data;
 	} catch (error) {
 		console.log('🚀 ~ login ~ error:', error);
+		return false;
 		// throw error;
 	}
 }

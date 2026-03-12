@@ -3,26 +3,29 @@ import { useParams } from 'react-router-dom';
 import CardHeader from '../../components/CardHeader';
 import CardKelas from '../../components/CardKelas';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
-import apiGet from '@/api/api-get';
 import { getBulanHijri } from '@/utils/hijri';
 import AlertNotFound from '../../components/AlertNotFound';
+import { useReadLocalStorage } from 'usehooks-ts';
+import { getAbsensi } from '../../models/madrasah';
 
 function Index() {
 	const { kelas_id } = useParams();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [absensi, setAbsensi] = useState(null);
 	const category = 'sekolah';
 
-	const kelas = JSON.parse(localStorage.getItem('kelas')) || [];
+	const kelas = useReadLocalStorage('kelas');
 	const kelasData = kelas.find((item) => item.id == kelas_id);
+
 	useEffect(() => {
-		apiGet({ endPoint: 'absensi', params: { kelas_id, category } }).then((data) => {
-			if (data) {
-				setAbsensi(data.absensi_sekolah);
-				// console.log(nilaiAhwal);
-			}
-			setIsLoading(false);
-		});
+		setIsLoading(true);
+		getAbsensi(kelas_id, category)
+			.then((data) => {
+				if (data && data.absensi_sekolah) {
+					setAbsensi(data.absensi_sekolah);
+				}
+			})
+			.finally(() => setIsLoading(false));
 	}, [kelas_id]);
 
 	function RenderAbsensi({ absensi, className }) {

@@ -3,21 +3,25 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import CardHeader from '../../components/CardHeader';
-import apiGet from '@/api/api-get';
 import AlertNotFound from '../../components/AlertNotFound';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
+import { getKelas } from '../../models/madrasah';
+import { useLocalStorage } from 'usehooks-ts';
 
 function KelasPage() {
-	const [kelas, setKelas] = useState(null);
+	const [kelas, setKelas] = useLocalStorage('kelas', null);
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
-		apiGet({ endPoint: 'kelas' }).then((data) => {
-			if (data) setKelas(data.kelas);
-			localStorage.setItem('kelas', JSON.stringify(data.kelas));
-			setIsLoading(false);
-		});
+		getKelas()
+			.then((data) => {
+				if (data && data.kelas) {
+					setKelas(data.kelas);
+				}
+				setIsLoading(false);
+			})
+			.finally(() => setIsLoading(false));
 	}, []);
 
 	function RenderItem({ kelas, ...props }) {
