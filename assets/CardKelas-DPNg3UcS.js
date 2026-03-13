@@ -1,1 +1,0 @@
-import{j as e}from"./index-CKg8qKFm.js";function r({data:s,className:t}){return e.jsx("div",{className:`${t||null} w-full rounded-md bg-success text-success-content`,children:e.jsxs("div",{className:"px-2 py-2 text-center",children:[s.th_ajaran_h," | ",s.tingkat," | ",s.kelas]})})}export{r as C};

@@ -1,0 +1,1 @@
+import{j as t}from"./index-BKMAIHDU.js";function e(){return t.jsx("div",{role:"alert",className:"block w-full text-center rounded-sm alert alert-danger",children:t.jsx("span",{children:" Tidak ada data untuk ditampilkan!"})})}export{e as A};
