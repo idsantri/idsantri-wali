@@ -9,8 +9,11 @@ function ToggleMode({ className }) {
 	return (
 		<button
 			onClick={toggleTheme}
-			className={`${className} p-2 rounded-full border-0 transition-colors duration-200
-                ${isDark ? 'text-base-100 border-base-100 bg-warning' : 'text-accent border-accent bg-neutral-700'}`}
+			className={`${className}
+				p-2 rounded-full transition-colors duration-500 ring-offset-1 ring ring-offset-base-100
+				text-accent bg-accent-content
+				dark:text-accent dark:bg-warning dark:ring-warning
+			`}
 			title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
 		>
 			<Icon icon={isDark ? 'material-symbols-light:light-mode' : 'material-symbols-light:dark-mode'} width='24' />
