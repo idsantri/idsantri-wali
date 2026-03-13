@@ -11,10 +11,10 @@ const AuthLayout = () => {
 
 	return (
 		<>
-			<div className='grid min-h-screen p-4 bg-base-300 place-content-center'>
+			<div className='grid min-h-screen p-4 bg-base-300 dark:bg-base-100 place-content-center'>
 				<div className='max-w-sm text-center'>
 					<InstallPwa className='mb-4' />
-					<div className='relative px-4 py-10 rounded-md shadow-sm bg-base-100 shadow-base-300'>
+					<div className='relative px-4 py-10 rounded-md shadow-sm bg-base-100 dark:bg-base-300 shadow-accent border border-secondary'>
 						<HeaderGuest />
 						<main>
 							<Outlet />

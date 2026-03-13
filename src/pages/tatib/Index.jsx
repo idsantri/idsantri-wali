@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import apiGet from '@/api/api-get';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
 import AlertNotFound from '../../components/AlertNotFound';
+import { getTatib } from '../../models/app';
 
 function TatibPage() {
 	const [tatib, setTatib] = useState(null);
@@ -9,12 +9,15 @@ function TatibPage() {
 
 	useEffect(() => {
 		setIsLoading(true);
-		apiGet({ endPoint: 'tatib-santri' }).then((res) => {
-			if (res) {
-				setTatib(res.tatib_santri);
-			}
-			setIsLoading(false);
-		});
+		getTatib()
+			.then((res) => {
+				if (res && res.tatib_santri) {
+					setTatib(res.tatib_santri);
+				}
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, []);
 
 	const Header = () => (

@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import AlertNotFound from '../../components/AlertNotFound';
 import CardHeader from '../../components/CardHeader';
-import apiGet from '@/api/api-get';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
+import { getSantri } from '../../models/santri';
+import { useLocalStorage } from 'usehooks-ts';
 
 export default function Santri() {
-	const [santri, setSantri] = useState(null);
+	const [santri, setSantri] = useLocalStorage('santri', {});
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
-		apiGet({ endPoint: 'santri' }).then((res) => {
-			if (res && res.santri) {
-				setSantri(res.santri);
-				localStorage.setItem('santri', JSON.stringify(res.santri));
-			}
-			setIsLoading(false);
-		});
+		getSantri()
+			.then((data) => {
+				if (data && data.santri) {
+					setSantri(data.santri);
+				}
+			})
+			.finally(() => setIsLoading(false));
 	}, []);
 
 	function RenderSantri() {

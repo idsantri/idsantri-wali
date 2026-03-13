@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
 import CardHeader from '../../components/CardHeader';
-import apiGet from '@/api/api-get';
 import AlertNotFound from '../../components/AlertNotFound';
 import RenderTahun from './RenderTahun';
 import RenderFooter from './RenderFooter';
+import { getIuran } from '../../models/santri';
 
 function IuranPage() {
 	const [iuran, setIuran] = useState(null);
@@ -13,16 +13,18 @@ function IuranPage() {
 
 	useEffect(() => {
 		setIsLoading(true);
-		apiGet({ endPoint: 'iuran' }).then((res) => {
-			if (res) {
-				const { iuran, message } = res;
-				const result = groupByThAjaranH(iuran);
-				// console.log('🚀 ~ apiGet ~ result:', result);
-				setIuran(result);
-				setInfo(message);
-			}
-			setIsLoading(false);
-		});
+		getIuran()
+			.then((res) => {
+				if (res) {
+					const { iuran, message } = res;
+					const result = groupByThAjaranH(iuran);
+					setIuran(result);
+					setInfo(message);
+				}
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, []);
 
 	function groupByThAjaranH(data) {

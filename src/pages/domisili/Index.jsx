@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
 import { addHours, format } from 'date-fns';
 import CardHeader from '../../components/CardHeader';
-import apiGet from '@/api/api-get';
 import AlertNotFound from '../../components/AlertNotFound';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
+import { getDomisili } from '../../models/santri';
 
 function PesantrenPage() {
 	const [domisili, setDomisili] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		apiGet({ endPoint: 'domisili' }).then((data) => {
-			if (data) setDomisili(data.domisili);
-			setIsLoading(false);
-		});
+		setIsLoading(true);
+		getDomisili()
+			.then((data) => {
+				if (data && data.domisili) {
+					setDomisili(data.domisili);
+				}
+			})
+			.finally(() => setIsLoading(false));
 	}, []);
 
 	function RenderItem({ dom, index: i }) {

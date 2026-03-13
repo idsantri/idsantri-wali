@@ -1,29 +1,31 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import apiGet from '@/api/api-get';
 import CardHeader from '../../components/CardHeader';
 import Rating from 'react-rating';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import CardKelas from '../../components/CardKelas';
 import AlertNotFound from '../../components/AlertNotFound';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
+import { getNilaiAhwal } from '../../models/madrasah';
+import { useReadLocalStorage } from 'usehooks-ts';
 
 function Index() {
 	const { kelas_id } = useParams();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [nilaiAhwal, setNilaiAhwal] = useState(null);
 
-	const kelas = JSON.parse(localStorage.getItem('kelas')) || [];
+	const kelas = useReadLocalStorage('kelas');
 	const kelasData = kelas.find((item) => item.id == kelas_id);
 
 	useEffect(() => {
-		apiGet({ endPoint: 'nilai-ahwal', params: { kelas_id } }).then((data) => {
-			if (data) {
-				setNilaiAhwal(data.nilai_ahwal);
-				// console.log(nilaiAhwal);
-			}
-			setIsLoading(false);
-		});
+		setIsLoading(true);
+		getNilaiAhwal(kelas_id)
+			.then((data) => {
+				if (data && data.nilai_ahwal) {
+					setNilaiAhwal(data.nilai_ahwal);
+				}
+			})
+			.finally(() => setIsLoading(false));
 	}, [kelas_id]);
 
 	function RenderNilai({ nilai, className }) {
