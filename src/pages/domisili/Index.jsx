@@ -23,13 +23,13 @@ function PesantrenPage() {
 	function RenderItem({ dom, index: i }) {
 		return (
 			<div className={`flex items-center justify-between px-3 py-1 ${i == 0 ? '' : 'border-t border-accent/50'}`}>
-				<div>
-					<div>
-						<span className='inline-block text-sm italic font-light w-15'>Kamar:</span>
-						<span>{dom.domisili}</span>
+				<div className='font-light'>
+					<div className=''>
+						<span className='inline-block text-sm italic w-15'>Kamar:</span>
+						<span className=''>{dom.domisili}</span>
 					</div>
-					<div>
-						<span className='inline-block text-sm italic font-light w-15'>Ket.:</span>
+					<div className=''>
+						<span className='inline-block text-sm italic w-15'>Ket.:</span>
 						<span>{dom.keterangan || '-'}</span>
 					</div>
 				</div>
