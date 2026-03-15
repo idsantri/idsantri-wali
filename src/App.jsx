@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import MainLayout from './layouts/MainLayout';
 import GuestLayout from './layouts/GuestLayout';
 import { lazy } from 'react';
+import { useTheme } from './hooks/useTheme';
 
 // Lazy load components
 const Dashboard = lazy(() => import('./pages/dashboard/Index'));
@@ -19,9 +20,12 @@ const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 
 const App = () => {
+	const { isDarkMode } = useTheme();
+	const isDark = isDarkMode();
+
 	return (
 		<Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-			<ToastContainer />
+			<ToastContainer theme={isDark ? 'colored' : 'light'} />
 			<Routes>
 				<Route path='/' element={<Navigate to='/santri' replace />} />
 				<Route element={<GuestLayout />}>
