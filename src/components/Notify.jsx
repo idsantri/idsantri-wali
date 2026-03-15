@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-const notifySuccess = ({ message, position = 'bottom-center', autoClose = 3000 }) => {
+const notifySuccess = ({ message, position = 'bottom-center p-2', autoClose = 2500 }) => {
 	toast.success(<div dangerouslySetInnerHTML={{ __html: message }} />, {
 		position: position,
 		autoClose: autoClose,
@@ -11,7 +11,8 @@ const notifySuccess = ({ message, position = 'bottom-center', autoClose = 3000 }
 		progress: undefined,
 	});
 };
-const notifyError = ({ message, position = 'bottom-center', autoClose = 3000 }) => {
+
+const notifyError = ({ message, position = 'bottom-center p-2', autoClose = 2500 }) => {
 	toast.error(<div dangerouslySetInnerHTML={{ __html: message }} />, {
 		position: position,
 		autoClose: autoClose,

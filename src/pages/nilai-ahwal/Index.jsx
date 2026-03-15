@@ -28,32 +28,25 @@ function Index() {
 			.finally(() => setIsLoading(false));
 	}, [kelas_id]);
 
-	function RenderNilai({ nilai, className }) {
+	function RenderNilai({ nilai }) {
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-accent/75`}>
-				<div className='p-2 text-center bg-accent/25 text-accent-content'>Data Nilai Ahwal (Kepribadian)</div>
-				<div className='px-2 py-4 text-center'>
-					{!nilai || nilai.length === 0 ? (
-						<AlertNotFound />
-					) : (
-						<div className='overflow-x-auto'>
-							<table className='table'>
-								<thead>
-									<tr className='text-center bg-secondary/50 text-secondary-content'>
-										<th className='font-medium'>Cawu/Semester</th>
-										<th className='font-medium'>Kesopanan</th>
-										<th className='font-medium'>Kedisiplinan</th>
-										<th className='font-medium'>Kerapian</th>
-									</tr>
-								</thead>
-								<tbody>
-									{nilai.map((n, i) => (
-										<RenderItem nilai={n} index={i} key={i} />
-									))}
-								</tbody>
-							</table>
-						</div>
-					)}
+			<div className='w-full border rounded-md border-accent/75'>
+				<div className='overflow-x-auto'>
+					<table className='table'>
+						<thead>
+							<tr className='text-center bg-secondary/50 text-secondary-content'>
+								<th className='font-light'>Cawu/Semester</th>
+								<th className='font-light'>Kesopanan</th>
+								<th className='font-light'>Kedisiplinan</th>
+								<th className='font-light'>Kerapian</th>
+							</tr>
+						</thead>
+						<tbody>
+							{nilai.map((n, i) => (
+								<RenderItem nilai={n} index={i} key={i} />
+							))}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		);
@@ -64,7 +57,7 @@ function Index() {
 			<>
 				<tr className='text-nowrap'>
 					<td>Ke-{nilai.ujian_ke}</td>
-					<td className=''>
+					<td className='text-primary'>
 						<Rating
 							initialRating={nilai.sopan}
 							readonly
@@ -73,7 +66,7 @@ function Index() {
 						/>
 						{/* {nilai.sopan} */}
 					</td>
-					<td>
+					<td className='text-primary'>
 						<Rating
 							initialRating={nilai.disiplin}
 							readonly
@@ -82,7 +75,7 @@ function Index() {
 						/>
 						{/* {nilai.disiplin} */}
 					</td>
-					<td>
+					<td className='text-primary'>
 						<Rating
 							initialRating={nilai.rapi}
 							readonly
@@ -95,12 +88,15 @@ function Index() {
 			</>
 		);
 	}
+
 	return (
 		<>
-			<CardHeader title='Nilai Mata Pelajaran' />
+			<CardHeader title='Nilai Kepribadian' />
 			<CardKelas data={kelasData} />
 			{isLoading && <LoadingAbsolute />}
-			<RenderNilai nilai={nilaiAhwal} />
+			<div className='my-2'>
+				{!nilaiAhwal || nilaiAhwal.length === 0 ? <AlertNotFound /> : <RenderNilai nilai={nilaiAhwal} />}
+			</div>
 		</>
 	);
 }

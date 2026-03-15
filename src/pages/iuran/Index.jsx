@@ -55,6 +55,7 @@ function IuranPage() {
 		<>
 			<CardHeader title='Riwayat Iuran' />
 			{isLoading && <LoadingAbsolute />}
+			{/* {console.log(iuran)} */}
 			{!iuran || iuran.length == 0 ? (
 				<AlertNotFound />
 			) : (

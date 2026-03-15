@@ -166,44 +166,37 @@ function Index() {
 		return count > 0 ? total / count : null;
 	}
 
-	function RenderNilai({ nilai, className }) {
+	function RenderNilai({ nilai }) {
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-accent/75`}>
-				<div className='p-2 text-center bg-accent/25 text-accent-content'>Data Nilai Mata Pelajaran</div>
-				<div className='px-2 py-4 text-center'>
-					{!nilai || nilai.length === 0 ? (
-						<AlertNotFound />
-					) : (
-						<div className='overflow-x-auto'>
-							<table className='table'>
-								<thead className=''>
-									<tr className='text-center bg-secondary/50 text-secondary-content'>
-										<th className='font-semibold text-left'>Mapel</th>
-										<th className='font-semibold'>U-1</th>
-										<th className='font-semibold'>U-2</th>
-										<th className='font-semibold'>U-3</th>
-										<th className='font-semibold'>U-4</th>
-										<th className='font-semibold'>Rerata</th>
-									</tr>
-								</thead>
-								<tbody>
-									{nilai.map((n, i) => (
-										<RenderItem nilai={n} index={i} key={i} />
-									))}
-								</tbody>
-								<tfoot className=''>
-									<tr className='italic text-center bg-secondary/25 text-secondary-content'>
-										<td className='font-semibold text-left'>Rerata</td>
-										<td className='font-semibold'>{hitungRerata(nilai, 'nilai_1')?.toFixed(1)}</td>
-										<td className='font-semibold'>{hitungRerata(nilai, 'nilai_2')?.toFixed(1)}</td>
-										<td className='font-semibold'>{hitungRerata(nilai, 'nilai_3')?.toFixed(1)}</td>
-										<td className='font-semibold'>{hitungRerata(nilai, 'nilai_4')?.toFixed(1)}</td>
-										<td className='font-semibold'>{hitungRerata(nilai, 'rerata')?.toFixed(1)}</td>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-					)}
+			<div className='w-full border rounded-md border-accent/75'>
+				<div className='overflow-x-auto'>
+					<table className='table'>
+						<thead className=''>
+							<tr className='text-center bg-secondary/50 text-secondary-content'>
+								<th className='font-light text-left'>Mapel</th>
+								<th className='font-light'>U-1</th>
+								<th className='font-light'>U-2</th>
+								<th className='font-light'>U-3</th>
+								<th className='font-light'>U-4</th>
+								<th className='font-light'>Rerata</th>
+							</tr>
+						</thead>
+						<tbody>
+							{nilai.map((n, i) => (
+								<RenderItem nilai={n} index={i} key={i} />
+							))}
+						</tbody>
+						<tfoot className=''>
+							<tr className='italic text-center bg-secondary/25 text-secondary-content'>
+								<td className='font-light text-left'>Rerata</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_1')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_2')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_3')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_4')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'rerata')?.toFixed(1)}</td>
+							</tr>
+						</tfoot>
+					</table>
 				</div>
 			</div>
 		);
@@ -227,7 +220,9 @@ function Index() {
 			<CardHeader title='Nilai Mata Pelajaran' />
 			<CardKelas data={kelasData} />
 			{isLoading && <LoadingAbsolute />}
-			<RenderNilai nilai={nilai} />
+			<div className='my-2'>
+				{!nilai || nilai.length === 0 ? <AlertNotFound /> : <RenderNilai nilai={nilai} />}
+			</div>
 		</>
 	);
 }
