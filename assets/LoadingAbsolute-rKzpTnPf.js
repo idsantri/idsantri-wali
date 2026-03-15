@@ -1,0 +1,1 @@
+import{j as s}from"./index-Bw22ObM5.js";const t=()=>s.jsx("div",{className:"absolute inset-0 z-10 flex items-center justify-center backdrop-blur-[1px] bg-base-100/25",children:s.jsx("div",{className:"loading loading-ring w-25"})});export{t as L};
