@@ -28,33 +28,26 @@ function Index() {
 			.finally(() => setIsLoading(false));
 	}, [kelas_id]);
 
-	function RenderAbsensi({ absensi, className }) {
+	function RenderAbsensi({ absensi }) {
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-accent/75`}>
-				<div className='p-2 text-center bg-accent/25 text-accent-content'>Data Absensi Sekolah</div>
-				<div className='px-2 py-4 text-center'>
-					{!absensi || absensi.length === 0 ? (
-						<AlertNotFound />
-					) : (
-						<div className='overflow-x-auto'>
-							<table className='table'>
-								<thead>
-									<tr className='bg-secondary/50 text-secondary-content'>
-										<th className='font-medium'>Bulan</th>
-										<th className='font-medium text-center'>Sakit</th>
-										<th className='font-medium text-center'>Izin</th>
-										<th className='font-medium text-center'>Alpa</th>
-										<th className='font-medium text-center'>Terlambat</th>
-									</tr>
-								</thead>
-								<tbody>
-									{absensi.map((n, i) => (
-										<RenderItem key={i} absensi={n} />
-									))}
-								</tbody>
-							</table>
-						</div>
-					)}
+			<div className='w-full border rounded-md border-accent/75'>
+				<div className='overflow-x-auto'>
+					<table className='table'>
+						<thead>
+							<tr className='bg-secondary/50 text-secondary-content'>
+								<th className='font-light'>Bulan</th>
+								<th className='font-light text-center'>Sakit</th>
+								<th className='font-light text-center'>Izin</th>
+								<th className='font-light text-center'>Alpa</th>
+								<th className='font-light text-center'>Terlambat</th>
+							</tr>
+						</thead>
+						<tbody>
+							{absensi.map((n, i) => (
+								<RenderItem key={i} absensi={n} />
+							))}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		);
@@ -96,12 +89,15 @@ function Index() {
 			</tr>
 		);
 	}
+
 	return (
 		<>
 			<CardHeader title='Absensi Sekolah' />
 			<CardKelas data={kelasData} />
 			{isLoading && <LoadingAbsolute />}
-			<RenderAbsensi absensi={absensi} />
+			<div className='my-2'>
+				{!absensi || absensi.length === 0 ? <AlertNotFound /> : <RenderAbsensi absensi={absensi} />}
+			</div>
 		</>
 	);
 }

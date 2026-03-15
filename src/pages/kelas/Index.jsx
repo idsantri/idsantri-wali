@@ -7,6 +7,7 @@ import AlertNotFound from '../../components/AlertNotFound';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
 import { getKelas } from '../../models/madrasah';
 import { useLocalStorage } from 'usehooks-ts';
+import { useSessionStorage } from 'usehooks-ts';
 
 function KelasPage() {
 	const [kelas, setKelas] = useLocalStorage('kelas', null);
@@ -25,12 +26,35 @@ function KelasPage() {
 	}, []);
 
 	function RenderItem({ kelas, ...props }) {
+		// 1 & 2. Gunakan hook dari usehooks-ts untuk sinkronisasi otomatis ke sessionStorage
+		const [storedShow, setStoredShow] = useSessionStorage(`show-kelas-${kelas.id}`, false);
+
+		// State lokal untuk handle tampilan (agar bisa mulai dari false sesuai permintaan)
 		const [show, setShow] = useState(false);
+
+		// 3. Logika delay saat mount
+		useEffect(() => {
+			const timer = setTimeout(() => {
+				if (storedShow === true) {
+					setShow(true);
+				}
+			}, 250);
+
+			return () => clearTimeout(timer);
+		}, []); // Hanya jalan sekali saat mount
+
+		// Handler untuk update kedua state
+		const toggleShow = () => {
+			const nextState = !show;
+			setShow(nextState);
+			setStoredShow(nextState);
+		};
+
 		return (
 			<div {...props} className='w-full my-1 border rounded-md border-accent bg-accent/10 text-base-content'>
 				<div
 					className='flex items-center justify-between px-2 py-4 cursor-pointer text-base-content'
-					onClick={() => setShow(!show)}
+					onClick={toggleShow}
 				>
 					<div className='text-sm'>
 						{kelas.th_ajaran_h} | {kelas.tingkat} | {kelas.kelas}
@@ -77,6 +101,7 @@ function KelasPage() {
 			</div>
 		);
 	}
+
 	return (
 		<>
 			<CardHeader title='Riwayat Kelas' />
