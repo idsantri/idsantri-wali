@@ -32,6 +32,9 @@ jobs:
                   corepack enable
                   corepack prepare pnpm@latest --activate
 
+            - name: Set pnpm config
+              run: pnpm config set minimumReleaseAge 0
+
             - name: Install Dependencies
               run: pnpm install --frozen-lockfile
 
