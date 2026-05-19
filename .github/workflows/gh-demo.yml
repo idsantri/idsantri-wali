@@ -33,7 +33,9 @@ jobs:
                   corepack prepare pnpm@latest --activate
 
             - name: Install Dependencies
-              run: PNPM_MINIMUM_RELEASE_AGE=0 pnpm install --frozen-lockfile
+              run: pnpm install --frozen-lockfile
+              env:
+                  PNPM_MINIMUM_RELEASE_AGE: 0
 
             - name: Build PWA
               run: pnpm build
