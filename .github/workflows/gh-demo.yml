@@ -34,8 +34,6 @@ jobs:
 
             - name: Install Dependencies
               run: pnpm install --frozen-lockfile
-              env:
-                  PNPM_MINIMUM_RELEASE_AGE: 0
 
             - name: Build PWA
               run: pnpm build
