@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js';
 
-function InstallPwa({ className }) {
+function InstallPwa() {
 	const [deferredPrompt, setDeferredPrompt] = useState(null);
 	const [showInstallBanner, setShowInstallBanner] = useState(false);
 	const [showIosComp, setShowIosComp] = useState(false);
@@ -16,7 +16,10 @@ function InstallPwa({ className }) {
 			{ regex: /mac/i, name: 'Mac/iOS' },
 		];
 
-		return osList.find(({ regex }) => regex.test(userAgent))?.name || 'Unknown OS';
+		return (
+			osList.find(({ regex }) => regex.test(userAgent))?.name ||
+			'Unknown OS'
+		);
 	};
 	const isIos = () => getOS() === 'iOS';
 	const isAndroid = () => getOS() === 'Android';
@@ -34,10 +37,16 @@ function InstallPwa({ className }) {
 			}
 		};
 
-		window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+		window.addEventListener(
+			'beforeinstallprompt',
+			handleBeforeInstallPrompt,
+		);
 
 		return () => {
-			window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+			window.removeEventListener(
+				'beforeinstallprompt',
+				handleBeforeInstallPrompt,
+			);
 		};
 	});
 
@@ -63,40 +72,94 @@ function InstallPwa({ className }) {
 		<>
 			{showInstallBanner && (
 				<>
-					<div role='alert' className={`alert rounded-md bg-jingga-600 text-jingga-100 shadow-md shadow-jingga-500 border-jingga-200 ${className}`}>
-						<div className='flex items-center space-x-2'>
-							<div>
-								<Icon icon='typcn:info' height='32' className='text-yellow-200' />
+					<div
+						role="alert"
+						className="p-2 mb-2 rounded-md card bg-success text-success-content"
+					>
+						<div className="flex items-center justify-between gap-2">
+							<div className="flex items-center gap-2">
+								<div>
+									<Icon
+										icon="typcn:info"
+										height="32"
+										className=""
+									/>
+								</div>
+								<div className="text-sm italic text-left">
+									Instal aplikasi untuk mendapatkan pengalaman
+									lebih baik!
+								</div>
 							</div>
-							<div className='text-sm italic text-left'>Instal aplikasi untuk mendapatkan pengalaman lebih baik!</div>
+
 							{isAndroid() && (
-								<button className='px-2 font-medium border-none shadow-sm btn btn-ghost bg-jingga-200 text-jingga-900 shadow-jingga-950' onClick={installPwa}>
-									<Icon icon='material-symbols-light:install-mobile' height='32' />
+								<button
+									className="px-2 btn btn-neutral "
+									onClick={installPwa}
+								>
+									<Icon
+										icon="material-symbols-light:install-mobile"
+										height="24"
+									/>
 									Instal
 								</button>
 							)}
 							{isIos() && (
 								<button
-									className='font-medium border-none rounded-full shadow-sm btn btn-ghost btn-circle btn-sm bg-jingga-200 text-jingga-900 shadow-jingga-950'
+									className="font-medium border-none rounded-full shadow-sm btn btn-ghost btn-circle btn-sm text-neutral shadow-neutral"
 									onClick={() => setShowIosComp(!showIosComp)}
 								>
-									{showIosComp ? <Icon icon='mingcute:up-fill' width='24' height='24' /> : <Icon icon='mingcute:down-fill' width='24' height='24' />}
+									{showIosComp ? (
+										<Icon
+											icon="mingcute:up-fill"
+											width="24"
+											height="24"
+										/>
+									) : (
+										<Icon
+											icon="mingcute:down-fill"
+											width="24"
+											height="24"
+										/>
+									)}
 								</button>
 							)}
 						</div>
 						{showIosComp && (
-							<div className='w-full px-4 py-2 text-left border rounded-md bg-jingga-700'>
-								<p>Bagi Pengguna iOS!</p>
-								<ul className='ml-4 text-sm font-light list-decimal list-outside'>
-									<li className=''>
-										Pastikan Anda menggunakan browser <span className='font-semibold'>Safari</span>;
-									</li>
-									<li className=''>Ketuk ikon bagikan (sebuah kotak dengan panah ke atas di bagian bawah layar);</li>
-									<li>Gulir ke bawah dalam menu bagikan dan pilih opsi &ldquo;Tambahkan ke Layar Utama&rdquo;;</li>
-									<li>Anda mungkin akan diminta untuk memberikan nama dan mengonfigurasi ikon;</li>
-									<li>Ketuk &ldquo;Tambahkan&rdquo; di pojok kanan atas layar untuk menyelesaikan proses;</li>
-								</ul>
-							</div>
+							<>
+								<div className="mt-2 mb-0 divider"></div>
+								<div className="w-full text-left rounded-md card ">
+									<p>Bagi Pengguna iOS!</p>
+									<ul className="ml-4 text-sm font-light list-decimal list-outside">
+										<li className="">
+											Pastikan Anda menggunakan browser{' '}
+											<span className="font-semibold">
+												Safari
+											</span>
+											;
+										</li>
+										<li className="">
+											Ketuk ikon bagikan (sebuah kotak
+											dengan panah ke atas di bagian bawah
+											layar);
+										</li>
+										<li>
+											Gulir ke bawah dalam menu bagikan
+											dan pilih opsi &ldquo;Tambahkan ke
+											Layar Utama&rdquo;;
+										</li>
+										<li>
+											Anda mungkin akan diminta untuk
+											memberikan nama dan mengonfigurasi
+											ikon;
+										</li>
+										<li>
+											Ketuk &ldquo;Tambahkan&rdquo; di
+											pojok kanan atas layar untuk
+											menyelesaikan proses;
+										</li>
+									</ul>
+								</div>
+							</>
 						)}
 					</div>
 				</>

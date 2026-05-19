@@ -1,58 +1,52 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Loading from '@/components/Loading';
-import apiGet from '@/api/api-get';
-import CardHeader from '@/components/CardHeader';
+import CardHeader from '../../components/CardHeader';
 import Rating from 'react-rating';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import CardKelas from '../../components/CardKelas';
+import AlertNotFound from '../../components/AlertNotFound';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
+import { getNilaiAhwal } from '../../models/madrasah';
+import { useReadLocalStorage } from 'usehooks-ts';
 
 function Index() {
 	const { kelas_id } = useParams();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [nilaiAhwal, setNilaiAhwal] = useState(null);
 
-	const kelas = JSON.parse(localStorage.getItem('kelas')) || [];
+	const kelas = useReadLocalStorage('kelas');
 	const kelasData = kelas.find((item) => item.id == kelas_id);
 
 	useEffect(() => {
-		apiGet({ endPoint: 'nilai-ahwal', params: { kelas_id } }).then((data) => {
-			if (data) {
-				setNilaiAhwal(data.nilai_ahwal);
-				// console.log(nilaiAhwal);
-			}
-			setIsLoading(false);
-		});
+		setIsLoading(true);
+		getNilaiAhwal(kelas_id)
+			.then((data) => {
+				if (data && data.nilai_ahwal) {
+					setNilaiAhwal(data.nilai_ahwal);
+				}
+			})
+			.finally(() => setIsLoading(false));
 	}, [kelas_id]);
 
-	function RenderNilai({ nilai, className }) {
+	function RenderNilai({ nilai }) {
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-jingga-200 bg-jingga-200`}>
-				<div className='p-2 text-center bg-jingga-300 text-jingga-900'>Data Nilai Ahwal (Kepribadian)</div>
-				<div className='px-2 py-4 text-center text-jingga-800'>
-					{!nilai || nilai.length === 0 ? (
-						<div className='p-4 italic font-light text-center text-red-900 bg-red-200 rounded-md'>
-							Tidak ada data untuk ditampilkan!
-						</div>
-					) : (
-						<div className='overflow-x-auto'>
-							<table className='table'>
-								<thead>
-									<tr className='text-jingga-800'>
-										<th className='font-medium'>Cawu/Semester</th>
-										<th className='font-medium'>Kesopanan</th>
-										<th className='font-medium'>Kedisiplinan</th>
-										<th className='font-medium'>Kerapian</th>
-									</tr>
-								</thead>
-								<tbody>
-									{nilai.map((n, i) => (
-										<RenderItem nilai={n} index={i} key={i} />
-									))}
-								</tbody>
-							</table>
-						</div>
-					)}
+			<div className='w-full border rounded-md border-accent/75'>
+				<div className='overflow-x-auto'>
+					<table className='table'>
+						<thead>
+							<tr className='text-center bg-secondary/50 text-secondary-content'>
+								<th className='font-light'>Cawu/Semester</th>
+								<th className='font-light'>Kesopanan</th>
+								<th className='font-light'>Kedisiplinan</th>
+								<th className='font-light'>Kerapian</th>
+							</tr>
+						</thead>
+						<tbody>
+							{nilai.map((n, i) => (
+								<RenderItem nilai={n} index={i} key={i} />
+							))}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		);
@@ -63,7 +57,7 @@ function Index() {
 			<>
 				<tr className='text-nowrap'>
 					<td>Ke-{nilai.ujian_ke}</td>
-					<td className=''>
+					<td className='text-primary'>
 						<Rating
 							initialRating={nilai.sopan}
 							readonly
@@ -72,7 +66,7 @@ function Index() {
 						/>
 						{/* {nilai.sopan} */}
 					</td>
-					<td>
+					<td className='text-primary'>
 						<Rating
 							initialRating={nilai.disiplin}
 							readonly
@@ -81,7 +75,7 @@ function Index() {
 						/>
 						{/* {nilai.disiplin} */}
 					</td>
-					<td>
+					<td className='text-primary'>
 						<Rating
 							initialRating={nilai.rapi}
 							readonly
@@ -94,11 +88,15 @@ function Index() {
 			</>
 		);
 	}
+
 	return (
 		<>
-			<CardHeader title='Nilai Mata Pelajaran' />
+			<CardHeader title='Nilai Kepribadian' />
 			<CardKelas data={kelasData} />
-			{isLoading ? <Loading /> : <RenderNilai nilai={nilaiAhwal} />}
+			{isLoading && <LoadingAbsolute />}
+			<div className='my-2'>
+				{!nilaiAhwal || nilaiAhwal.length === 0 ? <AlertNotFound /> : <RenderNilai nilai={nilaiAhwal} />}
+			</div>
 		</>
 	);
 }

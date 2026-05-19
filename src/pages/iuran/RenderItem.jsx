@@ -1,5 +1,5 @@
+import { Icon } from '@iconify/react';
 import { notifyError, notifySuccess } from '../../components/Notify';
-import { motion } from 'framer-motion';
 
 function RenderItem({ item, index }) {
 	// console.log('🚀 ~ RenderItem ~ item:', item);
@@ -23,21 +23,10 @@ function RenderItem({ item, index }) {
 	}
 
 	return (
-		<motion.div
-			key={item.id}
-			initial={{ opacity: 0, y: -10 }}
-			animate={{ opacity: 1, y: 0 }}
-			exit={{ opacity: 0, y: -10 }}
-			transition={{
-				duration: 0.2,
-				delay: 0.1,
-			}}
-			className={index != 0 ? 'border-t border-jingga-300/75 px-2 py-2' : 'px-2 py-2'}
-			title=''
-		>
+		<div className={index != 0 ? 'border-t border-accent/50 px-2 py-2' : 'px-2 py-2'}>
 			<div className='flex items-center justify-between mb-1'>
 				<div className=''>{item.item}</div>
-				<div className=' text-right font-semibold'>
+				<div className={item.lunas ? 'font-medium' : 'font-bold'}>
 					{item.nominal.toLocaleString('id-ID', {
 						style: 'currency',
 						currency: 'IDR',
@@ -46,31 +35,28 @@ function RenderItem({ item, index }) {
 					})}
 				</div>
 			</div>
-			<div className='flex items-center justify-between text-xs text-jingga-800'>
-				<div className=' text-nowrap text-center '>
+			<div className='flex items-center justify-between text-xs'>
+				<div className='text-center text-nowrap'>
 					{item.lunas ? (
-						<div className='badge badge-success text-jingga-200 text-xs'>Lunas</div>
+						<div className='text-xs badge badge-success text-success-content'>Lunas</div>
 					) : (
-						<div className='badge badge-error text-jingga-200 text-xs'>Belum Lunas</div>
+						<div className='text-xs badge badge-error text-error-content'>Belum Lunas</div>
 					)}
 				</div>
 				<div>
 					{!item.lunas && item.bank_va ? (
 						<>
 							{item.bank_name}: {String(item.bank_va).replace(/(\d{4})(?=\d)/g, '$1.')}
-							<button
-								className='badge badge-outline text-jingga-700 text-xs ml-2'
-								onClick={() => copyText(item.bank_va)}
-							>
+							<button className='ml-2 text-xs badge badge-outline' onClick={() => copyText(item.bank_va)}>
 								Salin
 							</button>
 						</>
 					) : (
-						<div></div>
+						<Icon icon='simple-line-icons:check' className='text-xl text-primary' />
 					)}
 				</div>
 			</div>
-		</motion.div>
+		</div>
 	);
 }
 

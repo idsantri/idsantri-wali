@@ -19,11 +19,24 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Install dependencies
-              run: yarn install
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                 node-version: 22
+
+            - name: Install Corepack
+              run: npm i -g corepack
+
+            - name: Enable corepack & pnpm
+              run: |
+               corepack enable
+               corepack prepare pnpm@latest --activate
+
+            - name: Install Dependencies
+              run: pnpm install --frozen-lockfile
 
             - name: Build PWA
-              run: yarn build
+              run: pnpm build
 
             - name: Create branch
               uses: JamesIves/github-pages-deploy-action@v4

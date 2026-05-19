@@ -1,7 +1,6 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import ConfirmDialog from '@/components/ConfirmDialog';
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const ConfirmDialogContext = createContext();
 
 export const ConfirmDialogProvider = ({ children }) => {

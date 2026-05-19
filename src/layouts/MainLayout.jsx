@@ -1,20 +1,26 @@
-import { Outlet } from 'react-router-dom';
-import MainBottom from '@/layouts/_components/MainBottom';
-import MainTop from '@/layouts/_components/MainTop';
+import { Navigate, Outlet } from 'react-router-dom';
+import MainTop from './_components/MainTop';
+import DockNavigation from './_components/DockNavigation';
+import { useAuthStore } from '../store/authStore';
 
 const MainLayout = () => {
+	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+	if (!isLoggedIn) {
+		return <Navigate to='/login' replace />;
+	}
+
 	return (
-		<div className='min-h-screen bg-jingga-50 text-jingga-950 dark:bg-jingga-950 dark:text-jingga-200'>
-			<header className='fixed top-0 z-[1000] w-screen '>
+		<div className='min-h-screen bg-base-100'>
+			<header className='fixed top-0 w-screen z-1000 '>
 				<MainTop />
 			</header>
-			<main className='pt-[86px] pb-[74px]'>
+			<main className='pt-21.5 pb-18.5'>
 				<div className='m-2'>
 					<Outlet />
 				</div>
 			</main>
-			<footer className='fixed bottom-0 z-[1000] w-screen'>
-				<MainBottom />
+			<footer className='fixed bottom-0 w-screen z-1000'>
+				<DockNavigation />
 			</footer>
 		</div>
 	);

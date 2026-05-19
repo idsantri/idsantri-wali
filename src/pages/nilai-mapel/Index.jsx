@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Loading from '@/components/Loading';
-import apiGet from '@/api/api-get';
-import CardHeader from '@/components/CardHeader';
+import CardHeader from '../../components/CardHeader';
 import CardKelas from '../../components/CardKelas';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
+import AlertNotFound from '../../components/AlertNotFound';
+import { useReadLocalStorage } from 'usehooks-ts';
+import { getNilaiMapel } from '../../models/madrasah';
 // const temp = [
 // 	{
 // 		id: 'ts-qur',
@@ -129,14 +131,23 @@ import CardKelas from '../../components/CardKelas';
 
 function Index() {
 	const { kelas_id } = useParams();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [nilai, setNilai] = useState(null);
 	const category = 'rapor';
 
-	const kelas = JSON.parse(localStorage.getItem('kelas')) || [];
+	const kelas = useReadLocalStorage('kelas');
 	const kelasData = kelas.find((item) => item.id == kelas_id);
-	// console.log('🚀 ~ Index ~ kelas:', kelas);
-	// console.log('🚀 ~ Index ~ kelasData:', kelasData);
+
+	useEffect(() => {
+		setIsLoading(true);
+		getNilaiMapel(kelas_id, category)
+			.then((data) => {
+				if (data && data.nilai_mapel) {
+					setNilai(data.nilai_mapel);
+				}
+			})
+			.finally(() => setIsLoading(false));
+	}, [kelas_id]);
 
 	function hitungRerata(data, key) {
 		if (!Array.isArray(data) || data.length === 0) return null;
@@ -155,59 +166,37 @@ function Index() {
 		return count > 0 ? total / count : null;
 	}
 
-	useEffect(() => {
-		apiGet({ endPoint: 'nilai-mapel', params: { kelas_id, category } }).then((data) => {
-			if (data) {
-				setNilai(data.nilai);
-			}
-			setIsLoading(false);
-		});
-
-		// Clean-up function
-		// return () => {
-		// 	setIsLoading(true);
-		// 	setNilai(null);
-		// };
-	}, [kelas_id]);
-
-	function RenderNilai({ nilai, className }) {
+	function RenderNilai({ nilai }) {
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-jingga-200 bg-jingga-200`}>
-				<div className='p-2 text-center bg-jingga-300 text-jingga-900'>Data Nilai Mata Pelajaran</div>
-				<div className='px-2 py-4 text-center text-jingga-800'>
-					{!nilai || nilai.length === 0 ? (
-						<div className='p-4 italic font-light text-center text-red-900 bg-red-200 rounded-md'>
-							Tidak ada data untuk ditampilkan!
-						</div>
-					) : (
-						<table className='table'>
-							<thead className=''>
-								<tr className='text-center text-jingga-950'>
-									<th className='font-semibold text-left'>Mapel</th>
-									<th className='font-semibold'>U-1</th>
-									<th className='font-semibold'>U-2</th>
-									<th className='font-semibold'>U-3</th>
-									<th className='font-semibold'>U-4</th>
-									<th className='font-semibold'>Rerata</th>
-								</tr>
-							</thead>
-							<tbody>
-								{nilai.map((n, i) => (
-									<RenderItem nilai={n} index={i} key={i} />
-								))}
-							</tbody>
-							<tfoot className=''>
-								<tr className='italic text-center text-jingga-950'>
-									<td className='font-semibold text-left'>Rerata</td>
-									<td className='font-semibold'>{hitungRerata(nilai, 'nilai_1')?.toFixed(1)}</td>
-									<td className='font-semibold'>{hitungRerata(nilai, 'nilai_2')?.toFixed(1)}</td>
-									<td className='font-semibold'>{hitungRerata(nilai, 'nilai_3')?.toFixed(1)}</td>
-									<td className='font-semibold'>{hitungRerata(nilai, 'nilai_4')?.toFixed(1)}</td>
-									<td className='font-semibold'>{hitungRerata(nilai, 'rerata')?.toFixed(1)}</td>
-								</tr>
-							</tfoot>
-						</table>
-					)}
+			<div className='w-full border rounded-md border-accent/75'>
+				<div className='overflow-x-auto'>
+					<table className='table'>
+						<thead className=''>
+							<tr className='text-center bg-secondary/50 text-secondary-content'>
+								<th className='font-light text-left'>Mapel</th>
+								<th className='font-light'>U-1</th>
+								<th className='font-light'>U-2</th>
+								<th className='font-light'>U-3</th>
+								<th className='font-light'>U-4</th>
+								<th className='font-light'>Rerata</th>
+							</tr>
+						</thead>
+						<tbody>
+							{nilai.map((n, i) => (
+								<RenderItem nilai={n} index={i} key={i} />
+							))}
+						</tbody>
+						<tfoot className=''>
+							<tr className='italic text-center bg-secondary/25 text-secondary-content'>
+								<td className='font-light text-left'>Rerata</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_1')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_2')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_3')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'nilai_4')?.toFixed(1)}</td>
+								<td className=''>{hitungRerata(nilai, 'rerata')?.toFixed(1)}</td>
+							</tr>
+						</tfoot>
+					</table>
 				</div>
 			</div>
 		);
@@ -230,7 +219,10 @@ function Index() {
 		<>
 			<CardHeader title='Nilai Mata Pelajaran' />
 			<CardKelas data={kelasData} />
-			{isLoading ? <Loading /> : <RenderNilai nilai={nilai} />}
+			{isLoading && <LoadingAbsolute />}
+			<div className='my-2'>
+				{!nilai || nilai.length === 0 ? <AlertNotFound /> : <RenderNilai nilai={nilai} />}
+			</div>
 		</>
 	);
 }

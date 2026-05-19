@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react';
-import Loading from '@/components/Loading';
-import CardHeader from '@/components/CardHeader';
-import apiGet from '@/api/api-get';
-import AlertNotFound from '@/components/AlertNotFound';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
+import CardHeader from '../../components/CardHeader';
+import AlertNotFound from '../../components/AlertNotFound';
 import RenderTahun from './RenderTahun';
 import RenderFooter from './RenderFooter';
+import { getIuran } from '../../models/santri';
 
 function IuranPage() {
 	const [iuran, setIuran] = useState(null);
 	const [info, setInfo] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		apiGet({ endPoint: 'iuran' }).then((res) => {
-			if (res) {
-				const { iuran, message } = res;
-				const result = groupByThAjaranH(iuran);
-				// console.log('🚀 ~ apiGet ~ result:', result);
-				setIuran(result);
-				setInfo(message);
-			}
-			setIsLoading(false);
-		});
+		setIsLoading(true);
+		getIuran()
+			.then((res) => {
+				if (res) {
+					const { iuran, message } = res;
+					const result = groupByThAjaranH(iuran);
+					setIuran(result);
+					setInfo(message);
+				}
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, []);
 
 	function groupByThAjaranH(data) {
@@ -51,29 +54,29 @@ function IuranPage() {
 	return (
 		<>
 			<CardHeader title='Riwayat Iuran' />
-			{isLoading ? (
-				<Loading />
-			) : !iuran || iuran.length == 0 ? (
+			{isLoading && <LoadingAbsolute />}
+			{/* {console.log(iuran)} */}
+			{!iuran || iuran.length == 0 ? (
 				<AlertNotFound />
 			) : (
-				<div className=''>
-					<div className='overflow-hidden border rounded-md border-jingga-300/75'>
+				<>
+					<div className='overflow-hidden border rounded-md border-accent'>
 						{iuran.map((item, index) => (
 							<RenderTahun
 								key={item.th_ajaran_h}
 								iuran={item}
-								className={index == 0 ? '' : 'border-t border-jingga-300/75'}
+								className={index == 0 ? '' : 'border-t border-accent'}
 								title='Klik untuk melihat selengkapnya'
 							/>
 						))}
 					</div>
 					{info && (
-						<div className='px-2 py-4 mt-2 italic font-light text-sm text-center border rounded-sm text-jingga-800 bg-jingga-300 border-jingga-400'>
+						<div className='px-2 py-4 mt-2 text-sm italic font-light text-center rounded-sm text-info-content bg-info'>
 							{info}
 						</div>
 					)}
 					<RenderFooter />
-				</div>
+				</>
 			)}
 		</>
 	);

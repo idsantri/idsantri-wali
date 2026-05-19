@@ -1,59 +1,53 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CardHeader from '@/components/CardHeader';
-import CardKelas from '@/components/CardKelas';
-import Loading from '@/components/Loading';
-import apiGet from '@/api/api-get';
+import CardHeader from '../../components/CardHeader';
+import CardKelas from '../../components/CardKelas';
+import LoadingAbsolute from '../../components/LoadingAbsolute';
 import { getBulanHijri } from '@/utils/hijri';
+import AlertNotFound from '../../components/AlertNotFound';
+import { useReadLocalStorage } from 'usehooks-ts';
+import { getAbsensi } from '../../models/madrasah';
 
 function Index() {
 	const { kelas_id } = useParams();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [absensi, setAbsensi] = useState(null);
 	const category = 'sekolah';
 
-	const kelas = JSON.parse(localStorage.getItem('kelas')) || [];
+	const kelas = useReadLocalStorage('kelas');
 	const kelasData = kelas.find((item) => item.id == kelas_id);
+
 	useEffect(() => {
-		apiGet({ endPoint: 'absensi', params: { kelas_id, category } }).then((data) => {
-			if (data) {
-				setAbsensi(data.absensi_sekolah);
-				// console.log(nilaiAhwal);
-			}
-			setIsLoading(false);
-		});
+		setIsLoading(true);
+		getAbsensi(kelas_id, category)
+			.then((data) => {
+				if (data && data.absensi_sekolah) {
+					setAbsensi(data.absensi_sekolah);
+				}
+			})
+			.finally(() => setIsLoading(false));
 	}, [kelas_id]);
 
-	function RenderAbsensi({ absensi, className }) {
-		// console.log(absensi);
+	function RenderAbsensi({ absensi }) {
 		return (
-			<div className={`${className} w-full my-2 border rounded-md border-jingga-200 bg-jingga-200`}>
-				<div className='p-2 text-center bg-jingga-300 text-jingga-900'>Data Absensi Sekolah</div>
-				<div className='px-2 py-4 text-center text-jingga-800'>
-					{!absensi || absensi.length === 0 ? (
-						<div className='p-4 italic font-light text-center text-red-900 bg-red-200 rounded-md'>
-							Tidak ada data untuk ditampilkan!
-						</div>
-					) : (
-						<div className='overflow-x-auto'>
-							<table className='table'>
-								<thead>
-									<tr className='text-jingga-800'>
-										<th className='font-medium'>Bulan</th>
-										<th className='font-medium text-center'>Sakit</th>
-										<th className='font-medium text-center'>Izin</th>
-										<th className='font-medium text-center'>Alpa</th>
-										<th className='font-medium text-center'>Terlambat</th>
-									</tr>
-								</thead>
-								<tbody>
-									{absensi.map((n, i) => (
-										<RenderItem key={i} absensi={n} />
-									))}
-								</tbody>
-							</table>
-						</div>
-					)}
+			<div className='w-full border rounded-md border-accent/75'>
+				<div className='overflow-x-auto'>
+					<table className='table'>
+						<thead>
+							<tr className='bg-secondary/50 text-secondary-content'>
+								<th className='font-light'>Bulan</th>
+								<th className='font-light text-center'>Sakit</th>
+								<th className='font-light text-center'>Izin</th>
+								<th className='font-light text-center'>Alpa</th>
+								<th className='font-light text-center'>Terlambat</th>
+							</tr>
+						</thead>
+						<tbody>
+							{absensi.map((n, i) => (
+								<RenderItem key={i} absensi={n} />
+							))}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		);
@@ -95,11 +89,15 @@ function Index() {
 			</tr>
 		);
 	}
+
 	return (
 		<>
 			<CardHeader title='Absensi Sekolah' />
 			<CardKelas data={kelasData} />
-			{isLoading ? <Loading /> : <RenderAbsensi absensi={absensi} />}
+			{isLoading && <LoadingAbsolute />}
+			<div className='my-2'>
+				{!absensi || absensi.length === 0 ? <AlertNotFound /> : <RenderAbsensi absensi={absensi} />}
+			</div>
 		</>
 	);
 }
