@@ -2,6 +2,7 @@ import DockMore from './DockMore';
 import DockButton from './DockButton';
 import { useLocation } from 'react-router-dom';
 
+// eslint-disable-next-line no-unused-vars
 function DockNavigation({ clickLogout, disabled }) {
 	// console.log('DockNavigation render', disable);
 	const location = useLocation();

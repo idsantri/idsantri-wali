@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import 'react-toastify/dist/ReactToastify.css';
-import { ConfirmDialogProvider } from './context/ConfirmDialogContext';
-import { ThemeProvider } from './context/ThemeContext';
+import { ConfirmDialogProvider } from './context/ConfirmDialog';
+import { ThemeProvider } from './context/Theme';
 import App from '@/App';
 import './App.css';
 

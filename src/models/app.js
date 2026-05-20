@@ -1,4 +1,3 @@
-import { notifySuccess } from '../components/Notify';
 import api from './api';
 
 export async function getAppWali() {

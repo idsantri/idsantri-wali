@@ -1,9 +1,9 @@
-import React, { createContext, useState } from 'react';
+import { useState } from 'react';
 import ConfirmDialog from '@/components/ConfirmDialog';
 
-export const ConfirmDialogContext = createContext();
+import ConfirmDialogContext from './context';
 
-export const ConfirmDialogProvider = ({ children }) => {
+const ConfirmDialogProvider = ({ children }) => {
 	const [dialogState, setDialogState] = useState({
 		isOpen: false,
 		title: '',
@@ -41,3 +41,5 @@ export const ConfirmDialogProvider = ({ children }) => {
 		</ConfirmDialogContext.Provider>
 	);
 };
+
+export default ConfirmDialogProvider;
