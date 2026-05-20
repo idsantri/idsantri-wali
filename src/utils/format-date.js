@@ -44,14 +44,7 @@ function isDate(dateStr, splitter = '-') {
 		}
 
 		// Pastikan panjang hour, minute, dan second adalah dua digit
-		if (
-			hour < 0 ||
-			hour > 23 ||
-			minute < 0 ||
-			minute > 59 ||
-			second < 0 ||
-			second > 59
-		) {
+		if (hour < 0 || hour > 23 || minute < 0 || minute > 59 || second < 0 || second > 59) {
 			return false;
 		}
 	}
@@ -88,7 +81,7 @@ function formatDateTimeHtmlToSql(inputHtmlDateTime) {
 	return sqlDateTime;
 }
 function hari(inputDay) {
-	let day = '';
+	let day;
 	const caseDay = parseInt(inputDay);
 	switch (caseDay) {
 		case 0:
@@ -119,7 +112,7 @@ function hari(inputDay) {
 }
 
 function bulanMasehi(inputMonth) {
-	let month = '';
+	let month;
 	const caseMonth = parseInt(inputMonth);
 	switch (caseMonth) {
 		case 1:
@@ -195,11 +188,4 @@ function formatDateShort(inputDate) {
 	return `${day}-${month}-${year}`;
 }
 
-export {
-	isDate,
-	formatDateSql,
-	formatDateShort,
-	formatDateFull,
-	formatDateFullDay,
-	formatDateTimeHtmlToSql,
-};
+export { isDate, formatDateSql, formatDateShort, formatDateFull, formatDateFullDay, formatDateTimeHtmlToSql };

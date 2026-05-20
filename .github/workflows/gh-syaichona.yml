@@ -9,6 +9,10 @@ permissions:
 
 jobs:
     build:
+        # env:
+        #     APP_NAME: TEST APP NAME
+        #     APP_URL: https://idsantri.github.io/idsantri-wali
+
         runs-on: ubuntu-latest
 
         steps:
@@ -27,6 +31,9 @@ jobs:
               run: |
                   corepack enable
                   corepack prepare pnpm@latest --activate
+
+            - name: Set pnpm config
+              run: pnpm config set minimumReleaseAge 0
 
             - name: Install Dependencies
               run: pnpm install --frozen-lockfile

@@ -6,13 +6,36 @@ import RenderTahun from './RenderTahun';
 import RenderFooter from './RenderFooter';
 import { getIuran } from '../../models/santri';
 
+function groupByThAjaranH(data) {
+	return Object.values(
+		data.reduce((acc, item) => {
+			if (!acc[item.th_ajaran_h]) {
+				acc[item.th_ajaran_h] = {
+					th_ajaran_h: item.th_ajaran_h,
+					data: [],
+					total: 0, // Tambahkan total awal
+					totalLunas: 0, // Tambahkan total awal
+				};
+			}
+
+			const total = item.nominal;
+			const totalLunas = item.lunas ? item.nominal : 0; // Hitung total lunas
+
+			acc[item.th_ajaran_h].data.push(item);
+			acc[item.th_ajaran_h].totalLunas += totalLunas; // Tambahkan ke total lunas
+			acc[item.th_ajaran_h].total += total; // Tambahkan ke total group
+
+			return acc;
+		}, {}),
+	);
+}
+
 function IuranPage() {
 	const [iuran, setIuran] = useState(null);
 	const [info, setInfo] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		setIsLoading(true);
 		getIuran()
 			.then((res) => {
 				if (res) {
@@ -26,30 +49,6 @@ function IuranPage() {
 				setIsLoading(false);
 			});
 	}, []);
-
-	function groupByThAjaranH(data) {
-		return Object.values(
-			data.reduce((acc, item) => {
-				if (!acc[item.th_ajaran_h]) {
-					acc[item.th_ajaran_h] = {
-						th_ajaran_h: item.th_ajaran_h,
-						data: [],
-						total: 0, // Tambahkan total awal
-						totalLunas: 0, // Tambahkan total awal
-					};
-				}
-
-				const total = item.nominal;
-				const totalLunas = item.lunas ? item.nominal : 0; // Hitung total lunas
-
-				acc[item.th_ajaran_h].data.push(item);
-				acc[item.th_ajaran_h].totalLunas += totalLunas; // Tambahkan ke total lunas
-				acc[item.th_ajaran_h].total += total; // Tambahkan ke total group
-
-				return acc;
-			}, {}),
-		);
-	}
 
 	return (
 		<>
