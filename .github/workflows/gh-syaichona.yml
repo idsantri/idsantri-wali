@@ -1,49 +1,49 @@
 name: 🚀 Build to branch syaichona-build
 on:
-    push:
-        branches:
-            - syaichona
+  push:
+    branches:
+      - syaichona
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    build:
-        # env:
-        #     APP_NAME: TEST APP NAME
-        #     APP_URL: https://idsantri.github.io/idsantri-wali
+  build:
+    # env:
+    #     APP_NAME: TEST APP NAME
+    #     APP_URL: https://idsantri.github.io/idsantri-wali
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 22
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
 
-            - name: Install Corepack
-              run: npm i -g corepack
+      - name: Install Corepack
+        run: npm i -g corepack
 
-            - name: Enable corepack & pnpm
-              run: |
-                  corepack enable
-                  corepack prepare pnpm@latest --activate
+      - name: Enable corepack & pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10 --activate
 
-            - name: Set pnpm config
-              run: pnpm config set minimumReleaseAge 0
+      - name: Set pnpm config
+        run: pnpm config set minimumReleaseAge 0
 
-            - name: Install Dependencies
-              run: pnpm install --frozen-lockfile
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
 
-            - name: Build PWA
-              run: pnpm build
+      - name: Build PWA
+        run: pnpm run build
 
-            - name: Create branch
-              uses: JamesIves/github-pages-deploy-action@v4
-              with:
-                  folder: dist
-                  clean: true
-                  branch: syaichona-build
+      - name: Create branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          clean: true
+          branch: syaichona-build
