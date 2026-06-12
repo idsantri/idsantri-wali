@@ -3,8 +3,8 @@ import LoadingAbsolute from '../../components/LoadingAbsolute';
 import CardHeader from '../../components/CardHeader';
 import AlertNotFound from '../../components/AlertNotFound';
 import RenderTahun from './RenderTahun';
-import RenderFooter from './RenderFooter';
 import { getIuran } from '../../models/santri';
+import RenderMidtrans from './RenderMidtrans';
 
 function groupByThAjaranH(data) {
 	return Object.values(
@@ -31,6 +31,7 @@ function groupByThAjaranH(data) {
 }
 
 function IuranPage() {
+	const [iuranGroup, setIuranGroup] = useState(null);
 	const [iuran, setIuran] = useState(null);
 	const [info, setInfo] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -40,8 +41,9 @@ function IuranPage() {
 			.then((res) => {
 				if (res) {
 					const { iuran, message } = res;
+					setIuran(iuran);
 					const result = groupByThAjaranH(iuran);
-					setIuran(result);
+					setIuranGroup(result);
 					setInfo(message);
 				}
 			})
@@ -55,12 +57,12 @@ function IuranPage() {
 			<CardHeader title='Riwayat Iuran' />
 			{isLoading && <LoadingAbsolute />}
 			{/* {console.log(iuran)} */}
-			{!iuran || iuran.length == 0 ? (
+			{!iuranGroup || iuranGroup.length == 0 ? (
 				<AlertNotFound />
 			) : (
 				<>
 					<div className='overflow-hidden border rounded-md border-accent'>
-						{iuran.map((item, index) => (
+						{iuranGroup.map((item, index) => (
 							<RenderTahun
 								key={item.th_ajaran_h}
 								iuran={item}
@@ -74,7 +76,7 @@ function IuranPage() {
 							{info}
 						</div>
 					)}
-					<RenderFooter />
+					<RenderMidtrans iuran={iuran} />
 				</>
 			)}
 		</>

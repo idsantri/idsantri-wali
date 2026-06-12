@@ -18,7 +18,7 @@ const TatibPage = lazy(() => import('./pages/tatib/Index'));
 const ProfilePage = lazy(() => import('./pages/profile/Index'));
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
-const MidtransPage = lazy(() => import('./pages/payment/Midtrans'));
+const MidtransPage = lazy(() => import('./pages/payment/MidtransPage'));
 
 const App = () => {
 	const { isDarkMode } = useTheme();

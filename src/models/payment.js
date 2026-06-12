@@ -1,8 +1,21 @@
 import api from './api';
 
-export async function midtrans(params) {
+export async function getPayments() {
 	try {
-		const response = await api('payment/midtrans', { method: 'POST', data: params });
+		const response = await api('payments', { method: 'GET' });
+		return response.data;
+	} catch (error) {
+		console.error('Gagal mengambil data payments:', error);
+		return false;
+	}
+}
+
+export async function payWithMidtrans(params) {
+	try {
+		const response = await api('payments/midtrans', {
+			method: 'POST',
+			body: JSON.stringify(params),
+		});
 		return response.data;
 	} catch (error) {
 		console.error('Gagal mengambil data midtrans:', error);
