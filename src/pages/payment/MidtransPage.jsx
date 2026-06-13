@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getPayments, payWithMidtrans } from '../../models/payment';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import CardHeader from '../../components/CardHeader';
+import { Icon } from '@iconify/react/dist/iconify.js';
+import { notifyError, notifySuccess } from '../../components/Notify';
 import '../../utils/rupiah';
 
 const MidtransPage = () => {
@@ -13,10 +15,11 @@ const MidtransPage = () => {
 	const [midtrans, setMidtrans] = useState(null);
 	const [selectedIds, setSelectedIds] = useState(() => iuran.map((item) => item.id));
 	const [customerDetails, setCustomerDetails] = useState({
-		first_name: santri?.wali_nama,
-		email: santri?.wali_email,
-		phone: santri?.wali_telepon,
+		first_name: santri?.wali_nama || '',
+		email: santri?.wali_email || '',
+		phone: santri?.wali_telepon || '',
 	});
+	const [isScriptLoaded, setIsScriptLoaded] = useState(() => typeof window.snap !== 'undefined');
 
 	const removeScript = (script_url) => {
 		if (!script_url) return;
@@ -24,29 +27,48 @@ const MidtransPage = () => {
 	};
 
 	useEffect(() => {
+		let isMounted = true;
+		let scriptElement = null;
+
 		getPayments()
 			.then((res) => {
+				if (!isMounted) return;
 				if (res && res.payments && res.payments.midtrans) {
 					setMidtrans(res.payments.midtrans);
 
-					// remove first if exists
-					removeScript(res.payments.midtrans.snap_script_url);
+					const scriptUrl = res.payments.midtrans.snap_script_url;
 
-					// Script hanya ditambahkan setelah data siap
+					// Remove first if exists
+					removeScript(scriptUrl);
+
+					// Script only added after data is ready
 					const script = document.createElement('script');
-					script.src = res.payments.midtrans.snap_script_url;
+					script.src = scriptUrl;
 					script.setAttribute('data-client-key', res.payments.midtrans.client_key);
 					script.async = true;
+					script.onload = () => {
+						if (isMounted) setIsScriptLoaded(true);
+					};
+					script.onerror = () => {
+						console.error('Failed to load Midtrans Snap script');
+						if (isMounted) setIsScriptLoaded(false);
+					};
 					document.head.appendChild(script);
+					scriptElement = script;
 				}
 			})
 			.finally(() => {
-				setIsLoading(false);
+				if (isMounted) setIsLoading(false);
 			});
 
-		// cleanup di return effect
-		return () => removeScript(midtrans?.snap_script_url);
-	}, [midtrans?.snap_script_url]);
+		// Cleanup on unmount
+		return () => {
+			isMounted = false;
+			if (scriptElement) {
+				scriptElement.remove();
+			}
+		};
+	}, []);
 
 	const handleToggle = (id) => {
 		setSelectedIds((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
@@ -70,6 +92,13 @@ const MidtransPage = () => {
 		e.preventDefault();
 		if (!isFormValid || selectedIds.length === 0 || isLoading || isProcessing) return;
 
+		if (!window.snap) {
+			notifyError({
+				message: 'Sistem pembayaran Midtrans belum siap. Silakan muat ulang atau tunggu beberapa saat.',
+			});
+			return;
+		}
+
 		setIsProcessing(true);
 		try {
 			const data = await payWithMidtrans({
@@ -81,18 +110,27 @@ const MidtransPage = () => {
 				window.snap.pay(data.token, {
 					onSuccess: function (result) {
 						console.log('Payment successful:', result);
+						notifySuccess({ message: 'Pembayaran berhasil diproses!' });
 					},
 					onError: function (error) {
 						console.error('Payment error:', error);
+						notifyError({ message: 'Pembayaran gagal. Silakan coba lagi.' });
 					},
 					onClose: function () {
 						console.log('Payment closed');
+						notifyError({ message: 'Pembayaran dibatalkan.' });
 					},
 					onPending: function (result) {
 						console.log('Payment pending', result);
+						notifySuccess({ message: 'Pembayaran sedang ditangguhkan (pending).' });
 					},
 				});
+			} else {
+				notifyError({ message: 'Gagal membuat transaksi pembayaran. Silakan coba beberapa saat lagi.' });
 			}
+		} catch (error) {
+			console.error('Payment request error:', error);
+			notifyError({ message: 'Terjadi kesalahan sistem saat memproses pembayaran.' });
 		} finally {
 			setIsProcessing(false);
 		}
@@ -102,11 +140,21 @@ const MidtransPage = () => {
 		<>
 			<CardHeader title='Bayar Iuran/Tagihan' />
 			{iuran.length === 0 ? (
-				<div className='px-2 py-4 mt-2 text-sm italic font-light text-center bg-info text-info-content'>
-					<p>Tidak ada tagihan untuk atas nama santri ini</p>
+				<div className='flex flex-col items-center justify-center px-4 py-8 mt-2 space-y-4 text-sm italic font-light text-center rounded-md shadow-sm bg-info text-info-content'>
+					<p>Tidak ada tagihan untuk atas nama santri ini atau sesi pembayaran telah selesai.</p>
+					<Link to='/iuran' className='gap-1 btn btn-sm btn-primary text-primary-content'>
+						<Icon icon='ion:arrow-back-outline' width='1.2em' height='1.2em' />
+						Kembali ke Riwayat Iuran
+					</Link>
 				</div>
 			) : (
-				<div className='space-y-4'>
+				<div className='space-y-2'>
+					<div className='flex items-center justify-between my-4'>
+						<Link to='/iuran' className='gap-1 btn btn-xs btn-outline btn-primary'>
+							<Icon icon='ion:arrow-back-outline' />
+							Kembali
+						</Link>
+					</div>
 					<div className='grid gap-2'>
 						{iuran.map((item) => (
 							<label
@@ -118,9 +166,9 @@ const MidtransPage = () => {
 								}`}
 							>
 								<div className='flex-1'>
-									<div className='flex items-center gap-2'>
-										<div className='font-semibold text-base-content'>{item.item}</div>
-										<div className='text-[10px] font-bold uppercase tracking-wider text-base-content/75'>
+									<div className='flex items-baseline gap-2'>
+										<div className='text-base-content'>{item.item}</div>
+										<div className='text-[10px] font-semibold uppercase tracking-wider text-base-content/75'>
 											{item.th_ajaran_h}
 										</div>
 									</div>
@@ -172,18 +220,28 @@ const MidtransPage = () => {
 							</div>
 
 							{/* button */}
-							<div className='p-4 mt-4 rounded-md bg-base-200'>
-								<div className='flex items-center justify-between mb-4'>
+							<div className='p-2 mt-4 rounded-md bg-base-200'>
+								<div className='flex items-center justify-between mb-2'>
 									<div>
 										<div className='text-xs font-medium text-base-content/60'>Total Tagihan</div>
-										<div className='flex items-center gap-2'>
+										<div className='flex flex-wrap items-center gap-2'>
 											<div className='text-xl font-black text-primary'>
-												{totalAmount?.toRupiah()}{' '}
+												{totalAmount?.toRupiah()}
 											</div>
-											<div className='text-sm font-light '>
-												(+ biaya admin {midtrans?.admin_fee?.toRupiah()})
-											</div>
+											{midtrans?.admin_fee !== undefined && (
+												<div className='text-xs font-normal text-base-content/70'>
+													+ Admin: {midtrans.admin_fee.toRupiah()}
+												</div>
+											)}
 										</div>
+										{midtrans?.admin_fee !== undefined && (
+											<div className='mt-1 text-xs text-base-content/60'>
+												Total Bayar:{' '}
+												<span className='font-bold'>
+													{(totalAmount + Number(midtrans.admin_fee || 0)).toRupiah()}
+												</span>
+											</div>
+										)}
 									</div>
 									<div className='text-right'>
 										<div className='text-xs font-medium text-base-content/60'>Item</div>
@@ -194,7 +252,13 @@ const MidtransPage = () => {
 								<button
 									type='submit'
 									className='w-full btn btn-primary'
-									disabled={isLoading || isProcessing || selectedIds.length === 0 || !isFormValid}
+									disabled={
+										isLoading ||
+										isProcessing ||
+										selectedIds.length === 0 ||
+										!isFormValid ||
+										!isScriptLoaded
+									}
 								>
 									{isProcessing ? (
 										<span className='loading loading-spinner'></span>

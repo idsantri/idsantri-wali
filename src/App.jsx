@@ -43,7 +43,7 @@ const App = () => {
 					<Route path='/iuran' element={<IuranPage />} />
 					<Route path='/domisili' element={<PesantrenPage />} />
 					<Route path='/tatib' element={<TatibPage />} />
-					<Route path='/midtrans' element={<MidtransPage />} />
+					<Route path='/payment-midtrans' element={<MidtransPage />} />
 				</Route>
 				<Route path='*' element={<ErrorPage />} />
 			</Routes>

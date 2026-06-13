@@ -10,7 +10,7 @@ function RenderMidtrans({ iuran }) {
 				<Link
 					disabled={notLunas.length === 0}
 					className='w-full btn btn-primary text-primary-content'
-					to='/midtrans'
+					to='/payment-midtrans'
 					state={{ iuran: notLunas }}
 				>
 					<Icon className='ms-2' icon='uiw:pay' width='1.5em' height='1.5em' />
