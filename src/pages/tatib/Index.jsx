@@ -14,7 +14,7 @@ const Header = () => (
 	</div>
 );
 
-const RenderRow = ({ tatib, index: i }) => {
+const RenderRow = ({ tatib, _index }) => {
 	const processString = (str) => (str.length > 2 && /[a-zA-Z]$/.test(str) ? `— ${str.slice(-1)}` : str);
 	const { pasal, teks } = tatib;
 

@@ -4,6 +4,7 @@ import { login as loginApi } from '../models/auth';
 
 export const useAuthStore = create(
 	persist(
+		// eslint-disable-next-line no-unused-vars
 		(set, get) => ({
 			token: null,
 			isLoggedIn: false,
