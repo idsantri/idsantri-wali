@@ -3,7 +3,7 @@ import { notifyError, notifySuccess } from '../../components/Notify';
 
 function RenderItem({ item, index }) {
 	// console.log('🚀 ~ RenderItem ~ item:', item);
-	async function copyText(text) {
+	async function _copyText(text) {
 		try {
 			await navigator.clipboard.writeText(text);
 			notifySuccess({
@@ -44,6 +44,13 @@ function RenderItem({ item, index }) {
 					)}
 				</div>
 				<div>
+					{item.lunas ? (
+						<Icon icon='simple-line-icons:check' className='text-xl text-primary' />
+					) : (
+						<div className='font-bold text-error'>—</div>
+					)}
+				</div>
+				{/* <div>
 					{!item.lunas && item.bank_va ? (
 						<>
 							{item.bank_name}: {String(item.bank_va).replace(/(\d{4})(?=\d)/g, '$1.')}
@@ -54,7 +61,7 @@ function RenderItem({ item, index }) {
 					) : (
 						<Icon icon='simple-line-icons:check' className='text-xl text-primary' />
 					)}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
