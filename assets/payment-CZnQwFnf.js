@@ -1,1 +1,0 @@
-import{a as t}from"./index-Cq2NA6XT.js";async function n(){try{return(await t("payments",{method:"GET"})).data}catch(a){return console.error("Gagal mengambil data payments:",a),!1}}async function s(a){try{return(await t("payments/midtrans",{method:"POST",body:JSON.stringify(a)})).data}catch(r){return console.error("Gagal mengambil data midtrans:",r),!1}}export{n as g,s as p};
