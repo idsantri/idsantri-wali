@@ -19,6 +19,8 @@ const ProfilePage = lazy(() => import('./pages/profile/Index'));
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const MidtransPage = lazy(() => import('./pages/payment/MidtransPage'));
+const EmaalPage = lazy(() => import('./pages/payment/EmaalPage'));
+const HistoryPage = lazy(() => import('./pages/payment/HistoryPage'));
 
 const App = () => {
 	const { isDarkMode } = useTheme();
@@ -43,7 +45,9 @@ const App = () => {
 					<Route path='/iuran' element={<IuranPage />} />
 					<Route path='/domisili' element={<PesantrenPage />} />
 					<Route path='/tatib' element={<TatibPage />} />
-					<Route path='/payment-midtrans' element={<MidtransPage />} />
+					<Route path='/payments/midtrans' element={<MidtransPage />} />
+					<Route path='/payments/emaal' element={<EmaalPage />} />
+					<Route path='/payments/history' element={<HistoryPage />} />
 				</Route>
 				<Route path='*' element={<ErrorPage />} />
 			</Routes>

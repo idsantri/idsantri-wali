@@ -2,6 +2,7 @@ const config = {
 	APP_NAME: 'Aplikasi Wali Santri',
 	INS_DESC: 'Pondok Pesantren',
 	INS_NAME: 'Demo Aplikasi',
+	EMAAL_NAME: 'ID Santri',
 	BASE_API: 'https://demo.idsantri.my.id',
 	END_API: '/wali/',
 	DEV: true,
