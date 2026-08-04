@@ -5,6 +5,10 @@ import AlertNotFound from '../../components/AlertNotFound';
 import RenderTahun from './RenderTahun';
 import { getIuran } from '../../models/santri';
 import RenderMidtrans from './RenderMidtrans';
+import { Link } from 'react-router-dom';
+import { Icon } from '@iconify/react';
+import { getPayments } from '../../models/payment';
+import RenderEmaal from './RenderEmaal';
 
 function groupByThAjaranH(data) {
 	return Object.values(
@@ -35,21 +39,32 @@ function IuranPage() {
 	const [iuran, setIuran] = useState(null);
 	const [info, setInfo] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [payments, setPayments] = useState(null);
 
 	useEffect(() => {
-		getIuran()
-			.then((res) => {
-				if (res) {
-					const { iuran, message } = res;
+		let cancelled = false;
+
+		Promise.all([getIuran(), getPayments()])
+			.then(([iuranRes, paymentsRes]) => {
+				if (cancelled) return;
+
+				if (iuranRes) {
+					const { iuran, message } = iuranRes;
 					setIuran(iuran);
-					const result = groupByThAjaranH(iuran);
-					setIuranGroup(result);
+					setIuranGroup(groupByThAjaranH(iuran));
 					setInfo(message);
+				}
+				if (paymentsRes) {
+					setPayments(paymentsRes.payments);
 				}
 			})
 			.finally(() => {
-				setIsLoading(false);
+				if (!cancelled) setIsLoading(false);
 			});
+
+		return () => {
+			cancelled = true;
+		};
 	}, []);
 
 	return (
@@ -76,7 +91,17 @@ function IuranPage() {
 							{info}
 						</div>
 					)}
-					<RenderMidtrans iuran={iuran} />
+					{payments?.emaal?.is_active && <RenderEmaal />}
+					{payments?.midtrans?.is_active && <RenderMidtrans iuran={iuran} />}
+					<Link className='w-full mt-2 btn btn-info text-info-content' to='/payments/history' disabled>
+						<Icon
+							className='ms-2'
+							icon='material-symbols-light:history-rounded'
+							width='1.5em'
+							height='1.5em'
+						/>
+						Riwayat Pembayaran Online
+					</Link>
 				</>
 			)}
 		</>

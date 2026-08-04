@@ -6,17 +6,15 @@ function RenderMidtrans({ iuran }) {
 	// console.log(notLunas);
 	return (
 		<div className='mt-2'>
-			<div>
-				<Link
-					disabled={notLunas.length === 0}
-					className='w-full btn btn-primary text-primary-content'
-					to='/payment-midtrans'
-					state={{ iuran: notLunas }}
-				>
-					<Icon className='ms-2' icon='uiw:pay' width='1.5em' height='1.5em' />
-					Bayar Iuran
-				</Link>
-			</div>
+			<Link
+				disabled={notLunas.length === 0}
+				className='w-full btn btn-accent text-accent-content'
+				to='/payments/midtrans'
+				state={{ iuran: notLunas }}
+			>
+				<Icon className='ms-2' icon='uiw:pay' width='1.5em' height='1.5em' />
+				Bayar Iuran<span className='italic'>(transfer online)</span>
+			</Link>
 		</div>
 	);
 }
