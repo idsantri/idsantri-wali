@@ -20,7 +20,9 @@ const EmaalPage = () => {
 					<ul className='pl-8 list-disc'>
 						<li>Buka aplikasi Emaal.</li>
 						<li>Pilih PESANTRENKU.</li>
-						<li>Pilih {config.INS_NAME}</li>
+						<li>
+							Pilih <span className='font-semibold'>{config.EMAAL_NAME}</span>
+						</li>
 						<li>Pada jenis pembayaran, pilih iuran/tagihan yang ingin Anda bayar.</li>
 						<li>
 							Masukkan ID Santri <span className='font-semibold'>{santri.id}</span>.
