@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getPayments, payWithMidtrans } from '../../models/payment';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import CardHeader from '../../components/CardHeader';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { notifyError, notifySuccess } from '../../components/Notify';
@@ -20,6 +20,7 @@ const MidtransPage = () => {
 		phone: santri?.wali_telepon || '',
 	});
 	const [isScriptLoaded, setIsScriptLoaded] = useState(() => typeof window.snap !== 'undefined');
+	const navigate = useNavigate();
 
 	const removeScript = (script_url) => {
 		if (!script_url) return;
@@ -111,6 +112,7 @@ const MidtransPage = () => {
 					onSuccess: function (result) {
 						console.log('Payment successful:', result);
 						notifySuccess({ message: 'Pembayaran berhasil diproses!' });
+						navigate('/iuran', { replace: true });
 					},
 					onError: function (error) {
 						console.error('Payment error:', error);
@@ -119,10 +121,12 @@ const MidtransPage = () => {
 					onClose: function () {
 						console.log('Payment closed');
 						notifyError({ message: 'Pembayaran dibatalkan.' });
+						navigate('/iuran', { replace: true });
 					},
 					onPending: function (result) {
 						console.log('Payment pending', result);
 						notifySuccess({ message: 'Pembayaran sedang ditangguhkan (pending).' });
+						navigate('/iuran', { replace: true });
 					},
 				});
 			} else {

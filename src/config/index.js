@@ -2,6 +2,7 @@ const config = {
 	APP_NAME: 'Aplikasi Wali Santri',
 	INS_DESC: 'Pondok Pesantren',
 	INS_NAME: 'Syaichona Moh Cholil',
+	EMAAL_NAME: 'PP SYAICHONA MOH. CHOLIL',
 	BASE_API: 'https://syaichona.idsantri.my.id',
 	END_API: '/wali/',
 	DEV: false,
