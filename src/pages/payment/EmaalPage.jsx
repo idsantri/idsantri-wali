@@ -31,6 +31,15 @@ const EmaalPage = () => {
 						<li>Masukkan PIN.</li>
 						<li>Tekan tombol Lanjut/Bayar untuk menyelesaikan pembayaran.</li>
 					</ul>
+					<p className='mt-4 '>
+						Anda juga dapat melakukan pembayaran via&nbsp;
+						<span className='font-semibold'>merchant Emaal</span>
+						&nbsp;terdekat.
+					</p>
+					{/* <ul className='pl-8 list-disc'>
+						<li>Toko Basmalah</li>
+						<li>Toko Syaichona (SC)</li>
+					</ul> */}
 					<div className='px-4 py-2 mt-4 border rounded-md border-accent bg-warning text-warning-content'>
 						<div className='text-sm font-semibold'>Catatan:</div>
 						<ul className='pl-6 text-sm list-disc'>
