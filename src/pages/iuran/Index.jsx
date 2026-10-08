@@ -93,7 +93,7 @@ function IuranPage() {
 					)}
 					{payments?.emaal?.is_active && <RenderEmaal />}
 					{payments?.midtrans?.is_active && <RenderMidtrans iuran={iuran} />}
-					<Link className='w-full mt-2 btn btn-info text-info-content' to='/payments/history' disabled>
+					<Link className='hidden w-full mt-2 btn btn-info text-info-content' to='/payments/history' disabled>
 						<Icon
 							className='ms-2'
 							icon='material-symbols-light:history-rounded'

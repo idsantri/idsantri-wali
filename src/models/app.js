@@ -24,18 +24,6 @@ export async function getProfiles() {
 	}
 }
 
-export async function getVA() {
-	try {
-		const response = await api('va', {
-			method: 'GET',
-		});
-		return response.data;
-	} catch (error) {
-		console.log('Gagal mengambil data va:', error);
-		return false;
-	}
-}
-
 export async function getTatib() {
 	try {
 		const response = await api('tatib-santri', { method: 'GET' });
