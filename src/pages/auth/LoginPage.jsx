@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { notifyError } from '@/components/Notify';
 import LoadingAbsolute from '../../components/LoadingAbsolute';
-import { getAppWali, getProfiles, getVA } from '../../models/app';
+import { getAppWali, getProfiles } from '../../models/app';
 import { useAuthStore } from '../../store/authStore';
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
 		const fetchAllData = async () => {
 			setLoading(true);
 			try {
-				const [resWali, resProfiles, resVa] = await Promise.all([getAppWali(), getProfiles(), getVA()]);
+				const [resWali, resProfiles] = await Promise.all([getAppWali(), getProfiles()]);
 
 				if (resWali?.app_wali) {
 					localStorage.setItem('app_wali', JSON.stringify(resWali.app_wali));
@@ -22,10 +22,6 @@ const Login = () => {
 
 				if (resProfiles?.profiles) {
 					localStorage.setItem('profiles', JSON.stringify(resProfiles.profiles));
-				}
-
-				if (resVa?.va) {
-					localStorage.setItem('va', JSON.stringify(resVa.va));
 				}
 			} catch (error) {
 				console.error('Error fetching data:', error);
@@ -88,7 +84,7 @@ const Login = () => {
 					}}
 					disabled={loadingSubmit}
 				/>
-				<p className='pt-1 text-xs'>01012000 = 1 Januari 2000</p>
+				<p className='pt-1 text-xs'>03052000 = 3 Mei 2000</p>
 				<button type='submit' className='w-full max-w-xs mt-3 btn btn-primary' disabled={loadingSubmit}>
 					{loadingSubmit ? (
 						<>
